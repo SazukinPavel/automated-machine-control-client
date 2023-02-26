@@ -13,30 +13,14 @@ import appMain from "@/components/layouts/main.vue";
 import { computed, ComputedRef, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
+import Role from "@/types/Role";
 
 const store = useStore();
 const router = useRouter();
 const route = useRoute();
 
 onMounted(async () => {
-  switch (role.value) {
-    case "admin": {
-      router.replace({ name: "Admin" });
-      break;
-    }
-    case "manager": {
-      router.replace({ name: "Manager" });
-      break;
-    }
-    case "client": {
-      router.replace({ name: "Client" });
-      break;
-    }
-    default: {
-      router.push({ name: "Login" });
-      break;
-    }
-  }
+  redirect();
   try {
     await authorize();
   } catch {
@@ -52,24 +36,18 @@ const setupRouter = () => {
     role.value === "admin"
   ) {
     router.replace({ name: "Admin" });
-  } else if (
-    route.matched.some((el: any) => !el.meta.isManagerRoute) &&
-    role.value === "manager"
-  ) {
-    router.replace({ name: "Manager" });
-  } else if (isLogedIn.value && role.value === "client") {
+  } else if (isLogedIn.value && role.value === "user") {
     router.replace({ name: "Client" });
   }
+
   router.beforeEach((to: any, from: any, next: any) => {
     if (!isLogedIn.value && to.path !== "/login") {
       redirectToLogin();
     } else if (
       (!to.matched.some((el: any) => el.meta.isAdminRoute) &&
         role.value === "admin") ||
-      (!to.matched.some((el: any) => el.meta.isManagerRoute) &&
-        role.value === "manager") ||
-      (!to.matched.some((el: any) => el.meta.isClientRoute) &&
-        role.value === "client")
+      (!to.matched.some((el: any) => el.meta.isUserRoute) &&
+        role.value === "user")
     ) {
       next(from);
     } else {
@@ -95,28 +73,27 @@ const redirectToLogin = () => {
 const isLogedIn = computed(() => store.getters["auth/isLogedIn"]);
 const role: ComputedRef<Role> = computed(() => store.getters["auth/role"]);
 
+const redirect = () => {
+  switch (role.value) {
+    case "admin": {
+      router.replace({ name: "Admin" });
+      break;
+    }
+    case "user": {
+      router.replace({ name: "Client" });
+      break;
+    }
+    default: {
+      router.push({ name: "Login" });
+      break;
+    }
+  }
+};
+
 watch(
   () => role.value,
   () => {
-    switch (role.value) {
-      case "admin": {
-        router.replace({ name: "Admin" });
-        break;
-      }
-      case "manager": {
-        router.replace({ name: "Manager" });
-        break;
-      }
-      case "client": {
-        router.replace({ name: "Client" });
-        break;
-      }
-      default: {
-        router.push({ name: "Login" });
-        break;
-      }
-    }
+    redirect();
   }
 );
-// const isLogedInPage = computed(() => route.name === "Login");
 </script>

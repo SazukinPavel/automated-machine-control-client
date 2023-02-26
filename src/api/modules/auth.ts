@@ -15,4 +15,8 @@ export default class AuthModule extends BaseApiModule {
   me() {
     return this.post<null, AuthResponseDto>("me");
   }
+
+  logout() {
+    return this.post("logout");
+  }
 }
