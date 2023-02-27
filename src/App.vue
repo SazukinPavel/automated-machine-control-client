@@ -21,7 +21,9 @@ const route = useRoute();
 
 onMounted(async () => {
   redirect();
+
   try {
+    console.log(1);
     await authorize();
   } catch {
     redirectToLogin();
@@ -80,7 +82,7 @@ const redirect = () => {
       break;
     }
     case "user": {
-      router.replace({ name: "Client" });
+      router.replace({ name: "Departament" });
       break;
     }
     default: {

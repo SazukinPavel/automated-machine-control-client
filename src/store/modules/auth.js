@@ -1,3 +1,4 @@
+import CookiesService from "@/services/CookiesService";
 import api from "@/api";
 
 export default {
@@ -13,33 +14,41 @@ export default {
     setIsLogedIn(state, val) {
       state.isLogedIn = val;
     },
+    logout(state) {
+      CookiesService.resetToken();
+      state.isLogedIn = false;
+      state.user = null;
+    },
     applyToken(_, token) {
       api.applyToken(token);
     },
   },
   actions: {
     async login({ dispatch }, loginDto) {
-      await api.auth.login(loginDto);
-
+      const data = await api.auth.login(loginDto);
+      CookiesService.setToken(data.data.accessToken);
       await dispatch("init");
     },
     async init({ commit }) {
+      const tokenCookie = CookiesService.getToken();
+      if (tokenCookie === "") {
+        throw new Error("Token is empty!");
+      }
+
       try {
+        commit("applyToken", tokenCookie);
         const me = await api.auth.me();
-        commit("applyToken", me.data.token);
+
+        CookiesService.setToken(me.data.accessToken);
+        commit("applyToken", me.data.accessToken);
 
         commit("setUser", me.data.user);
         commit("setIsLogedIn", true);
       } catch {
         commit("setIsLogedIn", false);
+        CookiesService.resetToken();
         throw new Error();
       }
-    },
-    async logout({ commit }) {
-      await api.auth.logout();
-
-      commit("setUser", null);
-      commit("setIsLogedIn", false);
     },
   },
   getters: {
