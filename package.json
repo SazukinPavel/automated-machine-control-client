@@ -13,6 +13,7 @@
     "core-js": "^3.8.3",
     "js-cookie": "^3.0.1",
     "moment": "^2.29.4",
+    "sass-loader": "^13.2.0",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "4",

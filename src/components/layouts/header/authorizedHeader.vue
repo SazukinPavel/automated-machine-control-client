@@ -18,7 +18,7 @@ import { computed } from "vue";
 const store = useStore();
 
 const logout = () => {
-  store.commit("auth/logout");
+  store.reset();
 };
 
 const isLogoutButtonShow = computed(() => store.getters["auth/isLogedIn"]);
