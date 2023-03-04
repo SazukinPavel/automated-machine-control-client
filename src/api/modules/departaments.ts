@@ -17,7 +17,7 @@ export default class DepartamentModule extends BaseApiModule {
     return this.get(id);
   }
   add(addDepartamnetDto: AddDepartamentDto) {
-    this.post<AddDepartamentDto, Departament>("", addDepartamnetDto);
+    return this.post<AddDepartamentDto, Departament>("", addDepartamnetDto);
   }
 
   update(updateDepartamentDto: UpdateDepartamentDto) {

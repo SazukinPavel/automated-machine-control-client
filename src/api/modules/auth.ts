@@ -9,7 +9,7 @@ export default class AuthModule extends BaseApiModule {
   }
 
   login(loginDto: LoginDto) {
-    this.post<LoginDto, AuthResponseDto>("login", loginDto);
+    return this.post<LoginDto, AuthResponseDto>("login", loginDto);
   }
 
   me() {

@@ -11,19 +11,20 @@ export default class Api {
   public defects: DefectsModule;
   public machines: MachinesModule;
   public users: UsersModule;
-  public departament: DepartamentModule;
+  public departaments: DepartamentModule;
   constructor(baseURL: string) {
-    this.axios = axios.create({ baseURL });
+    this.axios = axios.create({ baseURL, withCredentials: true });
     this.auth = new AuthModule(this);
     this.users = new UsersModule(this);
     this.machines = new MachinesModule(this);
     this.defects = new DefectsModule(this);
-    this.departament = new DepartamentModule(this);
+    this.departaments = new DepartamentModule(this);
   }
 
   applyToken(token: string) {
     this.axios = axios.create({
       headers: { Authorization: "Bearer " + token },
+      withCredentials: true,
       baseURL: this.axios.defaults.baseURL,
     });
   }

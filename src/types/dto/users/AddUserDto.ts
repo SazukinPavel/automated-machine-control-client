@@ -4,4 +4,5 @@ export default interface AddUserDto {
   role: Role;
   password: string;
   login: string;
+  departamentId?: string;
 }

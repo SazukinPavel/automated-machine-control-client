@@ -17,7 +17,7 @@ export default class DefectsModule extends BaseApiModule {
     return this.get(id);
   }
   add(addDefectDto: AddDefectDto) {
-    this.post<AddDefectDto, Defect>("", addDefectDto);
+    return this.post<AddDefectDto, Defect>("", addDefectDto);
   }
 
   update(updateDefectDto: UpdateDefectDto) {

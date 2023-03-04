@@ -4,4 +4,6 @@ export default interface UpdateMachineDto {
   name: string;
 
   description: string;
+
+  isActive: boolean;
 }

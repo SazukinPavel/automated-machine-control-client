@@ -17,7 +17,7 @@ export default class MachinesModule extends BaseApiModule {
     return this.get(id);
   }
   add(addMachineDto: AddMachineDto) {
-    this.post<AddMachineDto, Machine>("", addMachineDto);
+    return this.post<AddMachineDto, Machine>("", addMachineDto);
   }
 
   update(updateMachineDto: UpdateMachineDto) {

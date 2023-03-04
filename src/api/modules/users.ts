@@ -15,7 +15,7 @@ export default class UsersModule extends BaseApiModule {
     return this.get(id);
   }
   add(addUserDto: AddUserDto) {
-    this.post<AddUserDto, User>("", addUserDto);
+    return this.post<AddUserDto, User>("", addUserDto);
   }
   update(updateUserDto: UpdateUserDto) {
     return this.put("", updateUserDto);
