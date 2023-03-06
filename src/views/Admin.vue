@@ -104,7 +104,7 @@
                       color="primary"
                       v-model="addMachineDto.name"
                     />
-                    <v-text-field
+                    <v-textarea
                       class="my-2"
                       :rules="requiredRule"
                       variant="outlined"
@@ -151,7 +151,7 @@
               >Удалить</v-btn
             >
           </div>
-          <v-data-table
+          <v-data-table show-expand
             v-model="selectedMachines"
             show-select
             :loading="isMachineLoading"
@@ -166,6 +166,15 @@
             </template>
             <template v-slot:[`item.updatedAt`]="{ value }">
               <span>{{ moment(value).format("DD-MM-YY") }}</span>
+            </template>
+            <template v-slot:expanded-row="{ columns, item }">
+              <tr>
+                <td :colspan="columns.length">
+                  <pre>
+                    {{ item.raw.description }}
+                  </pre>
+                </td>
+              </tr>
             </template>
             <template v-slot:[`item.actions`]="{ item }">
               <v-icon
@@ -403,7 +412,6 @@ const addMachineDto = ref<AddMachineDto>({
 
 const machinesHeaders: any = [
   { title: "Имя", value: "name" },
-  { title: "Описание", value: "description" },
   { value: "departament.name", title: "Департамент" },
   { value: "isActive", title: "Активна", key: "isActive" },
   { value: "createdAt", title: "Создана", key: "createdAt" },
