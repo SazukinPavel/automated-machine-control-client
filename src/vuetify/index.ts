@@ -29,6 +29,31 @@ const vuetify = createVuetify({
     VDataTable: {
       noDataText: "Данных нет",
     },
+    VBtn: {
+      color: "primary",
+    },
+    VExpansionPanels: {
+      color: "primary",
+    },
+    VExpansionPanel: {
+      color: "primary",
+    },
+    VTextField: {
+      color: "primary",
+      variant: "outlined",
+    },
+    VSelect: {
+      color: "primary",
+      variant: "outlined",
+    },
+    VListItem: {
+      color: "primary",
+      activeColor: "primary",
+    },
+    VList: {
+      color: "primary",
+      activeColor: "primary",
+    },
   },
   directives,
   theme: {
