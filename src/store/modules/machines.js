@@ -21,7 +21,7 @@ export default {
         d.id === defect.id ? defect : d
       );
     },
-    deleteMachines(state, id) {
+    deleteMachine(state, id) {
       state.machines = state.machines.filter((m) => m.id !== id);
     },
     setIsFetched(state, val) {
@@ -53,6 +53,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    async fetchByDepartamentId({ commit }, id) {
+      const machines = await api.machines.list({ departament: id });
+      commit("setMachines", machines.data);
+    },
     refresh({ dispatch, commit }) {
       commit("setIsFetched", false);
       dispatch("fetch");
@@ -66,27 +70,9 @@ export default {
         commit("setIsAddLoading", false);
       }
     },
-    async update({ commit }, updateMachineDto) {
-      commit("setIsAddLoading", true);
-      try {
-        const res = await api.machines.update(updateMachineDto);
-        commit("replaceMachines", res.data);
-      } finally {
-        commit("setIsAddLoading", false);
-      }
-    },
-    async deletemachines({ commit }, machines) {
-      commit("setIsDeleteLoading", true);
-      try {
-        await Promise.all(
-          machines.forEach(async (id) => {
-            await api.machines.drop(id);
-            commit("deleteMachines", id);
-          })
-        );
-      } finally {
-        commit("setIsDeleteLoading", false);
-      }
+    async deleteMachine({ commit }, id) {
+      await api.machines.drop(id);
+      commit("deleteMachine", id);
     },
   },
   getters: {

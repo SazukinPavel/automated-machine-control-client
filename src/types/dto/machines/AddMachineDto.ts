@@ -3,5 +3,5 @@ export default interface AddMachineDto {
   description: string;
 
   isActive?: boolean;
-  departamentId: string;
+  departamentId?: string;
 }

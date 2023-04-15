@@ -1,4 +1,5 @@
 import Defect from "@/types/Defect";
+import Departament from "@/types/Departament";
 
 interface Machine {
   id: string;
@@ -14,6 +15,7 @@ interface Machine {
   updateAt: Date;
 
   defects: Defect[];
+  departament?: Departament;
 }
 
 export default Machine;
