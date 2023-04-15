@@ -9,12 +9,12 @@ export default class MachinesModule extends BaseApiModule {
     super(api, "machines/");
   }
 
-  list() {
-    return this.get();
+  list(params: any) {
+    return this.get("", null, { params });
   }
 
   getById(id: string) {
-    return this.get(id);
+    return this.get<Machine>(id);
   }
   add(addMachineDto: AddMachineDto) {
     return this.post<AddMachineDto, Machine>("", addMachineDto);
