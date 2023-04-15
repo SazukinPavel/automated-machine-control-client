@@ -1,32 +1,28 @@
 <template>
-  <v-layout full-height>
-    <v-container fluid>
-      <v-row justify="center" align="center">
-        <v-form style="width: 500px; margin-top: 20vh" ref="loginForm">
-          <v-card-title class="text-center text-h4 mb-5">Login</v-card-title>
-          <v-text-field
-            class="my-5"
-            color="primary"
-            :rules="requiredRule"
-            variant="outlined"
-            label="Login:"
-            v-model="loginDto.login"
-          />
-          <v-text-field
-            class="my-5"
-            label="Password:"
-            color="primary"
-            :rules="requiredRule"
-            variant="outlined"
-            v-model="loginDto.password"
-          />
-          <div class="d-flex justify-end">
-            <v-btn color="primary" @click="login">Login</v-btn>
-          </div>
-        </v-form>
-      </v-row>
-    </v-container>
-  </v-layout>
+  <div class="d-flex justify-center align-center">
+    <v-form style="width: 500px; margin-top: 20vh" ref="loginForm">
+      <v-card-title class="text-center text-h4 mb-5">Login</v-card-title>
+      <v-text-field
+        class="my-5"
+        color="primary"
+        :rules="requiredRule"
+        variant="outlined"
+        label="Login:"
+        v-model="loginDto.login"
+      />
+      <v-text-field
+        class="my-5"
+        label="Password:"
+        color="primary"
+        :rules="requiredRule"
+        variant="outlined"
+        v-model="loginDto.password"
+      />
+      <div class="d-flex justify-end">
+        <v-btn color="primary" @click="login">Login</v-btn>
+      </div>
+    </v-form>
+  </div>
 </template>
 
 <script lang="ts" setup>
