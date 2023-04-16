@@ -65,7 +65,7 @@ const isEditLoading = ref(false);
 const departament = ref();
 
 const addMachine = async () => {
-  if (!(await machineForm.value?.validate().valid)) {
+  if (!(await machineForm.value?.validate()).valid) {
     return;
   }
 
