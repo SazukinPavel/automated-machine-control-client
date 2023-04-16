@@ -4,9 +4,6 @@ export default {
   state: {
     isFetched: false,
     isLoading: false,
-    isAddLoading: false,
-    isDeleteLoading: false,
-    isEditLoading: false,
     departaments: [],
   },
   mutations: {
@@ -17,7 +14,6 @@ export default {
       state.departaments.push(departament);
     },
     replaceDepartament(state, departament) {
-      console.log(departament);
       state.departaments = state.departaments.map((d) =>
         d.id === departament.id ? departament : d
       );
@@ -30,12 +26,6 @@ export default {
     },
     setIsLoading(state, val) {
       state.isLoading = val;
-    },
-    setIsAddLoading(state, val) {
-      state.isAddLoading = val;
-    },
-    setIsDeleteLoading(state, val) {
-      state.isDeleteLoading = val;
     },
   },
   actions: {
@@ -68,26 +58,12 @@ export default {
       }
     },
     async update({ commit }, updateDepartamentDto) {
-      commit("setIsAddLoading", true);
-      try {
-        const res = await api.departaments.update(updateDepartamentDto);
-        commit("replaceDepartament", res.data);
-      } finally {
-        commit("setIsAddLoading", false);
-      }
+      const res = await api.departaments.update(updateDepartamentDto);
+      commit("replaceDepartament", res.data);
     },
-    async deletedepartaments({ commit }, departaments) {
-      commit("setIsDeleteLoading", true);
-      try {
-        await Promise.all(
-          departaments.forEach(async (id) => {
-            await api.departaments.drop(id);
-            commit("deleteDepartament", id);
-          })
-        );
-      } finally {
-        commit("setIsDeleteLoading", false);
-      }
+    async deleteDepartament({ commit }, id) {
+      await api.departaments.drop(id);
+      commit("deleteDepartament", id);
     },
   },
   getters: {
