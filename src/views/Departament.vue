@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Machine from "@/types/Machine";
@@ -56,7 +56,11 @@ const stateItems = ref([
 
 const id = computed(() => route.params.id);
 
-onMounted(async () => {
+onMounted(() => {
+  fetchMachines();
+});
+
+const fetchMachines = async () => {
   isLoading.value = true;
   try {
     await store.dispatch("machines/fetchByDepartamentId", id.value);
@@ -67,7 +71,7 @@ onMounted(async () => {
   } finally {
     isLoading.value = false;
   }
-});
+};
 
 const machines = computed<Machine[]>(() => store.getters["machines/machines"]);
 const filtredMachines = computed<Machine[]>(() => {
@@ -92,6 +96,10 @@ const filtredMachines = computed<Machine[]>(() => {
   }
 
   return currMachines;
+});
+
+watch(id, () => {
+  fetchMachines();
 });
 </script>
 

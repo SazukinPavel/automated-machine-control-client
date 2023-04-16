@@ -68,7 +68,7 @@ const role: ComputedRef<Role> = computed(() => store.getters["auth/role"]);
 const redirect = () => {
   switch (role.value) {
     case "admin": {
-      router.replace({ name: "Admin" });
+      router.replace({ name: "LastDepartament" });
       break;
     }
     default: {
