@@ -4,18 +4,14 @@
       <v-card-title class="text-center text-h4 mb-5">Login</v-card-title>
       <v-text-field
         class="my-5"
-        color="primary"
-        :rules="requiredRule"
-        variant="outlined"
+        :rules="[required]"
         label="Login:"
         v-model="loginDto.login"
       />
-      <v-text-field
+      <password-input
         class="my-5"
         label="Password:"
-        color="primary"
-        :rules="requiredRule"
-        variant="outlined"
+        :rules="[required]"
         v-model="loginDto.password"
       />
       <div class="d-flex justify-end">
@@ -29,12 +25,14 @@
 import { ref } from "vue";
 import LoginDto from "@/types/dto/auth/LoginDto";
 import { useStore } from "vuex";
+import PasswordInput from "@/components/ui/passwordInput.vue";
+import useValidators from "@/hooks/useValidators";
 
 const loginForm = ref<any | null>(null);
 
 const store = useStore();
+const { required } = useValidators();
 
-const requiredRule = [(val: string) => !!val || "Поле обязательно!"];
 const loginDto = ref<LoginDto>({ login: "", password: "" });
 
 const login = async () => {
