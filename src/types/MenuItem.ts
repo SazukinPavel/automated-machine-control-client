@@ -1,4 +1,5 @@
-export default interface MenuItem{
-    title:string
-    routeName:string
+export default interface MenuItem {
+  title: string;
+  routeName: string;
+  params?: any;
 }
