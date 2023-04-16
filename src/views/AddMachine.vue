@@ -18,7 +18,6 @@
       />
       <v-textarea
         class="my-2"
-        :rules="[required]"
         variant="outlined"
         label="Описание"
         color="primary"

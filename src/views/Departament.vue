@@ -49,8 +49,8 @@ const isLoading = ref(false);
 const searchParam = ref("");
 const selectedState = ref("");
 const stateItems = ref([
-  { title: "С дефектами", value: true },
-  { title: "Без дефектов", value: false },
+  { title: "С дефектами", value: "false" },
+  { title: "Без дефектов", value: "true" },
   { title: "Все", value: "" },
 ]);
 
@@ -75,10 +75,10 @@ const fetchMachines = async () => {
 
 const machines = computed<Machine[]>(() => store.getters["machines/machines"]);
 const filtredMachines = computed<Machine[]>(() => {
-  let currMachines = machines.value;
-  if (selectedState.value) {
+  let currMachines: Machine[] = JSON.parse(JSON.stringify(machines.value));
+  if (selectedState.value !== "") {
     currMachines = currMachines.filter(
-      (m) => m.isActive === !!selectedState.value
+      (m) => m.isActive == !!JSON.parse(selectedState.value)
     );
   }
 

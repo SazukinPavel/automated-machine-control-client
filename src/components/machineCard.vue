@@ -16,7 +16,7 @@
         Обновлён:{{ formatDateTime(props.machine.updateAt) }}</span
       >
     </v-card-text>
-    <v-expansion-panels>
+    <v-expansion-panels v-if="props.machine?.description">
       <v-expansion-panel color="primary">
         <v-expansion-panel-title color="primary"
           >Описание:</v-expansion-panel-title
