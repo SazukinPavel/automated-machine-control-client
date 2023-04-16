@@ -1,19 +1,39 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Login from "@/views/Login.vue";
-import Admin from "@/views/Admin.vue";
 import Departament from "@/views/Departament.vue";
 import AddMachine from "@/views/AddMachine.vue";
+import AddDepartament from "@/views/AddDepartament.vue";
+import Departaments from "@/views/Departaments.vue";
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
   {
     path: "/departaments/",
+    name: "Departaments",
+    component: Departaments,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/departaments/add",
+    name: "AddDepartament",
+    component: AddDepartament,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/departaments/:id/edit",
+    name: "EditDepartament",
+    component: AddDepartament,
+    props: { isEdit: true },
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/departaments/machines/",
     name: "LastDepartament",
     component: Departament,
     meta: { isAdminRoute: true },
   },
   {
-    path: "/departaments/:id",
+    path: "/departaments/:id/machines",
     name: "Departament",
     component: Departament,
     meta: { isAdminRoute: true },
@@ -29,12 +49,6 @@ const routes = [
     name: "EditMachine",
     component: AddMachine,
     props: { isEdit: true },
-    meta: { isAdminRoute: true },
-  },
-  {
-    path: "/admin",
-    name: "Admin",
-    component: Admin,
     meta: { isAdminRoute: true },
   },
 ];
