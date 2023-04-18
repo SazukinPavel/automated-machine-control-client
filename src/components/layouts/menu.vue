@@ -44,6 +44,9 @@
       <v-list-item value="departaments" @click="goTo('Departaments')">
         <v-list-item-title class="text-h6">Цеха</v-list-item-title>
       </v-list-item>
+      <v-list-item value="users" @click="goTo('Users')">
+        <v-list-item-title class="text-h6">Ответственные</v-list-item-title>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>

@@ -5,6 +5,8 @@ interface Defect {
 
   description: string;
 
+  type: string;
+
   isResolved: boolean;
 
   createdAt: Date;

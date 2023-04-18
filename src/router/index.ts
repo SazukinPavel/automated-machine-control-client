@@ -4,6 +4,10 @@ import Departament from "@/views/Departament.vue";
 import AddMachine from "@/views/AddMachine.vue";
 import AddDepartament from "@/views/AddDepartament.vue";
 import Departaments from "@/views/Departaments.vue";
+import MachinesDefects from "@/views/MachinesDefects.vue";
+import AddDefect from "@/views/AddDefect.vue";
+import Users from "@/views/Users.vue";
+import AddUser from "@/views/AddUser.vue";
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
@@ -49,6 +53,30 @@ const routes = [
     name: "EditMachine",
     component: AddMachine,
     props: { isEdit: true },
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/machines/:id/defects",
+    name: "MachinesDefects",
+    component: MachinesDefects,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/defects/add",
+    name: "AddDefect",
+    component: AddDefect,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/users",
+    name: "Users",
+    component: Users,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/users/add",
+    name: "AddUser",
+    component: AddUser,
     meta: { isAdminRoute: true },
   },
 ];
