@@ -6,11 +6,11 @@ import Defect from "@/types/Defect";
 
 export default class DefectsModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "defects/");
+    super(api, "defects");
   }
 
-  list() {
-    return this.get();
+  list(params: any) {
+    return this.get("", null, { params });
   }
 
   getById(id: string) {
