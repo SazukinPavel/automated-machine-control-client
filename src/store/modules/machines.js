@@ -3,10 +3,6 @@ export default {
   namespaced: true,
   state: {
     isFetched: false,
-    isLoading: false,
-    isAddLoading: false,
-    isDeleteLoading: false,
-    isEditLoading: false,
     machines: [],
   },
   mutations: {
@@ -27,15 +23,6 @@ export default {
     setIsFetched(state, val) {
       state.isFetched = val;
     },
-    setIsLoading(state, val) {
-      state.isLoading = val;
-    },
-    setIsAddLoading(state, val) {
-      state.isAddLoading = val;
-    },
-    setIsDeleteLoading(state, val) {
-      state.isDeleteLoading = val;
-    },
   },
   actions: {
     async fetch({ commit, state }) {
@@ -43,14 +30,14 @@ export default {
         return;
       }
 
-      commit("setIsLoading", true);
       try {
         const machines = await api.machines.list();
 
         commit("setMachines", machines.data);
         commit("setIsFetched", true);
-      } finally {
-        commit("setIsLoading", false);
+      } catch {
+        commit("setIsFetched", false);
+        throw new Error("fetch error");
       }
     },
     async fetchByDepartamentId({ commit }, id) {
@@ -62,13 +49,8 @@ export default {
       dispatch("fetch");
     },
     async add({ commit }, addMachinesDto) {
-      commit("setIsAddLoading", true);
-      try {
-        const res = await api.machines.add(addMachinesDto);
-        commit("pushMachines", res.data);
-      } finally {
-        commit("setIsAddLoading", false);
-      }
+      const res = await api.machines.add(addMachinesDto);
+      commit("pushMachines", res.data);
     },
     async deleteMachine({ commit }, id) {
       await api.machines.drop(id);
@@ -81,12 +63,6 @@ export default {
     },
     isLoading(state) {
       return state.isLoading;
-    },
-    isAddLoading(state) {
-      return state.isAddLoading;
-    },
-    isDeleteLoading(state) {
-      return state.isDeleteLoading;
     },
     machines(state) {
       return state.machines;
