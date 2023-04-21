@@ -1,17 +1,29 @@
+import Consumable from "@/types/Consumable";
+import User from "@/types/User";
+import Machine from "@/types/Machine";
+
 interface Defect {
-  id: string;
+  id?: string;
 
-  name: string;
+  name?: string;
 
-  description: string;
+  description?: string;
 
-  type: string;
+  isResolved?: boolean;
 
-  isResolved: boolean;
+  type?: string;
 
-  createdAt: Date;
+  decisionDate?: Date;
 
-  updateAt: Date;
+  createdAt?: Date;
+
+  updateAt?: Date;
+
+  consumable?: Consumable;
+
+  responsible?: User;
+
+  machine?: Machine;
 }
 
 export default Defect;

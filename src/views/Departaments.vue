@@ -5,12 +5,7 @@
         <search v-model="searchParam" />
       </v-col>
       <v-col>
-        <v-btn
-          class="mt-1"
-          append-icon="mdi-plus"
-          :to="{ name: 'AddDepartament' }"
-          >Добавить
-        </v-btn>
+        <add-btn :to="{ name: 'AddDepartament' }" />
       </v-col>
     </v-row>
     <departament-card
@@ -29,6 +24,7 @@ import Departament from "@/types/Departament";
 import Loading from "@/components/loading.vue";
 import Search from "@/components/search.vue";
 import DepartamentCard from "@/components/departamentCard.vue";
+import AddBtn from "@/components/ui/addBtn.vue";
 
 const store = useStore();
 

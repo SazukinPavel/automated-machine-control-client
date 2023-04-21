@@ -7,7 +7,10 @@ export default {
   },
   mutations: {
     setMachines(state, machines) {
-      state.machines = machines;
+      state.machines = machines.map((m) => {
+        m.isActive = m?.defects.every((d) => d.isResolved);
+        return m;
+      });
     },
     pushMachines(state, defect) {
       state.machines.push(defect);

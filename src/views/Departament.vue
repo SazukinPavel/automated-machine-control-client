@@ -13,13 +13,10 @@
         ></v-select>
       </v-col>
       <v-col>
-        <v-btn
+        <add-btn
           v-if="id"
-          class="mt-1"
-          append-icon="mdi-plus"
           :to="{ name: 'AddMachine', query: { departament: id } }"
-          >Добавить
-        </v-btn>
+        />
       </v-col>
     </v-row>
     <machine-card
@@ -40,6 +37,7 @@ import MachineCard from "@/components/machineCard.vue";
 import Search from "@/components/search.vue";
 import useDateFormater from "@/hooks/useDateFormater";
 import Loading from "@/components/loading.vue";
+import AddBtn from "@/components/ui/addBtn.vue";
 
 const route = useRoute();
 const store = useStore();

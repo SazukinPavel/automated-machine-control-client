@@ -5,5 +5,9 @@ export default function useDateFormater() {
     return moment(time).utc().format("YYYY/MM/DD hh:mm:ss");
   };
 
-  return { formatDateTime };
+  const formatToInput = (time: any) => {
+    return moment(time).format("yy-MM-ddThh:mm");
+  };
+
+  return { formatDateTime, formatToInput };
 }

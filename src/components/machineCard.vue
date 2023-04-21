@@ -4,7 +4,7 @@
       <v-chip
         variant="outlined"
         :color="props.machine?.isActive ? 'green' : 'red'"
-        >{{ props.machine.isActive ? "Активен" : "Не активен" }}</v-chip
+        >{{ props.machine.isActive ? "Исправна" : "Не исправна" }}</v-chip
       >
     </v-card-title>
     <v-card-title>{{ props.machine.name }}</v-card-title>
@@ -26,9 +26,17 @@
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
-    <div class="mt-3 mt-lg-10 d-flex justify-end">
+    <v-row
+      class="mt-3 mt-lg-10"
+      justify="end"
+      align-content="end"
+      align="end"
+      dense
+      no-gutters
+    >
+      <v-spacer />
       <v-btn
-        class="mx-1 mx-lg-5"
+        class="mx-1 mx-lg-5 my-3"
         :to="{ name: 'EditMachine', params: { id: props.machine?.id } }"
       >
         Изменить <v-icon>mdi-pencil</v-icon>
@@ -38,11 +46,17 @@
         :message="`Вы точно хотите удалить станок ${props.machine?.name}?`"
         @confirm="deleteMachine"
       >
-        <v-btn class="mx-1 mx-lg-5" @click="isDeleteDialog = true">
+        <v-btn class="mx-1 my-3 mx-lg-5" @click="isDeleteDialog = true">
           Удалить <v-icon>mdi-delete</v-icon>
         </v-btn>
       </confitm-dialog>
-    </div>
+      <v-btn
+        class="mx-1 my-3 mx-lg-5"
+        :to="{ name: 'MachinesDefects', params: { id: props.machine?.id } }"
+      >
+        Неисправности <v-icon>mdi-arrow-right-bold-outline</v-icon>
+      </v-btn>
+    </v-row>
   </v-card>
 </template>
 
