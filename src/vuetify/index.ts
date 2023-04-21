@@ -45,6 +45,8 @@ const vuetify = createVuetify({
     VSelect: {
       color: "primary",
       variant: "outlined",
+      hideNoData: true,
+      noDataText: "",
     },
     VListItem: {
       color: "primary",
@@ -53,6 +55,12 @@ const vuetify = createVuetify({
     VList: {
       color: "primary",
       activeColor: "primary",
+    },
+    VAutocomplete: {
+      color: "primary",
+      variant: "outlined",
+      hideNoData: true,
+      noDataText: "",
     },
   },
   directives,
