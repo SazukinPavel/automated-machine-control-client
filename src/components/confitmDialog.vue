@@ -1,6 +1,10 @@
 <template>
   <slot></slot>
-  <v-dialog max-width="600" :model-value="modelValue">
+  <v-dialog
+    @update:model-value="emit('update:modelValue', $event)"
+    max-width="600"
+    :model-value="modelValue"
+  >
     <v-card class="py-10 px-5">
       <v-card-title class="text-wrap">{{ props.message }}</v-card-title>
       <div class="d-flex justify-center mt-4">
