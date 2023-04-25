@@ -8,6 +8,8 @@ import MachinesDefects from "@/views/MachinesDefects.vue";
 import AddDefect from "@/views/AddDefect.vue";
 import Users from "@/views/Users.vue";
 import AddUser from "@/views/AddUser.vue";
+import ConsumableTypes from "@/views/ConsumableTypes.vue";
+import AddConsumableType from "@/views/AddConsumableType.vue";
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
@@ -77,6 +79,25 @@ const routes = [
     path: "/users/add",
     name: "AddUser",
     component: AddUser,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/types",
+    name: "ConsumableTypes",
+    component: ConsumableTypes,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/types/add",
+    name: "AddConsumableType",
+    component: AddConsumableType,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/types/:id/edit",
+    name: "EditConsumableType",
+    component: AddConsumableType,
+    props: { isEdit: true },
     meta: { isAdminRoute: true },
   },
 ];
