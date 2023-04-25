@@ -1,6 +1,6 @@
 <template>
   <right-menu v-if="isLogedIn" />
-  <main style="margin-left: 60px">
+  <main :style="isLogedIn && `margin-left: 60px`">
     <slot></slot>
   </main>
   <snackbar />
