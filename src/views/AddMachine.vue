@@ -10,17 +10,25 @@
     <v-form ref="machineForm">
       <v-text-field
         class="my-2"
-        :rules="[required]"
-        variant="outlined"
+        :rules="[requiredRule]"
         label="Название"
-        color="primary"
         v-model="addMachineDto.name"
+      />
+      <v-text-field
+        class="my-2"
+        label="Инвентарный номер"
+        v-model="addMachineDto.number"
+      />
+      <v-text-field class="my-2" label="Модель" v-model="addMachineDto.model" />
+      <v-text-field
+        class="my-2"
+        label="Год ввода"
+        :rules="[yearRule]"
+        v-model="addMachineDto.startYear"
       />
       <v-textarea
         class="my-2"
-        variant="outlined"
         label="Описание"
-        color="primary"
         v-model="addMachineDto.description"
       />
     </v-form>
@@ -50,7 +58,7 @@ const props = defineProps({ isEdit: { type: Boolean, default: false } });
 
 const route = useRoute();
 const store = useStore();
-const { required } = useValidators();
+const { requiredRule, yearRule } = useValidators();
 const { goTo, goBack } = useNavigateTo();
 
 const addMachineDto = ref<AddMachineDto>({

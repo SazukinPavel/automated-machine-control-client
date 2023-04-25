@@ -16,13 +16,13 @@
         label="Станок"
         item-value="id"
         item-title="name"
-        :rules="[required]"
+        :rules="[requiredRule]"
       />
       <v-autocomplete
         v-model="addDefectDto.responsibleId"
         :items="users"
         label="Ответственный"
-        :rules="[required]"
+        :rules="[requiredRule]"
         item-value="id"
         item-title="login"
       />
@@ -30,11 +30,11 @@
         v-model="addDefectDto.type"
         :items="types"
         label="Тип"
-        :rules="[required]"
+        :rules="[requiredRule]"
       />
       <v-text-field
         class="my-2"
-        :rules="[required]"
+        :rules="[requiredRule]"
         variant="outlined"
         label="Название"
         color="primary"
@@ -56,14 +56,14 @@
         @blur="setUserConsumable"
         item-title="name"
         item-value="name"
-        :rules="[required]"
+        :rules="[requiredRule]"
         color="primary"
         v-model="addDefectDto.consumable"
       />
       <v-text-field
         type="datetime-local"
         v-model="addDefectDto.decisionDate"
-        :rules="[required]"
+        :rules="[requiredRule]"
       />
     </v-form>
     <div class="d-flex justify-end align-center">
@@ -93,7 +93,7 @@ const props = defineProps({ isEdit: { type: Boolean, default: false } });
 const store = useStore();
 const route = useRoute();
 const { goBack } = useNavigateTo();
-const { required } = useValidators();
+const { requiredRule } = useValidators();
 
 const addDefectDto = ref<AddDefectDto>({});
 const isAddLoading = ref(false);

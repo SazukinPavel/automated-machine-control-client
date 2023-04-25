@@ -1,17 +1,17 @@
 <template>
   <div class="d-flex justify-center align-center px-5">
     <v-form style="width: 500px; margin-top: 20vh" ref="loginForm">
-      <v-card-title class="text-center text-h4 mb-5">Login</v-card-title>
+      <v-card-title class="text-center text-h4 mb-5">Авторизация</v-card-title>
       <v-text-field
         class="my-5"
-        :rules="[required]"
+        :rules="[requiredRule]"
         label="Логин"
         v-model="loginDto.login"
       />
       <password-input
         class="my-5"
         label="Пароль"
-        :rules="[required]"
+        :rules="[requiredRule]"
         v-model="loginDto.password"
       />
       <div class="d-flex justify-end">
@@ -31,7 +31,7 @@ import useValidators from "@/hooks/useValidators";
 const loginForm = ref<any | null>(null);
 
 const store = useStore();
-const { required } = useValidators();
+const { requiredRule } = useValidators();
 
 const loginDto = ref<LoginDto>({ login: "", password: "" });
 

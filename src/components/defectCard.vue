@@ -41,7 +41,7 @@
               <v-text-field
                 type="datetime-local"
                 v-model="newDate"
-                :rules="[required]"
+                :rules="[requiredRule]"
               />
               <div class="d-flex justify-space-between">
                 <v-btn
@@ -76,7 +76,7 @@ const props = defineProps({
 });
 
 const { formatDateTime } = useDateFormater();
-const { required } = useValidators();
+const { requiredRule } = useValidators();
 const store = useStore();
 
 const isFixDefectLoading = ref(false);

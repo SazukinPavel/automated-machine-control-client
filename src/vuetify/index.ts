@@ -42,6 +42,10 @@ const vuetify = createVuetify({
       color: "primary",
       variant: "outlined",
     },
+    VTextarea: {
+      color: "primary",
+      variant: "outlined",
+    },
     VSelect: {
       color: "primary",
       variant: "outlined",
