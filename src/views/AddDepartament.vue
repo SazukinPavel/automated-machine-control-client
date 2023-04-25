@@ -71,11 +71,13 @@ const add = async () => {
       message: `Цех успешно ${props.isEdit ? "обновлён" : "добавлен"}`,
     });
     goTo("Departaments");
-  } catch {
+  } catch (e: any) {
     store.commit("snackbar/showSnackbarError", {
-      message: `Произошла ошибка при ${
-        props.isEdit ? "обновление" : "добавление"
-      } цеха`,
+      message:
+        e.response.data.message ||
+        `Произошла ошибка при ${
+          props.isEdit ? "обновление" : "добавление"
+        } цеха`,
     });
   } finally {
     isLoading.value = false;
