@@ -16,6 +16,12 @@ interface Machine {
 
   defects: Defect[];
   departament?: Departament;
+
+  model: string;
+
+  number: string;
+
+  startYear: string;
 }
 
 export default Machine;
