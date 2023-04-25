@@ -47,6 +47,9 @@
       <v-list-item value="users" @click="goTo('Users')">
         <v-list-item-title class="text-h6">Ответственные</v-list-item-title>
       </v-list-item>
+      <v-list-item value="users" @click="goTo('ConsumableTypes')">
+        <v-list-item-title class="text-h6">Типы материалов</v-list-item-title>
+      </v-list-item>
       <v-list-item v-once active-color="primary" @click="logout" value="logout">
         <v-list-item-title class="text-h6 d-flex justify-space-between"
           ><span>Выйти</span>
@@ -60,8 +63,8 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import Departament from "@/types/Departament";
-import MenuItem from "@/types/MenuItem";
+import Departament from "@/types/busnes/Departament";
+import MenuItem from "@/types/utils/MenuItem";
 import useNavigateTo from "@/hooks/useNavigateTo";
 
 const store = useStore();
