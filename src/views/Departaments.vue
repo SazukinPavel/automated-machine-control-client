@@ -38,7 +38,7 @@ const filtredDepartaments = computed<Departament[]>(() => {
     return departaments.value;
   }
   return departaments.value.filter((d) =>
-    d.name.toLowerCase().startsWith(searchParam.value.toLowerCase())
+    d.name.toLowerCase().includes(searchParam.value.toLowerCase())
   );
 });
 
