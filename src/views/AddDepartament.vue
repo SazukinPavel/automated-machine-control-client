@@ -61,7 +61,7 @@ const add = async () => {
       const updateMachineDto = {
         ...addDepartamentDto.value,
       } as UpdateDepartamentDto;
-      store.dispatch("departaments/update", updateMachineDto);
+      await store.dispatch("departaments/update", updateMachineDto);
     } else {
       await store.dispatch("departaments/add", {
         ...addDepartamentDto.value,
