@@ -33,15 +33,10 @@ export default {
         return;
       }
 
-      try {
-        const machines = await api.machines.list();
+      const machines = await api.machines.list();
 
-        commit("setMachines", machines.data);
-        commit("setIsFetched", true);
-      } catch {
-        commit("setIsFetched", false);
-        throw new Error("fetch error");
-      }
+      commit("setMachines", machines.data);
+      commit("setIsFetched", true);
     },
     async fetchByDepartamentId({ commit }, id) {
       const machines = await api.machines.list({ departament: id });
@@ -63,9 +58,6 @@ export default {
   getters: {
     isFetched(state) {
       return state.isFetched;
-    },
-    isLoading(state) {
-      return state.isLoading;
     },
     machines(state) {
       return state.machines;

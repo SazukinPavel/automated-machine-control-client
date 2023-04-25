@@ -40,6 +40,9 @@ export default {
 
         commit("setDepartament", departaments.data);
         commit("setIsFetched", true);
+      } catch {
+        commit("setIsFetched", false);
+        throw new Error("");
       } finally {
         commit("setIsLoading", false);
       }
@@ -49,13 +52,8 @@ export default {
       dispatch("fetch");
     },
     async add({ commit }, addDepartamentDto) {
-      commit("setIsAddLoading", true);
-      try {
-        const res = await api.departaments.add(addDepartamentDto);
-        commit("pushDepartament", res.data);
-      } finally {
-        commit("setIsAddLoading", false);
-      }
+      const res = await api.departaments.add(addDepartamentDto);
+      commit("pushDepartament", res.data);
     },
     async update({ commit }, updateDepartamentDto) {
       const res = await api.departaments.update(updateDepartamentDto);
@@ -72,12 +70,6 @@ export default {
     },
     isLoading(state) {
       return state.isLoading;
-    },
-    isAddLoading(state) {
-      return state.isAddLoading;
-    },
-    isDeleteLoading(state) {
-      return state.isDeleteLoading;
     },
     departaments(state) {
       return state.departaments;
