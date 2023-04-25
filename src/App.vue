@@ -11,7 +11,7 @@ import appMain from "@/components/layouts/main.vue";
 import { computed, ComputedRef, onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
-import Role from "@/types/Role";
+import Role from "@/types/utils/Role";
 
 const store = useStore();
 const router = useRouter();

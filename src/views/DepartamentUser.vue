@@ -130,7 +130,7 @@
 import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import moment from "moment";
-import Machine from "@/types/Machine";
+import Machine from "@/types/busnes/Machine";
 import AddDefectDto from "@/types/dto/defects/AddDefectDto";
 import api from "@/api";
 import UpdateDefectDto from "@/types/dto/defects/UpdateDefectDto";

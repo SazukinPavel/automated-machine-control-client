@@ -16,10 +16,10 @@
 import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
-import Machine from "@/types/Machine";
+import Machine from "@/types/busnes/Machine";
 import AddBtn from "@/components/ui/addBtn.vue";
 import DefectCard from "@/components/defectCard.vue";
-import Defect from "@/types/Defect";
+import Defect from "@/types/busnes/Defect";
 import useNavigateTo from "@/hooks/useNavigateTo";
 
 const store = useStore();
@@ -39,9 +39,16 @@ const defects = computed<Defect[]>(() => store.getters["defects/defects"]);
 
 onMounted(async () => {
   isFetchLoading.value = true;
-  await store.dispatch("machines/fetch");
-  await store.dispatch("defects/fetch", { machine: machineId.value });
-  isFetchLoading.value = false;
+  try {
+    await store.dispatch("machines/fetch");
+    await store.dispatch("defects/fetch", { machine: machineId.value });
+  } catch {
+    store.commit("snackbar/showSnackbarError", {
+      message: "Произошла ошибка при запросе дефектов станка",
+    });
+  } finally {
+    isFetchLoading.value = false;
+  }
 });
 </script>
 

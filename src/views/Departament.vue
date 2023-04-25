@@ -32,7 +32,7 @@
 import { computed, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import Machine from "@/types/Machine";
+import Machine from "@/types/busnes/Machine";
 import MachineCard from "@/components/machineCard.vue";
 import Search from "@/components/search.vue";
 import useDateFormater from "@/hooks/useDateFormater";

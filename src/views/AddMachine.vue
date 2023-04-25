@@ -52,7 +52,7 @@ import useNavigateTo from "@/hooks/useNavigateTo";
 import api from "@/api";
 import Loading from "@/components/loading.vue";
 import UpdateMachineDto from "@/types/dto/machines/UpdateMachineDto";
-import Machine from "@/types/Machine";
+import Machine from "@/types/busnes/Machine";
 
 const props = defineProps({ isEdit: { type: Boolean, default: false } });
 

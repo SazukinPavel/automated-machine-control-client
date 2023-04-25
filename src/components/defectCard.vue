@@ -66,7 +66,7 @@
 
 <script setup lang="ts">
 import { defineProps, PropType, ref } from "vue";
-import Defect from "@/types/Defect";
+import Defect from "@/types/busnes/Defect";
 import useDateFormater from "@/hooks/useDateFormater";
 import { useStore } from "vuex";
 import useValidators from "@/hooks/useValidators";

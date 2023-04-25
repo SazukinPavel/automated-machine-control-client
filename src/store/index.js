@@ -6,6 +6,7 @@ import machines from "@/store/modules/machines";
 import departaments from "@/store/modules/departaments";
 import defects from "@/store/modules/defects";
 import consumables from "@/store/modules/consumables";
+import consumableTypes from "@/store/modules/consumableTypes";
 import { createStore } from "vuex-extensions";
 import { Store } from "vuex";
 
@@ -19,5 +20,6 @@ export default createStore(Store, {
     users,
     departaments,
     consumables,
+    consumableTypes,
   },
 });

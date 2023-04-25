@@ -23,7 +23,7 @@
 import { PropType, ref, defineProps } from "vue";
 import ConfitmDialog from "@/components/confitmDialog.vue";
 import { useStore } from "vuex";
-import User from "@/types/User";
+import User from "@/types/busnes/User";
 
 const props = defineProps({
   user: { type: Object as PropType<User>, required: true },

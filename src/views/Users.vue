@@ -19,7 +19,7 @@ import AddBtn from "@/components/ui/addBtn.vue";
 import Loading from "@/components/loading.vue";
 import Search from "@/components/search.vue";
 import { useStore } from "vuex";
-import User from "@/types/User";
+import User from "@/types/busnes/User";
 import UserCard from "@/components/userCard.vue";
 
 const store = useStore();

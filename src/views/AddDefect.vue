@@ -84,9 +84,9 @@ import { useStore } from "vuex";
 import useNavigateTo from "@/hooks/useNavigateTo";
 import { useRoute } from "vue-router";
 import AddDefectDto from "@/types/dto/defects/AddDefectDto";
-import Machine from "@/types/Machine";
-import User from "@/types/User";
-import Consumable from "@/types/Consumable";
+import Machine from "@/types/busnes/Machine";
+import User from "@/types/busnes/User";
+import Consumable from "@/types/busnes/Consumable";
 
 const props = defineProps({ isEdit: { type: Boolean, default: false } });
 

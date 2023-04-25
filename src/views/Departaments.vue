@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import Departament from "@/types/Departament";
+import Departament from "@/types/busnes/Departament";
 import Loading from "@/components/loading.vue";
 import Search from "@/components/search.vue";
 import DepartamentCard from "@/components/departamentCard.vue";

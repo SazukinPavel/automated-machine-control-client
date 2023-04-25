@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { PropType, ref, defineProps } from "vue";
-import Departament from "@/types/Departament";
+import Departament from "@/types/busnes/Departament";
 import ConfitmDialog from "@/components/confitmDialog.vue";
 import { useStore } from "vuex";
 

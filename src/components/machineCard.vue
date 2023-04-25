@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import Machine from "@/types/Machine";
+import Machine from "@/types/busnes/Machine";
 import { PropType, defineProps, ref } from "vue";
 import useDateFormater from "@/hooks/useDateFormater";
 import { useStore } from "vuex";
