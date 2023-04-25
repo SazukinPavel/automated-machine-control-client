@@ -1,5 +1,5 @@
 import Api from "@/api/api";
-import BaseApiModule from "@/types/BaseApiModule";
+import BaseApiModule from "@/types/utils/BaseApiModule";
 
 export default class ConsumablesModule extends BaseApiModule {
   constructor(api: Api) {

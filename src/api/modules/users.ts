@@ -1,8 +1,8 @@
 import Api from "@/api/api";
-import BaseApiModule from "@/types/BaseApiModule";
+import BaseApiModule from "@/types/utils/BaseApiModule";
 import AddUserDto from "@/types/dto/users/AddUserDto";
 import UpdateUserDto from "@/types/dto/users/UpdateUserDto";
-import User from "@/types/User";
+import User from "@/types/busnes/User";
 
 export default class UsersModule extends BaseApiModule {
   constructor(api: Api) {

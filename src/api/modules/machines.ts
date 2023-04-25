@@ -1,7 +1,7 @@
 import Api from "@/api/api";
-import BaseApiModule from "@/types/BaseApiModule";
+import BaseApiModule from "@/types/utils/BaseApiModule";
 import AddMachineDto from "@/types/dto/machines/AddMachineDto";
-import Machine from "@/types/Machine";
+import Machine from "@/types/busnes/Machine";
 import UpdateMachineDto from "@/types/dto/machines/UpdateMachineDto";
 
 export default class MachinesModule extends BaseApiModule {

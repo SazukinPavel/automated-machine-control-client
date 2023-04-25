@@ -1,8 +1,8 @@
 import Api from "@/api/api";
-import BaseApiModule from "@/types/BaseApiModule";
+import BaseApiModule from "@/types/utils/BaseApiModule";
 import AddDefectDto from "@/types/dto/defects/AddDefectDto";
 import UpdateDefectDto from "@/types/dto/defects/UpdateDefectDto";
-import Defect from "@/types/Defect";
+import Defect from "@/types/busnes/Defect";
 
 export default class DefectsModule extends BaseApiModule {
   constructor(api: Api) {

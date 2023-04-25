@@ -1,8 +1,8 @@
 import Api from "@/api/api";
-import BaseApiModule from "@/types/BaseApiModule";
+import BaseApiModule from "@/types/utils/BaseApiModule";
 import AddDepartamentDto from "@/types/dto/departaments/AddDepartamentDto";
 import UpdateDepartamentDto from "@/types/dto/departaments/UpdateDepartamentDto";
-import Departament from "@/types/Departament";
+import Departament from "@/types/busnes/Departament";
 
 export default class DepartamentModule extends BaseApiModule {
   constructor(api: Api) {
