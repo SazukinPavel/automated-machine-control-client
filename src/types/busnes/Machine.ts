@@ -1,5 +1,5 @@
-import Defect from "@/types/Defect";
-import Departament from "@/types/Departament";
+import Defect from "@/types/busnes/Defect";
+import Departament from "@/types/busnes/Departament";
 
 interface Machine {
   id: string;

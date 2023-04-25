@@ -1,4 +1,4 @@
-import Role from "@/types/Role";
+import Role from "@/types/utils/Role";
 
 export default interface UpdateUserDto {
   id: string;

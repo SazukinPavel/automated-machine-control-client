@@ -1,5 +1,5 @@
-import User from "@/types/User";
-import Machine from "@/types/Machine";
+import User from "@/types/busnes/User";
+import Machine from "@/types/busnes/Machine";
 
 interface Departament {
   id: string;

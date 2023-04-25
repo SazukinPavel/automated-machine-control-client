@@ -1,5 +1,5 @@
-import Role from "../types/Role";
-import Departament from "@/types/Departament";
+import Role from "../utils/Role";
+import Departament from "@/types/busnes/Departament";
 
 interface User {
   id: string;

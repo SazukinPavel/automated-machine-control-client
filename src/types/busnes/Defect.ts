@@ -1,6 +1,6 @@
-import Consumable from "@/types/Consumable";
-import User from "@/types/User";
-import Machine from "@/types/Machine";
+import Consumable from "@/types/busnes/Consumable";
+import User from "@/types/busnes/User";
+import Machine from "@/types/busnes/Machine";
 
 interface Defect {
   id?: string;
