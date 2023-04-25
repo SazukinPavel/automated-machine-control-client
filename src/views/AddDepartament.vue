@@ -10,7 +10,7 @@
     <v-form ref="departamentForm">
       <v-text-field
         class="my-2"
-        :rules="[required]"
+        :rules="[requiredRule]"
         variant="outlined"
         label="Название"
         color="primary"
@@ -42,7 +42,7 @@ const props = defineProps({ isEdit: { type: Boolean, default: false } });
 
 const store = useStore();
 const route = useRoute();
-const { required } = useValidators();
+const { requiredRule } = useValidators();
 const { goBack, goTo } = useNavigateTo();
 
 const isLoading = ref(false);
