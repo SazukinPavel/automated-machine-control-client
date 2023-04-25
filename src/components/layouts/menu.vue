@@ -48,8 +48,9 @@
         <v-list-item-title class="text-h6">Ответственные</v-list-item-title>
       </v-list-item>
       <v-list-item v-once active-color="primary" @click="logout" value="logout">
-        <v-list-item-title class="text-h6"
-          >Выйти <v-icon>mdi-logout</v-icon></v-list-item-title
+        <v-list-item-title class="text-h6 d-flex justify-space-between"
+          ><span>Выйти</span>
+          <v-icon size="small">mdi-logout</v-icon></v-list-item-title
         >
       </v-list-item>
     </v-list>
