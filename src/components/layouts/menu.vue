@@ -47,6 +47,11 @@
       <v-list-item value="users" @click="goTo('Users')">
         <v-list-item-title class="text-h6">Ответственные</v-list-item-title>
       </v-list-item>
+      <v-list-item v-once active-color="primary" @click="logout" value="logout">
+        <v-list-item-title class="text-h6"
+          >Выйти <v-icon>mdi-logout</v-icon></v-list-item-title
+        >
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -81,6 +86,12 @@ const departamnetsRoutes = computed<MenuItem[]>(() => {
 
   return departamnents;
 });
+
+const logout = () => {
+  store.commit("auth/logout");
+  sessionStorage.clear();
+  store.reset();
+};
 </script>
 
 <style scoped></style>
