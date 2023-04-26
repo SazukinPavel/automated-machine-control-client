@@ -8,15 +8,10 @@
     <v-card class="py-10 px-5">
       <v-card-title class="text-wrap">{{ props.message }}</v-card-title>
       <div class="d-flex justify-center mt-4">
-        <v-btn
-          class="mx-2"
-          variant="outlined"
-          @click="emit('update:modelValue', false)"
+        <v-btn class="mx-2" @click="emit('update:modelValue', false)"
           >Отмена</v-btn
         >
-        <v-btn class="mx-2" variant="outlined" @click="emit('confirm')"
-          >Подтвердить</v-btn
-        >
+        <v-btn class="mx-2" @click="emit('confirm')">Подтвердить</v-btn>
       </div>
     </v-card>
   </v-dialog>

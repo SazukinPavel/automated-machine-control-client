@@ -8,6 +8,7 @@
         @confirm="deleteUser"
       >
         <v-btn
+          density="comfortable"
           :loading="isDeleteLoading"
           class="mx-1 my-2 mx-lg-5"
           @click="isDeleteDialog = true"

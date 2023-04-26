@@ -8,6 +8,7 @@
         @confirm="deleteDepartament"
       >
         <v-btn
+          density="comfortable"
           :loading="isDeleteLoading"
           class="mx-1 my-2 mx-lg-5"
           @click="isDeleteDialog = true"
@@ -16,6 +17,7 @@
         </v-btn>
       </confitm-dialog>
       <v-btn
+        density="comfortable"
         class="mx-1 my-2 mx-lg-5"
         :disabled="isDeleteLoading"
         :to="{ name: 'EditDepartament', params: { id: props.departament?.id } }"
@@ -23,6 +25,7 @@
         Изменить <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn
+        density="comfortable"
         :disabled="isDeleteLoading"
         class="mx-1 my-2 mx-lg-5"
         :to="{ name: 'Departament', params: { id: props.departament?.id } }"

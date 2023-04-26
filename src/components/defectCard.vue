@@ -28,7 +28,7 @@
     </v-expansion-panels>
     <v-row justify="end" class="mt-5" v-if="!props.defect?.isResolved">
       <v-spacer />
-      <v-btn class="my-3 mx-2"
+      <v-btn class="my-3 mx-2" density="comfortable"
         >Передвинуть дату
         <v-dialog
           v-model="isChangeDateDialog"
@@ -57,7 +57,11 @@
           </v-card>
         </v-dialog></v-btn
       >
-      <v-btn class="mt-3" @click="fixDefect" :loading="isFixDefectLoading"
+      <v-btn
+        density="comfortable"
+        class="mt-3"
+        @click="fixDefect"
+        :loading="isFixDefectLoading"
         >Исправить</v-btn
       >
     </v-row>
