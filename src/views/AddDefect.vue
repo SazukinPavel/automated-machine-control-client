@@ -19,14 +19,16 @@
         :rules="[requiredRule]"
       />
       <v-autocomplete
-        v-model="addDefectDto.responsibleId"
+        v-model="addDefectDto.responsible"
         :items="users"
         label="Ответственный"
         :rules="[requiredRule]"
         item-value="id"
         item-title="login"
+        multiple
+        return-object
       />
-      <v-select
+      <v-autocomplete
         v-model="addDefectDto.type"
         :items="types"
         label="Тип"

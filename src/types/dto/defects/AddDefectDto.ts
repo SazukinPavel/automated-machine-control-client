@@ -7,7 +7,7 @@ export default interface AddDefectDto {
 
   consumable?: string;
 
-  responsibleId?: string;
+  responsible?: string;
 
   decisionDate?: Date;
   type?: string;
