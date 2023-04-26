@@ -134,6 +134,7 @@ import Machine from "@/types/busnes/Machine";
 import AddDefectDto from "@/types/dto/defects/AddDefectDto";
 import api from "@/api";
 import UpdateDefectDto from "@/types/dto/defects/UpdateDefectDto";
+import deepObjectSearch from "@/utils/deepObjectSearch";
 
 const store = useStore();
 const tab = ref(0);
@@ -152,13 +153,7 @@ const filtredMachines = computed(() => {
   if (!searchParam.value) {
     return machines.value;
   }
-  return machines.value.filter((m) => {
-    return (
-      m.id.toString().startsWith(searchParam.value) ||
-      m.name.toLowerCase().startsWith(searchParam.value.toLowerCase()) ||
-      m.description.toLowerCase().startsWith(searchParam.value.toLowerCase())
-    );
-  });
+  return deepObjectSearch(machines.value, searchParam.value);
 });
 
 const defectForm = ref<any>();

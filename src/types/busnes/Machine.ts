@@ -10,9 +10,9 @@ interface Machine {
 
   isActive: boolean;
 
-  createdAt: Date;
+  createdAt: Date | string;
 
-  updateAt: Date;
+  updateAt: Date | string;
 
   defects: Defect[];
   departament?: Departament;

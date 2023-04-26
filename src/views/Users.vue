@@ -21,6 +21,7 @@ import Search from "@/components/search.vue";
 import { useStore } from "vuex";
 import User from "@/types/busnes/User";
 import UserCard from "@/components/userCard.vue";
+import deepObjectSearch from "@/utils/deepObjectSearch";
 
 const store = useStore();
 
@@ -32,9 +33,7 @@ const filtredUsers = computed<User[]>(() => {
   if (!searchParam.value) {
     return users.value;
   }
-  return users.value.filter((u) =>
-    u.login.toLowerCase().startsWith(searchParam.value.toLowerCase())
-  );
+  return deepObjectSearch(users.value, searchParam.value);
 });
 
 onMounted(async () => {

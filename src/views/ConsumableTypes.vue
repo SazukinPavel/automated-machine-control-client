@@ -25,6 +25,7 @@ import Search from "@/components/search.vue";
 import AddBtn from "@/components/ui/addBtn.vue";
 import ConsumableType from "@/types/busnes/ConsumableType";
 import ConsumableTypeCard from "@/components/consumableTypeCard.vue";
+import deepObjectSearch from "@/utils/deepObjectSearch";
 
 const store = useStore();
 
@@ -38,9 +39,7 @@ const filtredTypes = computed<ConsumableType[]>(() => {
   if (!searchParam.value) {
     return types.value;
   }
-  return types.value.filter((d) =>
-    d.name.toLowerCase().includes(searchParam.value.toLowerCase())
-  );
+  return deepObjectSearch(types.value, searchParam.value);
 });
 
 onMounted(async () => {

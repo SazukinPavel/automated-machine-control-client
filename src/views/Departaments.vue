@@ -25,6 +25,7 @@ import Loading from "@/components/loading.vue";
 import Search from "@/components/search.vue";
 import DepartamentCard from "@/components/departamentCard.vue";
 import AddBtn from "@/components/ui/addBtn.vue";
+import deepObjectSearch from "@/utils/deepObjectSearch";
 
 const store = useStore();
 
@@ -37,9 +38,10 @@ const filtredDepartaments = computed<Departament[]>(() => {
   if (!searchParam.value) {
     return departaments.value;
   }
-  return departaments.value.filter((d) =>
-    d.name.toLowerCase().includes(searchParam.value.toLowerCase())
-  );
+
+  return deepObjectSearch(departaments.value, searchParam.value, {
+    includes: ["name"],
+  });
 });
 
 const isLoading = computed<boolean>(

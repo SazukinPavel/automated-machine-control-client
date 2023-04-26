@@ -38,6 +38,7 @@ import Search from "@/components/search.vue";
 import useDateFormater from "@/hooks/useDateFormater";
 import Loading from "@/components/loading.vue";
 import AddBtn from "@/components/ui/addBtn.vue";
+import deepObjectSearch from "@/utils/deepObjectSearch";
 
 const route = useRoute();
 const store = useStore();
@@ -71,7 +72,15 @@ const fetchMachines = async () => {
   }
 };
 
-const machines = computed<Machine[]>(() => store.getters["machines/machines"]);
+const machines = computed<Machine[]>(() =>
+  store.getters["machines/machines"].map((m: Machine): Machine => {
+    return {
+      ...m,
+      updateAt: formatDateTime(m.updateAt),
+      createdAt: formatDateTime(m.createdAt),
+    };
+  })
+);
 const filtredMachines = computed<Machine[]>(() => {
   let currMachines: Machine[] = JSON.parse(JSON.stringify(machines.value));
   if (selectedState.value !== "") {
@@ -81,16 +90,7 @@ const filtredMachines = computed<Machine[]>(() => {
   }
 
   if (searchParam.value) {
-    currMachines = currMachines.filter((m) => {
-      return (
-        m.name.toLowerCase().startsWith(searchParam.value.toLowerCase()) ||
-        m.description
-          .toLowerCase()
-          .startsWith(searchParam.value.toLowerCase()) ||
-        formatDateTime(m.createdAt).startsWith(searchParam.value) ||
-        formatDateTime(m.updateAt).startsWith(searchParam.value)
-      );
-    });
+    return deepObjectSearch(currMachines, searchParam.value);
   }
 
   return currMachines;
