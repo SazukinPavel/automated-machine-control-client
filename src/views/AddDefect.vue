@@ -48,14 +48,20 @@
         v-model="addDefectDto.description"
       />
       <v-autocomplete
+        :items="consumableTypes"
+        v-model="typeId"
+        item-title="name"
+        item-value="id"
+        label="Тип материала"
+      />
+      <v-autocomplete
         :single-line="false"
         class="my-2"
         variant="outlined"
         label="Материалы"
-        :items="fullConsumables"
-        @blur="setUserConsumable"
+        :items="consumables"
         item-title="name"
-        item-value="name"
+        item-value="id"
         :rules="[requiredRule]"
         color="primary"
         v-model="addDefectDto.consumable"
@@ -98,29 +104,20 @@ const { requiredRule } = useValidators();
 const addDefectDto = ref<AddDefectDto>({});
 const isAddLoading = ref(false);
 const isFetchLoading = ref(false);
-const types = ref(["Слесарная", "Электронная"]);
+const types = ref(["Слесарная", "Электронная", "Электрическая"]);
 const defectForm = ref<any | null>(null);
-const userConsumable = ref("");
+const typeId = ref("");
 
 const machines = computed<Machine[]>(() => store.getters["machines/machines"]);
 const users = computed<User[]>(() => store.getters["users/users"]);
-const consumables = computed<Consumable[]>(
-  () => store.getters["consumables/consumables"]
+const consumables = computed<Consumable[]>(() =>
+  store.getters["consumables/consumables"].filter(
+    (c: Consumable) => c.type?.id === typeId.value && !c.isUsed
+  )
 );
-const fullConsumables = computed<Consumable[]>(() => {
-  if (userConsumable.value) {
-    return consumables.value.concat([
-      { name: userConsumable.value } as Consumable,
-    ]);
-  }
-
-  return consumables.value;
-});
-
-const setUserConsumable = (e: any) => {
-  userConsumable.value = e.target.value || "";
-  addDefectDto.value.consumable = userConsumable.value;
-};
+const consumableTypes = computed<Consumable[]>(
+  () => store.getters["consumableTypes/types"]
+);
 
 const add = async () => {
   if (!(await defectForm.value.validate()).valid) {
@@ -148,6 +145,7 @@ onMounted(async () => {
     store.dispatch("machines/fetch"),
     store.dispatch("users/fetch"),
     store.dispatch("consumables/fetch"),
+    store.dispatch("consumableTypes/fetch"),
   ]);
 
   if (route.query.machine) {

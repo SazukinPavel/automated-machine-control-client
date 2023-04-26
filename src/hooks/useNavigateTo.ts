@@ -4,7 +4,7 @@ export default function useNavigateTo() {
   const router = useRouter();
 
   const goTo = (name: string, params?: any) => router.push({ name, params });
-  const goBack = () => router.go(-1);
+  const goBack = () => router.back();
 
   return { goTo, goBack };
 }
