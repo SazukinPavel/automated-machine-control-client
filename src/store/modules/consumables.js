@@ -5,15 +5,34 @@ export default {
     consumables: [],
   },
   mutations: {
-    setConsumables(state, consumables) {
+    set(state, consumables) {
       state.consumables = consumables;
+    },
+    push(state, type) {
+      state.consumables.push(type);
+    },
+    replace(state, consumable) {
+      state.consumables = state.consumables.map((d) =>
+        d.id === consumable.id ? consumable : d
+      );
+    },
+    delete(state, id) {
+      state.consumables = state.consumables.filter((t) => t.id !== id);
     },
   },
   actions: {
     async fetch({ commit }) {
       const consumables = await api.consumables.list();
 
-      commit("setConsumables", consumables.data);
+      commit("set", consumables.data);
+    },
+    async add({ commit }, dto) {
+      const res = await api.consumables.add(dto);
+      commit("push", res.data);
+    },
+    async delete({ commit }, id) {
+      await api.consumables.drop(id);
+      commit("delete", id);
     },
   },
   getters: {

@@ -10,6 +10,8 @@ import Users from "@/views/Users.vue";
 import AddUser from "@/views/AddUser.vue";
 import ConsumableTypes from "@/views/ConsumableTypes.vue";
 import AddConsumableType from "@/views/AddConsumableType.vue";
+import AddConsumable from "@/views/AddConsumable.vue";
+import Consumables from "@/views/Consumables.vue";
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
@@ -98,6 +100,18 @@ const routes = [
     name: "EditConsumableType",
     component: AddConsumableType,
     props: { isEdit: true },
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/consumables",
+    name: "Consumables",
+    component: Consumables,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/consumables/add",
+    name: "AddConsumable",
+    component: AddConsumable,
     meta: { isAdminRoute: true },
   },
 ];
