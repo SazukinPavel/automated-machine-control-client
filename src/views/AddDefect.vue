@@ -50,13 +50,6 @@
         v-model="addDefectDto.description"
       />
       <v-autocomplete
-        :items="consumableTypes"
-        v-model="typeId"
-        item-title="name"
-        item-value="id"
-        label="Тип материала"
-      />
-      <v-autocomplete
         :single-line="false"
         class="my-2"
         variant="outlined"
@@ -64,10 +57,20 @@
         :items="consumables"
         item-title="name"
         item-value="id"
+        multiple
         :rules="[requiredRule]"
         color="primary"
-        v-model="addDefectDto.consumable"
-      />
+        v-model="addDefectDto.consumables"
+        return-object
+      >
+        <template v-slot:item="{ props, item }">
+          <v-list-item
+            v-bind="props"
+            :title="item?.raw?.name"
+            :subtitle="item?.raw?.type?.name"
+          ></v-list-item>
+        </template>
+      </v-autocomplete>
       <v-text-field
         type="datetime-local"
         v-model="addDefectDto.decisionDate"
@@ -108,17 +111,11 @@ const isAddLoading = ref(false);
 const isFetchLoading = ref(false);
 const types = ref(["Слесарная", "Электронная", "Электрическая"]);
 const defectForm = ref<any | null>(null);
-const typeId = ref("");
 
 const machines = computed<Machine[]>(() => store.getters["machines/machines"]);
 const users = computed<User[]>(() => store.getters["users/users"]);
-const consumables = computed<Consumable[]>(() =>
-  store.getters["consumables/consumables"].filter(
-    (c: Consumable) => c.type?.id === typeId.value && !c.isUsed
-  )
-);
-const consumableTypes = computed<Consumable[]>(
-  () => store.getters["consumableTypes/types"]
+const consumables = computed<Consumable[]>(
+  () => store.getters["consumables/consumables"]
 );
 
 const add = async () => {
@@ -127,7 +124,7 @@ const add = async () => {
   }
   isAddLoading.value = true;
   try {
-    store.dispatch("defects/add", addDefectDto.value);
+    await store.dispatch("defects/add", addDefectDto.value);
     store.commit("snackbar/showSnackbarSuccess", {
       message: "Дефект добавлен успешно",
     });
@@ -147,7 +144,6 @@ onMounted(async () => {
     store.dispatch("machines/fetch"),
     store.dispatch("users/fetch"),
     store.dispatch("consumables/fetch"),
-    store.dispatch("consumableTypes/fetch"),
   ]);
 
   if (route.query.machine) {

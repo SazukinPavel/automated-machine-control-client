@@ -1,3 +1,6 @@
+import Consumable from "@/types/busnes/Consumable";
+import User from "@/types/busnes/User";
+
 export default interface AddDefectDto {
   name?: string;
 
@@ -5,9 +8,9 @@ export default interface AddDefectDto {
 
   machineId?: string;
 
-  consumable?: string;
+  consumables?: Consumable[];
 
-  responsible?: string;
+  responsible?: User[];
 
   decisionDate?: Date;
   type?: string;
