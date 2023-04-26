@@ -12,5 +12,5 @@ export default interface Consumable {
 
   createdAt: Date;
 
-  isUsed: boolean;
+  isAvailable: boolean;
 }
