@@ -4,6 +4,15 @@
       <v-col style="min-width: 150px" cols="3">
         <search v-model="searchParam" />
       </v-col>
+      <v-col style="min-width: 150px" cols="3">
+        <v-select
+          density="compact"
+          item-title="title"
+          item-value="value"
+          v-model="availableType"
+          :items="availableTypes"
+        />
+      </v-col>
       <v-col>
         <add-btn :to="{ name: 'AddConsumable' }" />
       </v-col>
@@ -30,15 +39,26 @@ const store = useStore();
 
 const searchParam = ref("");
 const isLoading = ref(false);
+const availableTypes = ref([
+  { title: "В наличии", value: true },
+  { title: "Использованые", value: false },
+  { title: "Все", value: null },
+]);
+const availableType = ref(true);
 
 const consumables = computed<Consumable[]>(
   () => store.getters["consumables/consumables"]
 );
 const filtredConsumables = computed<Consumable[]>(() => {
+  const filtred =
+    availableType.value === null
+      ? consumables.value
+      : consumables.value.filter((c) => c.isAvailable == !!availableType.value);
+
   if (!searchParam.value) {
-    return consumables.value;
+    return filtred;
   }
-  return consumables.value.filter((d) =>
+  return filtred.filter((d) =>
     d.name?.toLowerCase().startsWith(searchParam.value.toLowerCase())
   );
 });
