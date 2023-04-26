@@ -114,8 +114,8 @@ const defectForm = ref<any | null>(null);
 
 const machines = computed<Machine[]>(() => store.getters["machines/machines"]);
 const users = computed<User[]>(() => store.getters["users/users"]);
-const consumables = computed<Consumable[]>(
-  () => store.getters["consumables/consumables"]
+const consumables = computed<Consumable[]>(() =>
+  store.getters["consumables/consumables"].filter((d: Consumable) => !d.isUsed)
 );
 
 const add = async () => {

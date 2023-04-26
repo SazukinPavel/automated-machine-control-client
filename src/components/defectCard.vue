@@ -17,12 +17,28 @@
           <v-card-title class="text-wrap">
             Тип неисправности: {{ props.defect?.type }}</v-card-title
           >
-          <v-card-title class="text-wrap">
-            Ответственный: {{ props.defect?.responsible?.login }}</v-card-title
+          <v-card-title class="text-wrap"> Ответственные:</v-card-title>
+          <v-list density="comfortable" v-if="props.defect?.responsible">
+            <v-list-item-title
+              v-for="responsible in props.defect.responsible"
+              class="text-wrap"
+              :key="responsible.id"
+              >{{ responsible.login }}</v-list-item-title
+            >
+          </v-list>
+          <v-card-title class="text-wrap"> Материалы: </v-card-title>
+          <v-list
+            density="comfortable"
+            v-if="props.defect?.consumables"
+            item-title="name"
           >
-          <v-card-title class="text-wrap">
-            Материалы: {{ props.defect?.consumable?.name }}</v-card-title
-          >
+            <v-list-item-title
+              v-for="consumable in props.defect.consumables"
+              class="text-wrap"
+              :key="consumable.id"
+              >{{ consumable.name }}</v-list-item-title
+            >
+          </v-list>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>

@@ -19,9 +19,9 @@ interface Defect {
 
   updateAt?: Date;
 
-  consumable?: Consumable;
+  consumables?: Consumable[];
 
-  responsible?: User;
+  responsible?: User[];
 
   machine?: Machine;
 }
