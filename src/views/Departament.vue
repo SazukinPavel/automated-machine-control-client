@@ -48,8 +48,8 @@ const isLoading = ref(false);
 const searchParam = ref("");
 const selectedState = ref("");
 const stateItems = ref([
-  { title: "С дефектами", value: "false" },
-  { title: "Без дефектов", value: "true" },
+  { title: "Не исправна", value: "false" },
+  { title: "Исправна", value: "true" },
   { title: "Все", value: "" },
 ]);
 
