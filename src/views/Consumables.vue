@@ -1,10 +1,10 @@
 <template>
   <div v-if="!isLoading">
     <v-row class="ma-4" dense="dense">
-      <v-col style="min-width: 150px" cols="3">
+      <v-col style="min-width: 150px">
         <search v-model="searchParam" />
       </v-col>
-      <v-col style="min-width: 150px" cols="3">
+      <v-col style="min-width: 180px">
         <v-select
           density="compact"
           item-title="title"
@@ -41,11 +41,11 @@ const store = useStore();
 const searchParam = ref("");
 const isLoading = ref(false);
 const availableTypes = ref([
-  { title: "В наличии", value: true },
-  { title: "Использованые", value: false },
-  { title: "Все", value: null },
+  { title: "Не списанные", value: true },
+  { title: "Списанные", value: false },
+  { title: "Все", value: "null" },
 ]);
-const availableType = ref(true);
+const availableType = ref<string | boolean>(true);
 
 const consumables = computed<Consumable[]>(
   () => store.getters["consumables/consumables"]
@@ -54,7 +54,11 @@ const filtredConsumables = computed<Consumable[]>(() => {
   const filtred =
     availableType.value === null
       ? consumables.value
-      : consumables.value.filter((c) => c.isAvailable == !!availableType.value);
+      : consumables.value.filter(
+          (c) =>
+            availableType.value === "null" ||
+            c.isAvailable == availableType.value
+        );
 
   if (!searchParam.value) {
     return filtred;
