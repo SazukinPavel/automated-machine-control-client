@@ -6,6 +6,7 @@ import UsersModule from "@/api/modules/users";
 import DepartamentModule from "@/api/modules/departaments";
 import ConsumablesModule from "@/api/modules/consumables";
 import ConsumableTypesModule from "@/api/modules/consumableTypes";
+import DefectTypesModule from "@/api/modules/defectTypes";
 
 export default class Api {
   public axios: AxiosInstance;
@@ -16,6 +17,7 @@ export default class Api {
   public departaments: DepartamentModule;
   public consumables: ConsumablesModule;
   public consumableTypes: ConsumableTypesModule;
+  public defectTypes: DefectTypesModule;
 
   constructor(baseURL: string) {
     this.axios = axios.create({ baseURL, withCredentials: true });
@@ -26,6 +28,7 @@ export default class Api {
     this.departaments = new DepartamentModule(this);
     this.consumables = new ConsumablesModule(this);
     this.consumableTypes = new ConsumableTypesModule(this);
+    this.defectTypes = new DefectTypesModule(this);
   }
 
   applyToken(token: string) {
