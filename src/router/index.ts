@@ -12,6 +12,8 @@ import ConsumableTypes from "@/views/ConsumableTypes.vue";
 import AddConsumableType from "@/views/AddConsumableType.vue";
 import AddConsumable from "@/views/AddConsumable.vue";
 import Consumables from "@/views/Consumables.vue";
+import AddDefectType from "@/views/AddDefectType.vue";
+import DefectsTypes from "@/views/DefectsTypes.vue";
 
 const routes = [
   { path: "/login", name: "Login", component: Login },
@@ -84,19 +86,19 @@ const routes = [
     meta: { isAdminRoute: true },
   },
   {
-    path: "/types",
+    path: "/consumable-types",
     name: "ConsumableTypes",
     component: ConsumableTypes,
     meta: { isAdminRoute: true },
   },
   {
-    path: "/types/add",
+    path: "/consumable-types/add",
     name: "AddConsumableType",
     component: AddConsumableType,
     meta: { isAdminRoute: true },
   },
   {
-    path: "/types/:id/edit",
+    path: "/consumable-types/:id/edit",
     name: "EditConsumableType",
     component: AddConsumableType,
     props: { isEdit: true },
@@ -112,6 +114,25 @@ const routes = [
     path: "/consumables/add",
     name: "AddConsumable",
     component: AddConsumable,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/defect-types/",
+    name: "DefectTypes",
+    component: DefectsTypes,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/defect-types/add",
+    name: "AddDefectType",
+    component: AddDefectType,
+    meta: { isAdminRoute: true },
+  },
+  {
+    path: "/defect-types/:id/edit",
+    name: "EditDefectType",
+    component: AddDefectType,
+    props: { isEdit: true },
     meta: { isAdminRoute: true },
   },
 ];
