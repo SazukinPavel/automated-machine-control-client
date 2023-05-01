@@ -1,6 +1,7 @@
 import Consumable from "@/types/busnes/Consumable";
 import User from "@/types/busnes/User";
 import Machine from "@/types/busnes/Machine";
+import DefectType from "@/types/busnes/DefectType";
 
 interface Defect {
   id?: string;
@@ -11,7 +12,7 @@ interface Defect {
 
   isResolved?: boolean;
 
-  type?: string;
+  type?: DefectType;
 
   decisionDate?: Date;
 

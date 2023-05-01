@@ -15,7 +15,7 @@
         >
         <v-expansion-panel-text>
           <v-card-title class="text-wrap">
-            Тип неисправности: {{ props.defect?.type }}</v-card-title
+            Тип неисправности: {{ props.defect?.type.name }}</v-card-title
           >
           <v-card-title class="text-wrap"> Ответственные:</v-card-title>
           <v-list density="comfortable" v-if="props.defect?.responsible">

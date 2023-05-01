@@ -31,6 +31,8 @@
       <v-autocomplete
         v-model="addDefectDto.type"
         :items="types"
+        item-title="name"
+        item-value="id"
         label="Тип"
         :rules="[requiredRule]"
       />
@@ -103,13 +105,12 @@ const props = defineProps({ isEdit: { type: Boolean, default: false } });
 
 const store = useStore();
 const route = useRoute();
-const { goBack } = useNavigateTo();
+const { goBack, goTo } = useNavigateTo();
 const { requiredRule } = useValidators();
 
 const addDefectDto = ref<AddDefectDto>({});
 const isAddLoading = ref(false);
 const isFetchLoading = ref(false);
-const types = ref(["Слесарная", "Электронная", "Электрическая"]);
 const defectForm = ref<any | null>(null);
 
 const machines = computed<Machine[]>(() => store.getters["machines/machines"]);
@@ -119,6 +120,8 @@ const consumables = computed<Consumable[]>(() =>
     (d: Consumable) => d.isAvailable
   )
 );
+const types = computed(() => store.getters["defectTypes/types"]);
+const machineId = computed(() => route.query.machine?.toString());
 
 const add = async () => {
   if (!(await defectForm.value.validate()).valid) {
@@ -126,12 +129,16 @@ const add = async () => {
   }
   isAddLoading.value = true;
   try {
-    await store.dispatch("defects/add", addDefectDto.value);
+    await store.dispatch("defects/add", {
+      ...addDefectDto.value,
+      machineId: machineId.value,
+    });
     store.commit("snackbar/showSnackbarSuccess", {
       message: "Дефект добавлен успешно",
     });
-    goBack();
-  } catch {
+    goTo("MachinesDefects", { id: machineId.value });
+  } catch (e) {
+    console.log(e);
     store.commit("snackbar/showSnackbarError", {
       message: "Произошла ошибка при создании дефекта",
     });
@@ -146,11 +153,8 @@ onMounted(async () => {
     store.dispatch("machines/fetch"),
     store.dispatch("users/fetch"),
     store.dispatch("consumables/fetch"),
+    store.dispatch("defectTypes/fetch"),
   ]);
-
-  if (route.query.machine) {
-    addDefectDto.value.machineId = route.query.machine.toString();
-  }
 
   isFetchLoading.value = false;
 });
