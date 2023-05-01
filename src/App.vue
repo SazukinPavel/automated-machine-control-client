@@ -30,7 +30,6 @@ onMounted(async () => {
   }
 
   setupRouter();
-  store.dispatch("departaments/fetch");
 });
 
 const setupRouter = () => {
@@ -86,4 +85,10 @@ watch(
     }
   }
 );
+
+watch(isLogedIn, (newVal) => {
+  if (newVal) {
+    store.dispatch("departaments/fetch");
+  }
+});
 </script>
