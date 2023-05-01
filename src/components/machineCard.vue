@@ -7,7 +7,7 @@
         >{{ props.machine.isActive ? "Исправна" : "Не исправна" }}</v-chip
       >
     </v-card-title>
-    <v-card-title class="text-wrap">{{ props.machine.name }}</v-card-title>
+    <v-card-title class="text-wrap">{{ `${props.machine.name} (${props.machine.number})` }}</v-card-title>
     <v-card-text class="text-end"
       ><span class="mx-2 text-wrap"
         >Создан:{{ formatDateTime(props.machine.createdAt) }}</span
