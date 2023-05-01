@@ -47,11 +47,16 @@
       <v-list-item value="users" @click="goTo('Users')">
         <v-list-item-title class="text-h6">Ответственные</v-list-item-title>
       </v-list-item>
-      <v-list-item value="types" @click="goTo('ConsumableTypes')">
+      <v-list-item value="consumable-types" @click="goTo('ConsumableTypes')">
         <v-list-item-title class="text-h6">Типы материалов</v-list-item-title>
       </v-list-item>
       <v-list-item value="consumables" @click="goTo('Consumables')">
         <v-list-item-title class="text-h6">Материалы</v-list-item-title>
+      </v-list-item>
+      <v-list-item value="defect-types" @click="goTo('DefectTypes')">
+        <v-list-item-title class="text-h6"
+          >Типы неисправностей</v-list-item-title
+        >
       </v-list-item>
       <v-list-item v-once active-color="primary" @click="logout" value="logout">
         <v-list-item-title class="text-h6 d-flex justify-space-between"
