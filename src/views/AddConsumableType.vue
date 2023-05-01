@@ -72,10 +72,9 @@ const addType = async () => {
     });
     goTo("ConsumableTypes");
   } catch (e: any) {
-    console.log(e);
     store.commit("snackbar/showSnackbarError", {
       message:
-        e.response.data.message ||
+        e?.response?.data?.message ||
         `Произошла ошибка при ${
           props.isEdit ? "изменение" : "добавление"
         } типа материала`,
