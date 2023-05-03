@@ -3,13 +3,11 @@
     style="max-width: 800px"
     class="pa-4 ma-auto mt-lg-15 mt-xl-15 mt-sm-10 mt-md-10"
   >
-    <v-card-title class="text-center text-wrap">
-      Добавление ответственного</v-card-title
-    >
+    <page-title> Добавление ответственного</page-title>
     <v-form ref="userForm">
       <v-text-field
         class="my-2"
-        :rules="[required]"
+        :rules="[requiredRule]"
         variant="outlined"
         label="Имя"
         color="primary"
@@ -29,9 +27,10 @@ import useValidators from "@/hooks/useValidators";
 import useNavigateTo from "@/hooks/useNavigateTo";
 import { ref, onMounted } from "vue";
 import AddUserDto from "@/types/dto/users/AddUserDto";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const store = useStore();
-const { required } = useValidators();
+const { requiredRule } = useValidators();
 const { goBack, goTo } = useNavigateTo();
 
 const isLoading = ref(false);

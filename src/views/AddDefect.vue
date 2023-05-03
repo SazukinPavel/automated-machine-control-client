@@ -4,10 +4,10 @@
     style="max-width: 1000px"
     class="pa-4 ma-auto mt-xl-15"
   >
-    <v-card-title class="text-center text-wrap">
+    <page-title>
       {{
         isEdit ? "Редактирование неисправности" : "Добавление неисправности"
-      }}</v-card-title
+      }}</page-title
     >
     <v-form ref="defectForm">
       <v-select
@@ -100,6 +100,7 @@ import AddDefectDto from "@/types/dto/defects/AddDefectDto";
 import Machine from "@/types/busnes/Machine";
 import User from "@/types/busnes/User";
 import Consumable from "@/types/busnes/Consumable";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const props = defineProps({ isEdit: { type: Boolean, default: false } });
 

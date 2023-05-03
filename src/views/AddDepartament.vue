@@ -4,8 +4,8 @@
     style="max-width: 800px"
     class="pa-4 ma-auto mt-lg-15 mt-xl-15 mt-sm-10 mt-md-10"
   >
-    <v-card-title class="text-center text-wrap">
-      {{ isEdit ? "Редактирование цеха" : "Добавление цеха" }}</v-card-title
+    <page-title>
+      {{ isEdit ? "Редактирование цеха" : "Добавление цеха" }}</page-title
     >
     <v-form ref="departamentForm">
       <v-text-field
@@ -37,6 +37,7 @@ import AddDepartamentDto from "@/types/dto/departaments/AddDepartamentDto";
 import api from "@/api";
 import UpdateDepartamentDto from "@/types/dto/departaments/UpdateDepartamentDto";
 import { useRoute } from "vue-router";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const props = defineProps({ isEdit: { type: Boolean, default: false } });
 

@@ -1,5 +1,6 @@
 <template>
   <div v-if="!isLoading">
+    <page-title>Цеха</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col style="min-width: 150px" cols="3">
         <search v-model="searchParam" />
@@ -26,6 +27,7 @@ import Search from "@/components/search.vue";
 import DepartamentCard from "@/components/departamentCard.vue";
 import AddBtn from "@/components/ui/addBtn.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const store = useStore();
 

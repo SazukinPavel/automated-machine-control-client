@@ -1,7 +1,8 @@
 <template>
   <v-card :loading="isFetchLoading" variant="text">
-    <v-card-title class="text-center text-wrap"
-      >Станок {{ machine?.name }}</v-card-title
+    <page-title
+      >Неисправности станка
+      {{ `${machine?.name} (${machine?.number})` }}</page-title
     >
     <div class="mx-3">
       <search v-model="searchValue" />
@@ -32,6 +33,7 @@ import Defect from "@/types/busnes/Defect";
 import useNavigateTo from "@/hooks/useNavigateTo";
 import Search from "@/components/search.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const store = useStore();
 const route = useRoute();

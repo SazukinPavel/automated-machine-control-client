@@ -4,8 +4,8 @@
     style="max-width: 1000px"
     class="pa-4 ma-auto mt-xl-15"
   >
-    <v-card-title class="text-center text-wrap">
-      {{ isEdit ? "Редактирование станка" : "Добавление станка" }}</v-card-title
+    <page-title>
+      {{ isEdit ? "Редактирование станка" : "Добавление станка" }}</page-title
     >
     <v-form ref="machineForm">
       <v-text-field
@@ -53,6 +53,7 @@ import api from "@/api";
 import Loading from "@/components/loading.vue";
 import UpdateMachineDto from "@/types/dto/machines/UpdateMachineDto";
 import Machine from "@/types/busnes/Machine";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const props = defineProps({ isEdit: { type: Boolean, default: false } });
 

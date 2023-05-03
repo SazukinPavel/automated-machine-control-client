@@ -1,6 +1,7 @@
 <template>
   <div v-if="!isLoading">
     <v-row class="ma-4" dense="dense">
+      <page-title>Типы неисправностей</page-title>
       <v-col style="min-width: 150px" cols="3">
         <search v-model="searchParam" />
       </v-col>
@@ -26,6 +27,7 @@ import AddBtn from "@/components/ui/addBtn.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
 import DefectType from "@/types/busnes/DefectType";
 import DefectTypeCard from "@/components/defectTypeCard.vue";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const store = useStore();
 

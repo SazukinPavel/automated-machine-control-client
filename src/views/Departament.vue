@@ -1,5 +1,8 @@
 <template>
   <div v-if="!isLoading">
+    <page-title>{{
+      id ? `Станки в ${departament?.name}` : `Все станки`
+    }}</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col style="min-width: 150px" cols="3">
         <search v-model="searchParam" />
@@ -39,6 +42,7 @@ import useDateFormater from "@/hooks/useDateFormater";
 import Loading from "@/components/loading.vue";
 import AddBtn from "@/components/ui/addBtn.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const route = useRoute();
 const store = useStore();
@@ -94,6 +98,12 @@ const filtredMachines = computed<Machine[]>(() => {
   }
 
   return currMachines;
+});
+
+const departament = computed(() => {
+  return store.getters["departaments/departaments"].find(
+    (d) => d.id === id.value
+  );
 });
 
 watch(id, () => {

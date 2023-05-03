@@ -1,5 +1,6 @@
 <template>
   <div v-if="!isLoading">
+    <page-title>Материалы</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col style="min-width: 150px">
         <search v-model="searchParam" />
@@ -35,6 +36,7 @@ import AddBtn from "@/components/ui/addBtn.vue";
 import Consumable from "@/types/busnes/Consumable";
 import ConsumableCard from "@/components/consumableCard.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const store = useStore();
 

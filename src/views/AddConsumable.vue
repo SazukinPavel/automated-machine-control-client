@@ -4,11 +4,9 @@
     style="max-width: 1000px"
     class="pa-4 ma-auto mt-xl-15"
   >
-    <v-card-title class="text-center text-wrap">
-      {{
-        isEdit ? "Редактирование материалы" : "Добавление материала"
-      }}</v-card-title
-    >
+    <page-title>{{
+      isEdit ? "Редактирование материалы" : "Добавление материала"
+    }}</page-title>
     <v-form ref="consumableForm">
       <v-text-field
         class="my-2"
@@ -44,6 +42,7 @@ import useNavigateTo from "@/hooks/useNavigateTo";
 import Loading from "@/components/loading.vue";
 import ConsumableType from "@/types/busnes/ConsumableType";
 import AddConsumableDto from "@/types/dto/consumables/AddConsumableDto";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const props = defineProps({ isEdit: { type: Boolean, default: false } });
 

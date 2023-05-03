@@ -1,5 +1,6 @@
 <template>
   <div v-if="!isLoading">
+    <page-title>Типы материалов</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col style="min-width: 150px" cols="3">
         <search v-model="searchParam" />
@@ -26,6 +27,7 @@ import AddBtn from "@/components/ui/addBtn.vue";
 import ConsumableType from "@/types/busnes/ConsumableType";
 import ConsumableTypeCard from "@/components/consumableTypeCard.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
+import PageTitle from "@/components/ui/pageTitle.vue";
 
 const store = useStore();
 
