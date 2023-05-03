@@ -12,10 +12,12 @@ import { computed, ComputedRef, onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import Role from "@/types/utils/Role";
+import useSeo from "@/hooks/useSeo";
 
 const store = useStore();
 const router = useRouter();
 const route = useRoute();
+const { setTitle } = useSeo();
 
 const isAuthLoading = ref(false);
 
@@ -46,11 +48,9 @@ const setupRouter = () => {
     }
   });
   router.afterEach((to: any) => {
-    setTitle(to.name);
+    setTitle(to.meta.title);
   });
-};
-const setTitle = (value: string) => {
-  document.title = `${value} | Fitness`;
+  setTitle(router.currentRoute.value.meta.title as string);
 };
 const authorize = async () => {
   await store.dispatch("auth/init");
