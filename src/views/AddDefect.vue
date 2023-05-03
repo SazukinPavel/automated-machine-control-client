@@ -10,7 +10,7 @@
       }}</page-title
     >
     <v-form ref="defectForm">
-      <v-select
+      <v-autocomplete
         v-model="addDefectDto.machineId"
         :items="machines"
         label="Станок"
@@ -18,7 +18,7 @@
         item-title="fullName"
         :rules="[requiredRule]"
       >
-      </v-select>
+      </v-autocomplete>
       <v-autocomplete
         v-model="addDefectDto.responsible"
         :items="users"
@@ -155,6 +155,8 @@ const add = async () => {
 };
 
 onMounted(async () => {
+  addDefectDto.value.machineId = machineId.value;
+
   isFetchLoading.value = true;
   await Promise.all([
     store.dispatch("machines/fetch"),
@@ -162,7 +164,6 @@ onMounted(async () => {
     store.dispatch("consumables/fetch"),
     store.dispatch("defectTypes/fetch"),
   ]);
-
   isFetchLoading.value = false;
 });
 </script>
