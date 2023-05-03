@@ -7,14 +7,12 @@
         >{{ props.machine.isActive ? "Исправна" : "Не исправна" }}</v-chip
       >
     </v-card-title>
-    <v-card-title class="text-wrap">{{ `${props.machine.name} (${props.machine.number})` }}</v-card-title>
+    <v-card-title class="text-wrap">{{
+      `${props.machine.name} (${props.machine.number})`
+    }}</v-card-title>
     <v-card-text class="text-end"
-      ><span class="mx-2 text-wrap"
-        >Создан:{{ formatDateTime(props.machine.createdAt) }}</span
-      >
-      <span class="mx-2 text-wrap">
-        Обновлён:{{ formatDateTime(props.machine.updateAt) }}</span
-      >
+      ><span class="mx-2 text-wrap">Создан:{{ props.machine.createdAt }}</span>
+      <span class="mx-2 text-wrap"> Обновлён:{{ props.machine.updateAt }}</span>
     </v-card-text>
     <v-expansion-panels>
       <v-expansion-panel color="primary">
@@ -76,7 +74,6 @@
 <script setup lang="ts">
 import Machine from "@/types/busnes/Machine";
 import { PropType, defineProps, ref } from "vue";
-import useDateFormater from "@/hooks/useDateFormater";
 import { useStore } from "vuex";
 import ConfitmDialog from "@/components/confitmDialog.vue";
 
@@ -104,8 +101,6 @@ const deleteMachine = () => {
     isDeleteLoading.value = false;
   }
 };
-
-const { formatDateTime } = useDateFormater();
 </script>
 
 <style scoped></style>

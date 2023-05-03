@@ -4,7 +4,7 @@
       <v-chip
         variant="outlined"
         :color="props.defect?.isResolved ? 'green' : 'red'"
-        >{{ formatDateTime(props.defect?.decisionDate) }}</v-chip
+        >{{ props.defect?.decisionDate }}</v-chip
       >
     </div>
     <v-card-title class="text-wrap">{{ props.defect?.name }}</v-card-title>
@@ -87,7 +87,6 @@
 <script setup lang="ts">
 import { defineProps, PropType, ref } from "vue";
 import Defect from "@/types/busnes/Defect";
-import useDateFormater from "@/hooks/useDateFormater";
 import { useStore } from "vuex";
 import useValidators from "@/hooks/useValidators";
 
@@ -95,7 +94,6 @@ const props = defineProps({
   defect: { type: Object as PropType<Defect>, required: true },
 });
 
-const { formatDateTime } = useDateFormater();
 const { requiredRule } = useValidators();
 const store = useStore();
 

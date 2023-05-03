@@ -35,11 +35,13 @@ import Search from "@/components/search.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
 import PageTitle from "@/components/ui/pageTitle.vue";
 import useSeo from "@/hooks/useSeo";
+import useDateFormater from "@/hooks/useDateFormater";
 
 const store = useStore();
 const route = useRoute();
 const { goBack } = useNavigateTo();
 const { setTitle } = useSeo();
+const { formatDateTime } = useDateFormater();
 
 const searchValue = ref("");
 const isFetchLoading = ref(false);
@@ -51,7 +53,12 @@ const machine = computed<Machine | undefined>(() =>
   )
 );
 
-const defects = computed<Defect[]>(() => store.getters["defects/defects"]);
+const defects = computed<Defect[]>(() =>
+  store.getters["defects/defects"].map((d: Defect) => ({
+    ...d,
+    decisionDate: formatDateTime(d.decisionDate),
+  }))
+);
 const filtredDefects = computed<Defect[]>(() => {
   if (!searchValue.value) {
     return defects.value;
