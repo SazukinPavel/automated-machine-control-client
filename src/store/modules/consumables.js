@@ -9,7 +9,7 @@ export default {
       state.consumables = consumables;
     },
     push(state, type) {
-      state.consumables.push(type);
+      state.consumables.unshift(type);
     },
     replace(state, consumable) {
       state.consumables = state.consumables.map((d) =>

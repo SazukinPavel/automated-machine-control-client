@@ -11,7 +11,7 @@ export default {
       state.departaments = departaments;
     },
     pushDepartament(state, departament) {
-      state.departaments.push(departament);
+      state.departaments.unshift(departament);
     },
     replaceDepartament(state, departament) {
       state.departaments = state.departaments.map((d) =>

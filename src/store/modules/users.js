@@ -10,7 +10,7 @@ export default {
       state.users = users;
     },
     pushUsers(state, defect) {
-      state.users.push(defect);
+      state.users.unshift(defect);
     },
     replaceUsers(state, defect) {
       state.users = state.users.map((d) => (d.id === defect.id ? defect : d));

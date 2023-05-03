@@ -10,7 +10,7 @@ export default {
       state.types = types;
     },
     push(state, type) {
-      state.types.push(type);
+      state.types.unshift(type);
     },
     replace(state, type) {
       state.types = state.types.map((d) => (d.id === type.id ? type : d));

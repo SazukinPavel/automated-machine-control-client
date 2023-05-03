@@ -13,7 +13,7 @@ export default {
       });
     },
     pushMachines(state, defect) {
-      state.machines.push(defect);
+      state.machines.unshift(defect);
     },
     replaceMachines(state, defect) {
       state.machines = state.machines.map((d) =>

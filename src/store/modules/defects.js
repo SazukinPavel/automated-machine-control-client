@@ -9,7 +9,7 @@ export default {
       state.defects = defects;
     },
     pushDefect(state, defect) {
-      state.defects.push(defect);
+      state.defects.unshift(defect);
     },
     replaceDefect(state, defect) {
       state.defects = state.defects.map((d) =>
