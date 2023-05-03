@@ -15,9 +15,10 @@
         :items="machines"
         label="Станок"
         item-value="id"
-        item-title="name"
+        item-title="fullName"
         :rules="[requiredRule]"
-      />
+      >
+      </v-select>
       <v-autocomplete
         v-model="addDefectDto.responsible"
         :items="users"
@@ -114,7 +115,12 @@ const isAddLoading = ref(false);
 const isFetchLoading = ref(false);
 const defectForm = ref<any | null>(null);
 
-const machines = computed<Machine[]>(() => store.getters["machines/machines"]);
+const machines = computed<Machine[]>(() =>
+  store.getters["machines/machines"].map((m: Machine) => ({
+    ...m,
+    fullName: `${m.name} (${m.number})`,
+  }))
+);
 const users = computed<User[]>(() => store.getters["users/users"]);
 const consumables = computed<Consumable[]>(() =>
   store.getters["consumables/consumables"].filter(
