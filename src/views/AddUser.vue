@@ -3,7 +3,9 @@
     style="max-width: 800px"
     class="pa-4 ma-auto mt-lg-15 mt-xl-15 mt-sm-10 mt-md-10"
   >
-    <v-card-title class="text-center"> Добавление ответственного</v-card-title>
+    <v-card-title class="text-center text-wrap">
+      Добавление ответственного</v-card-title
+    >
     <v-form ref="userForm">
       <v-text-field
         class="my-2"

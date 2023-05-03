@@ -1,6 +1,6 @@
 <template>
   <v-card color="primary" variant="outlined" class="ma-5 pa-5">
-    <v-card-title>{{ props.departament.name }}</v-card-title>
+    <v-card-title class="=text-wrap">{{ props.departament.name }}</v-card-title>
     <v-row justify="end">
       <confitm-dialog
         v-model="isDeleteDialog"

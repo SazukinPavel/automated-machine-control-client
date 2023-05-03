@@ -1,13 +1,13 @@
 <template>
   <v-card color="primary" variant="outlined" class="ma-5 pa-5">
-    <div class="d-flex justify-space-between">
-      <v-card-title>{{ props.defect?.name }}</v-card-title>
+    <div class="d-flex justify-end">
       <v-chip
         variant="outlined"
         :color="props.defect?.isResolved ? 'green' : 'red'"
         >{{ formatDateTime(props.defect?.decisionDate) }}</v-chip
       >
     </div>
+    <v-card-title class="text-wrap">{{ props.defect?.name }}</v-card-title>
     <v-expansion-panels>
       <v-expansion-panel color="primary">
         <v-expansion-panel-title color="primary"

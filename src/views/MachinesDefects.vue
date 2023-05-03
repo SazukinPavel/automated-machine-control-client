@@ -1,6 +1,8 @@
 <template>
   <v-card :loading="isFetchLoading" variant="text">
-    <v-card-title class="text-center">Станок {{ machine?.name }}</v-card-title>
+    <v-card-title class="text-center text-wrap"
+      >Станок {{ machine?.name }}</v-card-title
+    >
     <div class="mx-3">
       <search v-model="searchValue" />
     </div>

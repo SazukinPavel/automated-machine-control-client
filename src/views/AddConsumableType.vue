@@ -4,7 +4,7 @@
     style="max-width: 1000px"
     class="pa-4 ma-auto mt-xl-15"
   >
-    <v-card-title class="text-center">
+    <v-card-title class="text-center text-wrap">
       {{
         isEdit ? "Редактирование типа материалы" : "Добавление типа материала"
       }}</v-card-title
