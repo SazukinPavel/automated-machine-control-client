@@ -34,10 +34,12 @@ import useNavigateTo from "@/hooks/useNavigateTo";
 import Search from "@/components/search.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
 import PageTitle from "@/components/ui/pageTitle.vue";
+import useSeo from "@/hooks/useSeo";
 
 const store = useStore();
 const route = useRoute();
 const { goBack } = useNavigateTo();
+const { setTitle } = useSeo();
 
 const searchValue = ref("");
 const isFetchLoading = ref(false);
@@ -61,6 +63,7 @@ onMounted(async () => {
   isFetchLoading.value = true;
   try {
     await store.dispatch("machines/fetch");
+    setTitle(`Неисправности ${machine.value?.name} (${machine.value?.number})`);
     await store.dispatch("defects/fetch", { machine: machineId.value });
   } catch {
     store.commit("snackbar/showSnackbarError", {

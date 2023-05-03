@@ -43,10 +43,13 @@ import Loading from "@/components/loading.vue";
 import AddBtn from "@/components/ui/addBtn.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
 import PageTitle from "@/components/ui/pageTitle.vue";
+import Departament from "@/types/busnes/Departament";
+import useSeo from "@/hooks/useSeo";
 
 const route = useRoute();
 const store = useStore();
 const { formatDateTime } = useDateFormater();
+const { setTitle } = useSeo();
 
 const isLoading = ref(false);
 const searchParam = ref("");
@@ -100,7 +103,7 @@ const filtredMachines = computed<Machine[]>(() => {
   return currMachines;
 });
 
-const departament = computed(() => {
+const departament = computed<Departament>(() => {
   return store.getters["departaments/departaments"].find(
     (d) => d.id === id.value
   );
@@ -108,6 +111,10 @@ const departament = computed(() => {
 
 watch(id, () => {
   fetchMachines();
+});
+
+watch(departament, () => {
+  setTitle(departament.value.name);
 });
 </script>
 
