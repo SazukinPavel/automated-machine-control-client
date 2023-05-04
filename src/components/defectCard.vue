@@ -76,6 +76,12 @@
       <v-btn
         density="comfortable"
         class="mt-3"
+        :to="{ name: 'EditDefect', params: { id: props.defect?.id } }"
+        >Редактировать <v-icon>mdi-pencil</v-icon></v-btn
+      >
+      <v-btn
+        density="comfortable"
+        class="mt-3"
         @click="fixDefect"
         :loading="isFixDefectLoading"
         >Исправить</v-btn
@@ -85,22 +91,24 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, PropType, ref } from "vue";
+import { defineProps, onMounted, PropType, ref } from "vue";
 import Defect from "@/types/busnes/Defect";
 import { useStore } from "vuex";
 import useValidators from "@/hooks/useValidators";
+import useDateFormater from "@/hooks/useDateFormater";
 
 const props = defineProps({
   defect: { type: Object as PropType<Defect>, required: true },
 });
 
 const { requiredRule } = useValidators();
+const { formatToInput } = useDateFormater();
 const store = useStore();
 
 const isFixDefectLoading = ref(false);
 const isChangeDateDialog = ref(false);
 const isChangeDateLoading = ref(false);
-const newDate = ref(null);
+const newDate = ref<string>("");
 const changeDateForm = ref<any | null>(null);
 
 const changeDate = async () => {
@@ -141,6 +149,10 @@ const fixDefect = async () => {
     isFixDefectLoading.value = false;
   }
 };
+
+onMounted(() => {
+  newDate.value = formatToInput(props.defect?.decisionDate);
+});
 </script>
 
 <style scoped></style>
