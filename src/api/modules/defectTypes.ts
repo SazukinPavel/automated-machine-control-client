@@ -10,7 +10,7 @@ export default class DefectTypesModule extends BaseApiModule {
   }
 
   list(params: any) {
-    return this.get("", null, { params });
+    return this.get<DefectType[]>("", { params });
   }
 
   getById(id: string) {
@@ -21,7 +21,7 @@ export default class DefectTypesModule extends BaseApiModule {
   }
 
   update(dto: UpdateDefectTypeDto) {
-    return this.put("", dto);
+    return this.put<UpdateDefectTypeDto, DefectType>("", dto);
   }
 
   drop(id: string) {

@@ -10,7 +10,7 @@ export default class DepartamentModule extends BaseApiModule {
   }
 
   list() {
-    return this.get();
+    return this.get<Departament[]>();
   }
 
   getById(id: string) {
@@ -21,7 +21,10 @@ export default class DepartamentModule extends BaseApiModule {
   }
 
   update(updateDepartamentDto: UpdateDepartamentDto) {
-    return this.put("", updateDepartamentDto);
+    return this.put<UpdateDepartamentDto, Departament>(
+      "",
+      updateDepartamentDto
+    );
   }
 
   drop(id: string) {

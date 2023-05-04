@@ -9,7 +9,7 @@ export default class ConsumablesModule extends BaseApiModule {
   }
 
   list() {
-    return this.get("");
+    return this.get<Consumable[]>("");
   }
 
   add(dto: AddConsumableDto) {

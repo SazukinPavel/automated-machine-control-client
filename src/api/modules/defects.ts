@@ -6,22 +6,22 @@ import Defect from "@/types/busnes/Defect";
 
 export default class DefectsModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "defects");
+    super(api, "defects/");
   }
 
   list(params: any) {
-    return this.get("", null, { params });
+    return this.get<Defect[]>("", { params });
   }
 
   getById(id: string) {
-    return this.get(id);
+    return this.get<Defect>(id);
   }
   add(addDefectDto: AddDefectDto) {
     return this.post<AddDefectDto, Defect>("", addDefectDto);
   }
 
   update(updateDefectDto: UpdateDefectDto) {
-    return this.put("", updateDefectDto);
+    return this.put<UpdateDefectDto, Defect>("", updateDefectDto);
   }
 
   drop(id: string) {

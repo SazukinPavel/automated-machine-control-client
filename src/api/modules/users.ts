@@ -9,16 +9,16 @@ export default class UsersModule extends BaseApiModule {
     super(api, "users/");
   }
   list() {
-    return this.get();
+    return this.get<User[]>();
   }
   getById(id: string) {
-    return this.get(id);
+    return this.get<User>(id);
   }
   add(addUserDto: AddUserDto) {
     return this.post<AddUserDto, User>("", addUserDto);
   }
   update(updateUserDto: UpdateUserDto) {
-    return this.put("", updateUserDto);
+    return this.put<UpdateUserDto, User>("", updateUserDto);
   }
   drop(id: string) {
     return this.delete(id);

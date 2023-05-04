@@ -21,7 +21,7 @@ export default class BaseApiModule {
     );
   }
 
-  protected get<T>(url: string = "", data?: T, config?: AxiosRequestConfig) {
+  protected get<T>(url: string = "", config?: AxiosRequestConfig) {
     return this.api.axios.get<T>(this.subPath + url, config);
   }
 

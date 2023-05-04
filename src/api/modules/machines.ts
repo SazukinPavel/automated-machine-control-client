@@ -10,7 +10,7 @@ export default class MachinesModule extends BaseApiModule {
   }
 
   list(params: any) {
-    return this.get("", null, { params });
+    return this.get<Machine[]>("", { params });
   }
 
   getById(id: string) {
@@ -21,7 +21,7 @@ export default class MachinesModule extends BaseApiModule {
   }
 
   update(updateMachineDto: UpdateMachineDto) {
-    return this.put("", updateMachineDto);
+    return this.put<UpdateMachineDto, Machine>("", updateMachineDto);
   }
 
   drop(id: string) {

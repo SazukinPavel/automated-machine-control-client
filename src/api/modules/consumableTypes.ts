@@ -10,7 +10,7 @@ export default class ConsumableTypesModule extends BaseApiModule {
   }
 
   list(params: any) {
-    return this.get("", null, { params });
+    return this.get<ConsumableType[]>("", { params });
   }
 
   getById(id: string) {
@@ -21,7 +21,7 @@ export default class ConsumableTypesModule extends BaseApiModule {
   }
 
   update(dto: UpdateConsumableTypeDto) {
-    return this.put("", dto);
+    return this.put<UpdateConsumableTypeDto, ConsumableType>("", dto);
   }
 
   drop(id: string) {
