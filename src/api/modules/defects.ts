@@ -24,7 +24,7 @@ export default class DefectsModule extends BaseApiModule {
     return this.put<UpdateDefectDto, Defect>("", updateDefectDto);
   }
 
-  drop(id: string) {
-    return this.delete(id);
+  drop(id: string, params: any) {
+    return this.delete(id, { params });
   }
 }
