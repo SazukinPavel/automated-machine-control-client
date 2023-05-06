@@ -34,8 +34,8 @@ export default {
       const res = await api.defects.update(updateDefectDto);
       commit("replaceDefect", res.data);
     },
-    async deleteDefect({ commit }, id) {
-      await api.defects.drop(id);
+    async delete({ commit }, id) {
+      await api.defects.drop(id, { check: true });
       commit("deleteDefect", id);
     },
   },
