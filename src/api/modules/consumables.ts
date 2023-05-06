@@ -8,8 +8,8 @@ export default class ConsumablesModule extends BaseApiModule {
     super(api, "consumables/");
   }
 
-  list() {
-    return this.get<Consumable[]>("");
+  list(params: any) {
+    return this.get<Consumable[]>("", { params });
   }
 
   add(dto: AddConsumableDto) {

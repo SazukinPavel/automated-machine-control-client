@@ -52,15 +52,20 @@ const availableType = ref<string | boolean>(true);
 const consumables = computed<Consumable[]>(
   () => store.getters["consumables/consumables"]
 );
+
+const usedConsumables = computed<Consumable[]>(
+  () => store.getters["consumables/usedConsumables"]
+);
 const filtredConsumables = computed<Consumable[]>(() => {
-  const filtred =
-    availableType.value === null
-      ? consumables.value
-      : consumables.value.filter(
-          (c) =>
-            availableType.value === "null" ||
-            c.isAvailable == availableType.value
-        );
+  const filtred = [];
+
+  if (availableType.value === "null") {
+    filtred.push(...consumables.value, ...usedConsumables.value);
+  } else if (availableType.value) {
+    filtred.push(...consumables.value);
+  } else {
+    filtred.push(...usedConsumables.value);
+  }
 
   if (!searchParam.value) {
     return filtred;
@@ -72,6 +77,7 @@ onMounted(async () => {
   isLoading.value = true;
   try {
     await store.dispatch("consumables/fetch");
+    await store.dispatch("consumables/fetchUsed");
   } catch {
     store.commit("snackbar/showSnackbarError", {
       message: "Произошла ошибка при запросе материалов",
