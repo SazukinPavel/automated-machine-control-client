@@ -11,6 +11,7 @@
     >
     <v-form ref="defectForm">
       <v-autocomplete
+        :disabled="!!props.isEdit"
         v-model="addDefectDto.machineId"
         :items="machines"
         label="Станок"
@@ -20,6 +21,7 @@
       >
       </v-autocomplete>
       <v-autocomplete
+        ref="responsibleAutoComplete"
         v-model="addDefectDto.responsible"
         :items="users"
         label="Ответственный"
@@ -27,7 +29,6 @@
         item-value="id"
         item-title="login"
         multiple
-        return-object
       />
       <v-autocomplete
         v-model="addDefectDto.type"
@@ -64,7 +65,6 @@
         :rules="[requiredRule]"
         color="primary"
         v-model="addDefectDto.consumables"
-        return-object
       >
         <template v-slot:item="{ props, item }">
           <v-list-item
@@ -102,18 +102,23 @@ import Machine from "@/types/busnes/Machine";
 import User from "@/types/busnes/User";
 import Consumable from "@/types/busnes/Consumable";
 import PageTitle from "@/components/ui/pageTitle.vue";
+import api from "@/api";
+import useDateFormater from "@/hooks/useDateFormater";
+import UpdateDefectDto from "@/types/dto/defects/UpdateDefectDto";
 
 const props = defineProps({ isEdit: { type: Boolean, default: false } });
 
 const store = useStore();
 const route = useRoute();
-const { goBack, goTo } = useNavigateTo();
+const { goTo } = useNavigateTo();
 const { requiredRule } = useValidators();
+const { formatToInput } = useDateFormater();
 
 const addDefectDto = ref<AddDefectDto>({});
 const isAddLoading = ref(false);
 const isFetchLoading = ref(false);
 const defectForm = ref<any | null>(null);
+const localConsumable = ref<Consumable[]>([]);
 
 const machines = computed<Machine[]>(() =>
   store.getters["machines/machines"].map((m: Machine) => ({
@@ -123,9 +128,9 @@ const machines = computed<Machine[]>(() =>
 );
 const users = computed<User[]>(() => store.getters["users/users"]);
 const consumables = computed<Consumable[]>(() =>
-  store.getters["consumables/consumables"].filter(
-    (d: Consumable) => d.isAvailable
-  )
+  store.getters["consumables/consumables"]
+    .filter((d: Consumable) => d.isAvailable)
+    .concat(...localConsumable.value)
 );
 const types = computed(() => store.getters["defectTypes/types"]);
 const machineId = computed(() => route.query.machine?.toString());
@@ -136,35 +141,71 @@ const add = async () => {
   }
   isAddLoading.value = true;
   try {
-    await store.dispatch("defects/add", {
-      ...addDefectDto.value,
-      machineId: machineId.value,
-    });
+    if (props.isEdit) {
+      const updateDefectDto: UpdateDefectDto = { ...addDefectDto.value };
+      await store.dispatch("defects/update", updateDefectDto);
+    } else {
+      await store.dispatch("defects/add", {
+        ...addDefectDto.value,
+        machineId: addDefectDto.value.machineId || machineId.value,
+      });
+    }
     store.commit("snackbar/showSnackbarSuccess", {
-      message: "Дефект добавлен успешно",
+      message: `Неисправность ${
+        props.isEdit ? "обновлена" : "добавлена"
+      } успешно`,
     });
-    goTo("MachinesDefects", { id: machineId.value });
+    goTo("MachinesDefects", { id: addDefectDto.value.machineId });
   } catch (e) {
-    console.log(e);
     store.commit("snackbar/showSnackbarError", {
-      message: "Произошла ошибка при создании дефекта",
+      message: `Произошла ошибка при ${
+        props.isEdit ? "обновление" : "создании"
+      } неисправности`,
     });
   } finally {
     isAddLoading.value = false;
   }
 };
 
+const goBack = () => {
+  goTo(
+    addDefectDto.value.machineId ? "MachinesDefects" : "LastDepartament",
+    addDefectDto.value.machineId ? { id: addDefectDto.value.machineId } : {}
+  );
+};
+
 onMounted(async () => {
   addDefectDto.value.machineId = machineId.value;
 
   isFetchLoading.value = true;
-  await Promise.all([
-    store.dispatch("machines/fetch"),
-    store.dispatch("users/fetch"),
-    store.dispatch("consumables/fetch"),
-    store.dispatch("defectTypes/fetch"),
-  ]);
-  isFetchLoading.value = false;
+  try {
+    await Promise.all([
+      store.dispatch("machines/fetch"),
+      store.dispatch("users/fetch"),
+      store.dispatch("consumables/fetch"),
+      store.dispatch("defectTypes/fetch"),
+    ]);
+
+    if (props.isEdit) {
+      const defect = await api.defects.getById(route.params.id.toString());
+      addDefectDto.value = {
+        ...defect.data,
+        type: defect.data.type.id,
+        machineId: defect.data.machine?.id,
+        decisionDate: formatToInput(defect.data.decisionDate),
+        responsible: defect.data.responsible?.map((r) => r.id),
+        consumables: defect.data.consumables?.map((r) => r.id),
+      };
+      localConsumable.value = defect.data.consumables;
+    }
+  } catch {
+    store.commit("snackbar/showSnackbarError", {
+      message: "Произошла ошибка при получение неисправности",
+    });
+    goBack();
+  } finally {
+    isFetchLoading.value = false;
+  }
 });
 </script>
 

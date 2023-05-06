@@ -8,9 +8,9 @@ export default interface AddDefectDto {
 
   machineId?: string;
 
-  consumables?: Consumable[];
+  consumables?: string[] | Consumable[];
 
-  responsible?: User[];
+  responsible?: string[] | User[];
 
   decisionDate?: Date;
   type?: string;
