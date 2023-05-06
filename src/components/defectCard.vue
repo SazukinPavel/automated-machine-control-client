@@ -44,7 +44,7 @@
     </v-expansion-panels>
     <v-row justify="end" class="mt-5" v-if="!props.defect?.isResolved">
       <v-spacer />
-      <v-btn class="my-3 mx-2" density="comfortable"
+      <v-btn class="mt-3" density="comfortable"
         >Передвинуть дату
         <v-dialog
           v-model="isChangeDateDialog"
@@ -73,6 +73,20 @@
           </v-card>
         </v-dialog></v-btn
       >
+      <confitm-dialog
+        v-model="isDeleteDialog"
+        :message="`Вы точно хотите удалить ${props.defect?.name}, все использованые матрериалы будут возвращены?`"
+        @confirm="deleteDefect"
+      >
+        <v-btn
+          density="comfortable"
+          :loading="isDeleteLoading"
+          class="mt-3"
+          @click="isDeleteDialog = true"
+        >
+          Удалить <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </confitm-dialog>
       <v-btn
         density="comfortable"
         class="mt-3"
@@ -96,6 +110,7 @@ import Defect from "@/types/busnes/Defect";
 import { useStore } from "vuex";
 import useValidators from "@/hooks/useValidators";
 import useDateFormater from "@/hooks/useDateFormater";
+import ConfitmDialog from "@/components/confitmDialog.vue";
 
 const props = defineProps({
   defect: { type: Object as PropType<Defect>, required: true },
@@ -110,6 +125,8 @@ const isChangeDateDialog = ref(false);
 const isChangeDateLoading = ref(false);
 const newDate = ref<string>("");
 const changeDateForm = ref<any | null>(null);
+const isDeleteDialog = ref(false);
+const isDeleteLoading = ref(false);
 
 const changeDate = async () => {
   if (!(await changeDateForm.value.validate()).valid) {
@@ -147,6 +164,22 @@ const fixDefect = async () => {
     });
   } finally {
     isFixDefectLoading.value = false;
+  }
+};
+
+const deleteDefect = async () => {
+  isDeleteLoading.value = true;
+  try {
+    await store.dispatch("defects/delete", props.defect?.id);
+    store.commit("snackbar/showSnackbarSuccess", {
+      message: `${props.defect?.name} успешно удалён`,
+    });
+  } catch {
+    store.commit("snackbar/showSnackbarError", {
+      message: `Произошла ошибка при удаление ${props.defect?.name}`,
+    });
+  } finally {
+    isDeleteLoading.value = false;
   }
 };
 
