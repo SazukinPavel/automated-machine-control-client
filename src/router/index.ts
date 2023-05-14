@@ -16,7 +16,12 @@ import AddDefectType from "@/views/AddDefectType.vue";
 import DefectsTypes from "@/views/DefectsTypes.vue";
 
 const routes = [
-  { path: "/login", name: "Login", component: Login },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+    meta: { title: "Авторизация" },
+  },
   {
     path: "/departaments/",
     name: "Departaments",
