@@ -15,7 +15,7 @@
         v-model="loginDto.password"
       />
       <div class="d-flex justify-end">
-        <v-btn color="primary" @click="login">Войти</v-btn>
+        <v-btn :loading="isLoading" color="primary" @click="login">Войти</v-btn>
       </div>
     </v-form>
   </div>
@@ -34,18 +34,20 @@ const store = useStore();
 const { requiredRule } = useValidators();
 
 const loginDto = ref<LoginDto>({ login: "", password: "" });
-
+const isLoading = ref(false);
 const login = async () => {
   try {
     if (!(await loginForm.value?.validate()).valid) {
       return;
     }
-
+    isLoading.value = true;
     await store.dispatch("auth/login", loginDto.value);
   } catch {
     store.commit("snackbar/showSnackbarError", {
       message: "Такого пользователя нет",
     });
+  } finally {
+    isLoading.value = false;
   }
 };
 </script>
