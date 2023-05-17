@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Login from "@/views/Login.vue";
 import Departament from "@/views/Departament.vue";
 import AddMachine from "@/views/AddMachine.vue";
@@ -147,10 +147,11 @@ const routes = [
     props: { isEdit: true },
     meta: { isAdminRoute: true, title: "Редактирование типа неисправностей" },
   },
+  { path: "/:pathMatch(.*)*", redirect: "/login" },
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes, // short for `routes: routes`
 });
 

@@ -1,8 +1,9 @@
 <template>
   <v-app>
-    <app-main>
+    <app-main v-if="!isAuthLoading">
       <router-view />
     </app-main>
+    <loading v-else></loading>
   </v-app>
 </template>
 
@@ -13,6 +14,7 @@ import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import Role from "@/types/utils/Role";
 import useSeo from "@/hooks/useSeo";
+import Loading from "@/components/loading.vue";
 
 const store = useStore();
 const router = useRouter();
@@ -80,9 +82,7 @@ const redirect = () => {
 watch(
   () => role.value,
   () => {
-    if (!isAuthLoading.value) {
-      redirect();
-    }
+    redirect();
   }
 );
 
