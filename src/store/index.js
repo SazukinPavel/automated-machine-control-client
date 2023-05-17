@@ -8,6 +8,7 @@ import defects from "@/store/modules/defects";
 import consumables from "@/store/modules/consumables";
 import consumableTypes from "@/store/modules/consumableTypes";
 import defectTypes from "@/store/modules/defectTypes";
+import logs from "@/store/modules/logs";
 import { createStore } from "vuex-extensions";
 import { Store } from "vuex";
 
@@ -23,5 +24,6 @@ export default createStore(Store, {
     consumables,
     consumableTypes,
     defectTypes,
+    logs,
   },
 });
