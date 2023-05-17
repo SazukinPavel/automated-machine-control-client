@@ -14,6 +14,7 @@ import AddConsumable from "@/views/AddConsumable.vue";
 import Consumables from "@/views/Consumables.vue";
 import AddDefectType from "@/views/AddDefectType.vue";
 import DefectsTypes from "@/views/DefectsTypes.vue";
+import Logging from "@/views/Logging.vue";
 
 const routes = [
   {
@@ -146,6 +147,12 @@ const routes = [
     component: AddDefectType,
     props: { isEdit: true },
     meta: { isAdminRoute: true, title: "Редактирование типа неисправностей" },
+  },
+  {
+    path: "/logging",
+    name: "Logging",
+    component: Logging,
+    meta: { isAdminRoute: true, title: "Логирвание" },
   },
   { path: "/:pathMatch(.*)*", redirect: "/login" },
 ];

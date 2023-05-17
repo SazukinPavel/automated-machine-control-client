@@ -2,10 +2,10 @@
   <div v-if="!isLoading">
     <page-title>Цеха</page-title>
     <v-row class="ma-4" dense="dense">
-      <v-col style="min-width: 150px" cols="3">
+      <v-col cols="6">
         <search v-model="searchParam" />
       </v-col>
-      <v-col>
+      <v-col cols="6">
         <add-btn :to="{ name: 'AddDepartament' }" />
       </v-col>
     </v-row>

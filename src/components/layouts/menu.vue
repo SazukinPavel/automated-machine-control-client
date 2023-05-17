@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    ref="menu"
     v-model="drawer"
     :rail="rail"
     permanent
@@ -10,7 +11,7 @@
         <v-btn
           variant="text"
           icon="mdi-chevron-left"
-          @click.stop="rail = !rail"
+          @click.stop="rail = true"
         ></v-btn>
       </template>
       <v-list-item-title class="text-h6 text-center">Меню</v-list-item-title>
@@ -58,6 +59,9 @@
           >Типы неисправностей</v-list-item-title
         >
       </v-list-item>
+      <v-list-item value="defect-types" @click="goTo('Logging')">
+        <v-list-item-title class="text-h6">Логирование</v-list-item-title>
+      </v-list-item>
       <v-list-item v-once active-color="primary" @click="logout" value="logout">
         <v-list-item-title class="text-h6 d-flex justify-space-between"
           ><span>Выйти</span>
@@ -74,7 +78,7 @@ import { useStore } from "vuex";
 import Departament from "@/types/busnes/Departament";
 import MenuItem from "@/types/utils/MenuItem";
 import useNavigateTo from "@/hooks/useNavigateTo";
-
+import { onClickOutside } from "@vueuse/core";
 const store = useStore();
 const { goTo } = useNavigateTo();
 
@@ -83,6 +87,7 @@ const departaments = computed<Departament[]>(
 );
 const drawer = ref(true);
 const rail = ref(true);
+const menu = ref(null);
 
 const departamnetsRoutes = computed<MenuItem[]>(() => {
   const departamnents: MenuItem[] = departaments.value.map((d) => ({
@@ -104,6 +109,11 @@ const logout = () => {
   sessionStorage.clear();
   store.reset();
 };
+
+onClickOutside(menu, () => {
+  console.log(1);
+  rail.value = true;
+});
 </script>
 
 <style scoped></style>
