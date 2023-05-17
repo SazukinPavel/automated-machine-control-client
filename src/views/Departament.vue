@@ -4,10 +4,10 @@
       id ? `Станки в ${departament?.name}` : `Все станки`
     }}</page-title>
     <v-row class="ma-4" dense="dense">
-      <v-col style="min-width: 150px" cols="3">
+      <v-col cols="6">
         <search v-model="searchParam" />
       </v-col>
-      <v-col cols="3" style="min-width: 150px">
+      <v-col cols="6">
         <v-select
           v-model="selectedState"
           :items="stateItems"
@@ -15,7 +15,7 @@
           density="compact"
         ></v-select>
       </v-col>
-      <v-col>
+      <v-col class="d-flex justify-end">
         <add-btn
           v-if="id"
           :to="{ name: 'AddMachine', query: { departament: id } }"

@@ -2,8 +2,11 @@
   <div v-if="!isLoading">
     <page-title>Материалы</page-title>
     <v-row class="ma-4" dense="dense">
-      <v-col style="min-width: 150px">
+      <v-col>
         <search v-model="searchParam" />
+      </v-col>
+      <v-col>
+        <add-btn :to="{ name: 'AddConsumable' }" />
       </v-col>
       <v-col style="min-width: 180px">
         <v-select
@@ -13,9 +16,6 @@
           v-model="availableType"
           :items="availableTypes"
         />
-      </v-col>
-      <v-col>
-        <add-btn :to="{ name: 'AddConsumable' }" />
       </v-col>
     </v-row>
     <consumable-card
