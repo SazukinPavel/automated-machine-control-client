@@ -59,6 +59,9 @@
           >Типы неисправностей</v-list-item-title
         >
       </v-list-item>
+      <v-list-item value="defect-types" @click="goTo('Logging')">
+        <v-list-item-title class="text-h6">Логирование</v-list-item-title>
+      </v-list-item>
       <v-list-item v-once active-color="primary" @click="logout" value="logout">
         <v-list-item-title class="text-h6 d-flex justify-space-between"
           ><span>Выйти</span>
