@@ -1,15 +1,15 @@
 <template>
-  <v-card color="primary" variant="outlined" class="ma-5 pa-5">
+  <v-card color="primary" variant="outlined" class="ma-5 pa-1">
     <v-card-title class="text-end text-wrap">
       <v-chip
         variant="outlined"
         :color="props.machine?.isActive ? 'green' : 'red'"
-        >{{ props.machine.isActive ? "Исправна" : "Не исправна" }}</v-chip
-      >
+        >{{ props.machine.isActive ? "Исправна" : "Не исправна" }}
+      </v-chip>
     </v-card-title>
-    <v-card-title class="text-wrap">{{
-      `${props.machine.name} (${props.machine.number})`
-    }}</v-card-title>
+    <v-card-title class="text-wrap"
+      >{{ `${props.machine.name} (${props.machine.number})` }}
+    </v-card-title>
     <v-card-text class="text-end"
       ><span class="mx-2 text-wrap">Создан:{{ props.machine.createdAt }}</span>
       <span class="mx-2 text-wrap"> Обновлён:{{ props.machine.updateAt }}</span>
@@ -17,15 +17,15 @@
     <v-expansion-panels>
       <v-expansion-panel color="primary">
         <v-expansion-panel-title color="primary"
-          >Описание:</v-expansion-panel-title
-        >
+          >Описание:
+        </v-expansion-panel-title>
         <v-expansion-panel-text class="text-wrap">
           <v-card-title class="text-wrap"
-            >Модель: {{ props.machine.model || "-" }}</v-card-title
-          >
+            >Модель: {{ props.machine.model || "-" }}
+          </v-card-title>
           <v-card-title class="text-wrap"
-            >Год ввода: {{ props.machine.startYear || "-" }}</v-card-title
-          >
+            >Год ввода: {{ props.machine.startYear || "-" }}
+          </v-card-title>
           <v-card-text v-if="props.machine?.description" class="text-wrap">
             <span class="v-card-subtitle ma-0 pa-0">Описание:</span
             >{{ props.machine.description }}
@@ -34,7 +34,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
     <v-row
-      class="mt-3 mt-lg-10"
+      class="pa-3 mt-lg-10"
       justify="end"
       align-content="end"
       align="end"
@@ -45,7 +45,8 @@
         class="mx-1 mx-lg-5 my-3"
         :to="{ name: 'EditMachine', params: { id: props.machine?.id } }"
       >
-        Изменить <v-icon>mdi-pencil</v-icon>
+        Изменить
+        <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <confitm-dialog
         v-model="isDeleteDialog"
@@ -57,7 +58,8 @@
           @click="isDeleteDialog = true"
           density="comfortable"
         >
-          Удалить <v-icon>mdi-delete</v-icon>
+          Удалить
+          <v-icon>mdi-delete</v-icon>
         </v-btn>
       </confitm-dialog>
       <v-btn
@@ -65,7 +67,8 @@
         :to="{ name: 'MachinesDefects', params: { id: props.machine?.id } }"
         density="comfortable"
       >
-        Неисправности <v-icon>mdi-arrow-right-bold-outline</v-icon>
+        Неисправности
+        <v-icon>mdi-arrow-right-bold-outline</v-icon>
       </v-btn>
     </v-row>
   </v-card>

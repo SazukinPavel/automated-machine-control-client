@@ -1,7 +1,7 @@
 <template>
-  <v-card color="primary" variant="outlined" class="ma-5 pa-5">
+  <v-card color="primary" variant="outlined" class="ma-5 pa-1">
     <v-card-title class="text-wrap">{{ props.user?.login }}</v-card-title>
-    <v-row justify="end">
+    <v-row justify="end" class="pa-3">
       <confitm-dialog
         v-model="isDeleteDialog"
         :message="`Вы точно хотите удалить ${props.user?.login}?`"
@@ -13,7 +13,8 @@
           class="mx-1 my-2 mx-lg-5"
           @click="isDeleteDialog = true"
         >
-          Удалить <v-icon>mdi-delete</v-icon>
+          Удалить
+          <v-icon>mdi-delete</v-icon>
         </v-btn>
       </confitm-dialog>
     </v-row>

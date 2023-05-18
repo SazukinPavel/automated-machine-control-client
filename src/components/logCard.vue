@@ -1,9 +1,9 @@
 <template>
-  <v-card color="primary" variant="outlined" class="ma-3 pa-3">
+  <v-card color="primary" variant="outlined" class="ma-3 pa-1">
     <div class="d-flex justify-end">
-      <v-chip :color="logColor">{{
-        formatDateTime(props.log.creationDate)
-      }}</v-chip>
+      <v-chip :color="logColor"
+        >{{ formatDateTime(props.log.creationDate) }}
+      </v-chip>
     </div>
     <v-card-title
       class="ma-0 pa-0 text-wrap text-subtitle-1 text-lg-h6 text-md-h6 text-sm-h6"
@@ -13,19 +13,19 @@
     <v-card-title
       class="ma-0 pa-0 text-wrap text-subtitle-1 text-lg-h6 text-md-h6 text-sm-h6"
     >
-      Пользователь: {{ props.log.user || "Не авторизован" }}</v-card-title
-    >
+      Пользователь: {{ props.log.user || "Не авторизован" }}
+    </v-card-title>
     <v-expansion-panels v-if="body">
       <v-expansion-panel color="primary">
         <v-expansion-panel-title color="primary"
-          >Описание:</v-expansion-panel-title
-        >
+          >Описание:
+        </v-expansion-panel-title>
         <v-expansion-panel-text class="text-wrap">
           <v-card-title
             class="ma-0 pa-0 text-wrap text-subtitle-1 text-lg-h6 text-md-h6 text-sm-h6"
           >
-            Тело запроса:</v-card-title
-          >
+            Тело запроса:
+          </v-card-title>
 
           <v-textarea :model-value="props.log?.body" readonly></v-textarea>
         </v-expansion-panel-text>

@@ -1,32 +1,32 @@
 <template>
-  <v-card color="primary" variant="outlined" class="ma-5 pa-5">
+  <v-card color="primary" variant="outlined" class="ma-5 pa-1">
     <div class="d-flex justify-end">
       <v-chip
         variant="outlined"
         :color="props.defect?.isResolved ? 'green' : 'red'"
-        >{{ props.defect?.decisionDate }}</v-chip
-      >
+        >{{ props.defect?.decisionDate }}
+      </v-chip>
     </div>
     <v-card-title class="text-wrap">{{ props.defect?.name }}</v-card-title>
     <v-expansion-panels>
       <v-expansion-panel color="primary">
         <v-expansion-panel-title color="primary"
-          >Описание:</v-expansion-panel-title
-        >
+          >Описание:
+        </v-expansion-panel-title>
         <v-expansion-panel-text>
           <v-card-title class="text-wrap">
-            Тип неисправности: {{ props.defect?.type.name }}</v-card-title
-          >
+            Тип неисправности: {{ props.defect?.type.name }}
+          </v-card-title>
           <v-card-title class="text-wrap"> Ответственные:</v-card-title>
           <v-list density="comfortable" v-if="props.defect?.responsible">
             <v-list-item-title
               v-for="responsible in props.defect.responsible"
               class="text-wrap"
               :key="responsible.id"
-              >{{ responsible.login }}</v-list-item-title
-            >
+              >{{ responsible.login }}
+            </v-list-item-title>
           </v-list>
-          <v-card-title class="text-wrap"> Материалы: </v-card-title>
+          <v-card-title class="text-wrap"> Материалы:</v-card-title>
           <v-list
             density="comfortable"
             v-if="props.defect?.consumables"
@@ -36,13 +36,13 @@
               v-for="consumable in props.defect.consumables"
               class="text-wrap"
               :key="consumable.id"
-              >{{ consumable.name }}</v-list-item-title
-            >
+              >{{ consumable.name }}
+            </v-list-item-title>
           </v-list>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
-    <v-row justify="end" class="mt-5" v-if="!props.defect?.isResolved">
+    <v-row justify="end" class="pa-3" v-if="!props.defect?.isResolved">
       <v-spacer />
       <v-btn class="mt-3" density="comfortable"
         >Передвинуть дату
@@ -63,16 +63,16 @@
                 <v-btn
                   :disabled="isChangeDateLoading"
                   @click="isChangeDateDialog = false"
-                  >Закрыть</v-btn
-                >
+                  >Закрыть
+                </v-btn>
                 <v-btn @click="changeDate" :loading="isChangeDateLoading"
-                  >Изменить</v-btn
-                >
+                  >Изменить
+                </v-btn>
               </div>
             </v-form>
           </v-card>
-        </v-dialog></v-btn
-      >
+        </v-dialog>
+      </v-btn>
       <confitm-dialog
         v-model="isDeleteDialog"
         :message="`Вы точно хотите удалить ${props.defect?.name}, все использованые матрериалы будут возвращены?`"
@@ -84,22 +84,24 @@
           class="mt-3"
           @click="isDeleteDialog = true"
         >
-          Удалить <v-icon>mdi-delete</v-icon>
+          Удалить
+          <v-icon>mdi-delete</v-icon>
         </v-btn>
       </confitm-dialog>
       <v-btn
         density="comfortable"
         class="mt-3"
         :to="{ name: 'EditDefect', params: { id: props.defect?.id } }"
-        >Редактировать <v-icon>mdi-pencil</v-icon></v-btn
-      >
+        >Редактировать
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
       <v-btn
         density="comfortable"
         class="mt-3"
         @click="fixDefect"
         :loading="isFixDefectLoading"
-        >Исправить</v-btn
-      >
+        >Исправить
+      </v-btn>
     </v-row>
   </v-card>
 </template>

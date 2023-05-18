@@ -32,14 +32,15 @@
             :value="item.title"
             @click="goTo(item.routeName, item.params)"
           >
-            <v-list-item-title class="text-subtitle-1">{{
-              item.title
-            }}</v-list-item-title>
+            <v-list-item-title class="text-subtitle-1"
+              >{{ item.title }}
+            </v-list-item-title>
           </v-list-item>
           <v-list-item value="add" @click="goTo('AddDepartament')">
             <v-list-item-title class="text-xl-subtitle-1 text-center"
-              >Добавить цех <v-icon>mdi-plus</v-icon></v-list-item-title
-            >
+              >Добавить цех
+              <v-icon>mdi-plus</v-icon>
+            </v-list-item-title>
           </v-list-item>
         </v-list-group>
         <v-list-item value="departaments" @click="goTo('Departaments')">
@@ -56,8 +57,8 @@
         </v-list-item>
         <v-list-item value="defect-types" @click="goTo('DefectTypes')">
           <v-list-item-title class="text-h6"
-            >Типы неисправностей</v-list-item-title
-          >
+            >Типы неисправностей
+          </v-list-item-title>
         </v-list-item>
         <v-list-item value="defect-types" @click="goTo('Logging')">
           <v-list-item-title class="text-h6">Логирование</v-list-item-title>
@@ -70,8 +71,8 @@
         >
           <v-list-item-title class="text-h6 d-flex justify-space-between"
             ><span>Выйти</span>
-            <v-icon size="small">mdi-logout</v-icon></v-list-item-title
-          >
+            <v-icon size="small">mdi-logout</v-icon>
+          </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -85,6 +86,7 @@ import Departament from "@/types/busnes/Departament";
 import MenuItem from "@/types/utils/MenuItem";
 import useNavigateTo from "@/hooks/useNavigateTo";
 import { onClickOutside } from "@vueuse/core";
+
 const store = useStore();
 const { goTo } = useNavigateTo();
 
