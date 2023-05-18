@@ -60,7 +60,7 @@
             >Типы неисправностей
           </v-list-item-title>
         </v-list-item>
-        <v-list-item value="defect-types" @click="goTo('Logging')">
+        <v-list-item value="logging" @click="goTo('Logging')">
           <v-list-item-title class="text-h6">Логирование</v-list-item-title>
         </v-list-item>
         <v-list-item
