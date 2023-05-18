@@ -1,75 +1,81 @@
 <template>
-  <v-navigation-drawer
-    ref="menu"
-    v-model="drawer"
-    :rail="rail"
-    permanent
-    @click="rail = false"
-  >
-    <v-list-item nav>
-      <template v-slot:append>
-        <v-btn
-          variant="text"
-          icon="mdi-chevron-left"
-          @click.stop="rail = true"
-        ></v-btn>
-      </template>
-      <v-list-item-title class="text-h6 text-center">Меню</v-list-item-title>
-    </v-list-item>
-
-    <v-divider></v-divider>
-
-    <v-list nav>
-      <v-list-group>
-        <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props">
-            <v-list-item-title class="text-h6">Станки</v-list-item-title>
-          </v-list-item>
+  <div ref="menu">
+    <v-navigation-drawer
+      v-model="drawer"
+      :rail="rail"
+      permanent
+      @click="rail = false"
+    >
+      <v-list-item nav>
+        <template v-slot:append>
+          <v-btn
+            variant="text"
+            icon="mdi-chevron-left"
+            @click.stop="rail = !rail"
+          ></v-btn>
         </template>
-        <v-list-item
-          v-for="item in departamnetsRoutes"
-          :key="item.title"
-          :value="item.title"
-          @click="goTo(item.routeName, item.params)"
-        >
-          <v-list-item-title class="text-subtitle-1">{{
-            item.title
-          }}</v-list-item-title>
+        <v-list-item-title class="text-h6 text-center">Меню</v-list-item-title>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list nav>
+        <v-list-group>
+          <template v-slot:activator="{ props }">
+            <v-list-item v-bind="props">
+              <v-list-item-title class="text-h6">Станки</v-list-item-title>
+            </v-list-item>
+          </template>
+          <v-list-item
+            v-for="item in departamnetsRoutes"
+            :key="item.title"
+            :value="item.title"
+            @click="goTo(item.routeName, item.params)"
+          >
+            <v-list-item-title class="text-subtitle-1">{{
+              item.title
+            }}</v-list-item-title>
+          </v-list-item>
+          <v-list-item value="add" @click="goTo('AddDepartament')">
+            <v-list-item-title class="text-xl-subtitle-1 text-center"
+              >Добавить цех <v-icon>mdi-plus</v-icon></v-list-item-title
+            >
+          </v-list-item>
+        </v-list-group>
+        <v-list-item value="departaments" @click="goTo('Departaments')">
+          <v-list-item-title class="text-h6">Цеха</v-list-item-title>
         </v-list-item>
-        <v-list-item value="add" @click="goTo('AddDepartament')">
-          <v-list-item-title class="text-xl-subtitle-1 text-center"
-            >Добавить цех <v-icon>mdi-plus</v-icon></v-list-item-title
+        <v-list-item value="users" @click="goTo('Users')">
+          <v-list-item-title class="text-h6">Ответственные</v-list-item-title>
+        </v-list-item>
+        <v-list-item value="consumable-types" @click="goTo('ConsumableTypes')">
+          <v-list-item-title class="text-h6">Типы материалов</v-list-item-title>
+        </v-list-item>
+        <v-list-item value="consumables" @click="goTo('Consumables')">
+          <v-list-item-title class="text-h6">Материалы</v-list-item-title>
+        </v-list-item>
+        <v-list-item value="defect-types" @click="goTo('DefectTypes')">
+          <v-list-item-title class="text-h6"
+            >Типы неисправностей</v-list-item-title
           >
         </v-list-item>
-      </v-list-group>
-      <v-list-item value="departaments" @click="goTo('Departaments')">
-        <v-list-item-title class="text-h6">Цеха</v-list-item-title>
-      </v-list-item>
-      <v-list-item value="users" @click="goTo('Users')">
-        <v-list-item-title class="text-h6">Ответственные</v-list-item-title>
-      </v-list-item>
-      <v-list-item value="consumable-types" @click="goTo('ConsumableTypes')">
-        <v-list-item-title class="text-h6">Типы материалов</v-list-item-title>
-      </v-list-item>
-      <v-list-item value="consumables" @click="goTo('Consumables')">
-        <v-list-item-title class="text-h6">Материалы</v-list-item-title>
-      </v-list-item>
-      <v-list-item value="defect-types" @click="goTo('DefectTypes')">
-        <v-list-item-title class="text-h6"
-          >Типы неисправностей</v-list-item-title
+        <v-list-item value="defect-types" @click="goTo('Logging')">
+          <v-list-item-title class="text-h6">Логирование</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          v-once
+          active-color="primary"
+          @click="logout"
+          value="logout"
         >
-      </v-list-item>
-      <v-list-item value="defect-types" @click="goTo('Logging')">
-        <v-list-item-title class="text-h6">Логирование</v-list-item-title>
-      </v-list-item>
-      <v-list-item v-once active-color="primary" @click="logout" value="logout">
-        <v-list-item-title class="text-h6 d-flex justify-space-between"
-          ><span>Выйти</span>
-          <v-icon size="small">mdi-logout</v-icon></v-list-item-title
-        >
-      </v-list-item>
-    </v-list>
-  </v-navigation-drawer>
+          <v-list-item-title class="text-h6 d-flex justify-space-between"
+            ><span>Выйти</span>
+            <v-icon size="small">mdi-logout</v-icon></v-list-item-title
+          >
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -111,7 +117,6 @@ const logout = () => {
 };
 
 onClickOutside(menu, () => {
-  console.log(1);
   rail.value = true;
 });
 </script>
