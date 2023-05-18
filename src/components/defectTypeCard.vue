@@ -1,7 +1,7 @@
 <template>
-  <v-card color="primary" variant="outlined" class="ma-5 pa-5">
+  <v-card color="primary" variant="outlined" class="ma-5 pa-1">
     <v-card-title class="text-wrap">{{ props.type.name }}</v-card-title>
-    <v-row justify="end">
+    <v-row justify="end" class="pa-3">
       <confitm-dialog
         v-model="isDeleteDialog"
         :message="`Вы точно хотите удалить ${props.type?.name}, все неисправности с типом ${props.type?.name} будут удалены ?`"
@@ -13,7 +13,8 @@
           class="mx-1 my-2 mx-lg-5"
           @click="isDeleteDialog = true"
         >
-          Удалить <v-icon>mdi-delete</v-icon>
+          Удалить
+          <v-icon>mdi-delete</v-icon>
         </v-btn>
       </confitm-dialog>
       <v-btn
@@ -22,7 +23,8 @@
         :disabled="isDeleteLoading"
         :to="{ name: 'EditDefectType', params: { id: props.type?.id } }"
       >
-        Изменить <v-icon>mdi-pencil</v-icon>
+        Изменить
+        <v-icon>mdi-pencil</v-icon>
       </v-btn>
     </v-row>
   </v-card>

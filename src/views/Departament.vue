@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isLoading">
+  <div>
     <page-title>{{
       id ? `Станки в ${departament?.name}` : `Все станки`
     }}</page-title>
@@ -22,13 +22,15 @@
         />
       </v-col>
     </v-row>
-    <machine-card
-      v-for="machine in filtredMachines"
-      :key="machine.id"
-      :machine="machine"
-    />
+    <template v-if="!isLoading">
+      <machine-card
+        v-for="machine in filtredMachines"
+        :key="machine.id"
+        :machine="machine"
+      />
+    </template>
+    <loading v-else></loading>
   </div>
-  <loading v-else></loading>
 </template>
 
 <script setup lang="ts">

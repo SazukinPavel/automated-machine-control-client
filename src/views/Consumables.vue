@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isLoading">
+  <div>
     <page-title>Материалы</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col>
@@ -18,13 +18,15 @@
         />
       </v-col>
     </v-row>
-    <consumable-card
-      v-for="consumable in filtredConsumables"
-      :key="consumable.id"
-      :consumable="consumable"
-    />
+    <template v-if="!isLoading">
+      <consumable-card
+        v-for="consumable in filtredConsumables"
+        :key="consumable.id"
+        :consumable="consumable"
+      />
+    </template>
+    <loading v-else></loading>
   </div>
-  <loading v-else></loading>
 </template>
 
 <script setup lang="ts">

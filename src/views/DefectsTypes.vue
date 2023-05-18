@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isLoading">
+  <div>
     <v-row class="ma-4" dense="dense">
       <page-title>Типы неисправностей</page-title>
       <v-col cols="6">
@@ -9,13 +9,15 @@
         <add-btn :to="{ name: 'AddDefectType' }" />
       </v-col>
     </v-row>
-    <defect-type-card
-      v-for="type in filtredTypes"
-      :key="type.id"
-      :type="type"
-    />
+    <template v-if="!isLoading">
+      <defect-type-card
+        v-for="type in filtredTypes"
+        :key="type.id"
+        :type="type"
+      />
+    </template>
+    <loading v-else></loading>
   </div>
-  <loading v-else></loading>
 </template>
 
 <script setup lang="ts">

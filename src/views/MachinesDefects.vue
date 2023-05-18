@@ -1,5 +1,5 @@
 <template>
-  <v-card :loading="isFetchLoading" variant="text">
+  <div v-if="isFetchLoading" variant="text">
     <page-title
       >Неисправности станка
       {{ `${machine?.name} (${machine?.number})` }}</page-title
@@ -19,7 +19,8 @@
       :key="defect.id"
       :defect="defect"
     />
-  </v-card>
+  </div>
+  <loading v-else />
 </template>
 
 <script setup lang="ts">
@@ -36,6 +37,7 @@ import deepObjectSearch from "@/utils/deepObjectSearch";
 import PageTitle from "@/components/ui/pageTitle.vue";
 import useSeo from "@/hooks/useSeo";
 import useDateFormater from "@/hooks/useDateFormater";
+import Loading from "@/components/loading.vue";
 
 const store = useStore();
 const route = useRoute();

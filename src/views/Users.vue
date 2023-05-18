@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isLoading">
+  <div>
     <page-title>Ответственные</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col cols="6">
@@ -9,21 +9,23 @@
         <add-btn :to="{ name: 'AddUser' }" />
       </v-col>
     </v-row>
-    <user-card v-for="user in filtredUsers" :key="user.id" :user="user" />
+    <template v-if="!isLoading">
+      <user-card v-for="user in filtredUsers" :key="user.id" :user="user" />
+    </template>
+    <loading v-else></loading>
   </div>
-  <loading v-else></loading>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import AddBtn from "@/components/ui/addBtn.vue";
-import Loading from "@/components/loading.vue";
 import Search from "@/components/search.vue";
 import { useStore } from "vuex";
 import User from "@/types/busnes/User";
 import UserCard from "@/components/userCard.vue";
 import deepObjectSearch from "@/utils/deepObjectSearch";
 import PageTitle from "@/components/ui/pageTitle.vue";
+import Loading from "@/components/loading.vue";
 
 const store = useStore();
 
