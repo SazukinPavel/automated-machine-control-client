@@ -24,6 +24,7 @@ const { setTitle } = useSeo();
 const isAuthLoading = ref(false);
 
 onMounted(async () => {
+  setTitle("");
   isAuthLoading.value = true;
   try {
     await authorize();
@@ -69,7 +70,9 @@ const role: ComputedRef<Role> = computed(() => store.getters["auth/role"]);
 const redirect = () => {
   switch (role.value) {
     case "admin": {
-      router.replace({ name: "LastDepartament" });
+      if (!route.meta.isAdminRoute) {
+        router.replace({ name: "LastDepartament" });
+      }
       break;
     }
     default: {
