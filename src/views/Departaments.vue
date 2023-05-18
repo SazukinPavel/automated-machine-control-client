@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isLoading">
+  <div>
     <page-title>Цеха</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col cols="6">
@@ -9,13 +9,15 @@
         <add-btn :to="{ name: 'AddDepartament' }" />
       </v-col>
     </v-row>
-    <departament-card
-      v-for="departament in filtredDepartaments"
-      :key="departament.id"
-      :departament="departament"
-    />
+    <template v-if="!isLoading">
+      <departament-card
+        v-for="departament in filtredDepartaments"
+        :key="departament.id"
+        :departament="departament"
+      />
+    </template>
+    <loading v-else></loading>
   </div>
-  <loading v-else></loading>
 </template>
 
 <script setup lang="ts">

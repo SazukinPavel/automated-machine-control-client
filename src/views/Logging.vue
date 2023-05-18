@@ -1,6 +1,6 @@
 <template>
-  <v-container class="ma-0 pa-0">
-    <v-card-title>Логирование</v-card-title>
+  <div class="ma-0 pa-0">
+    <v-card-title class="text-center">Логирование</v-card-title>
     <template v-if="!isFetching">
       <log-card v-for="log in logs" :key="log.id" :log="log" />
       <v-pagination
@@ -12,14 +12,14 @@
       ></v-pagination>
     </template>
     <loading v-else />
-  </v-container>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import LogCard from "@/components/logCard.vue";
-import Loading from "@/App.vue";
+import Loading from "@/components/loading.vue";
 
 const store = useStore();
 
