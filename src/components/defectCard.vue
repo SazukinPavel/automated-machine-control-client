@@ -13,7 +13,7 @@
         <v-expansion-panel-title color="primary"
           >Описание:
         </v-expansion-panel-title>
-        <v-expansion-panel-text>
+        <v-expansion-panel-text class="pa-1">
           <v-card-title class="text-wrap">
             Тип неисправности: {{ props.defect?.type.name }}
           </v-card-title>
@@ -26,7 +26,7 @@
               >{{ responsible.login }}
             </v-list-item-title>
           </v-list>
-          <v-card-title class="text-wrap"> Материалы:</v-card-title>
+          <v-card-title class="text-wrap"> Комплектуюшие:</v-card-title>
           <v-list
             density="comfortable"
             v-if="props.defect?.consumables"
@@ -39,6 +39,10 @@
               >{{ consumable.name }}
             </v-list-item-title>
           </v-list>
+          <v-card-title class="text-wrap"> Подробнее:</v-card-title>
+          <v-card-text v-if="props.defect?.description">
+            {{ props.defect?.description }}
+          </v-card-text>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>

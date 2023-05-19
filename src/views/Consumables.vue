@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title>Материалы</page-title>
+    <page-title>Комплектующие</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col>
         <search v-model="searchParam" />
@@ -82,7 +82,7 @@ onMounted(async () => {
     await store.dispatch("consumables/fetchUsed");
   } catch {
     store.commit("snackbar/showSnackbarError", {
-      message: "Произошла ошибка при запросе материалов",
+      message: "Произошла ошибка при запросе комплектующих",
     });
   } finally {
     isLoading.value = false;

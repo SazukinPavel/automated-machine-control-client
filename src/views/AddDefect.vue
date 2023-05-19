@@ -57,7 +57,7 @@
         :single-line="false"
         class="my-2"
         variant="outlined"
-        label="Материалы"
+        label="Комплектующие"
         :items="consumables"
         item-title="name"
         item-value="id"

@@ -71,7 +71,9 @@ const addType = async () => {
     }
 
     store.commit("snackbar/showSnackbarSuccess", {
-      message: `Тип материала успешно ${props.isEdit ? "изменён" : "добавлен"}`,
+      message: `Тип неисправности успешно ${
+        props.isEdit ? "изменён" : "добавлен"
+      }`,
     });
     goTo("DefectTypes");
   } catch (e: any) {

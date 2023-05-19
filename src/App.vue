@@ -3,7 +3,7 @@
     <app-main v-if="!isAuthLoading">
       <router-view />
     </app-main>
-    <loading v-else></loading>
+    <loading all-space v-else></loading>
   </v-app>
 </template>
 
@@ -95,3 +95,9 @@ watch(isLogedIn, (newVal) => {
   }
 });
 </script>
+
+<style>
+.v-expansion-panel-text__wrapper {
+  padding: 0rem 0.2rem !important;
+}
+</style>

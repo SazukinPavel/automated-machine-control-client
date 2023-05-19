@@ -50,10 +50,12 @@
           <v-list-item-title class="text-h6">Ответственные</v-list-item-title>
         </v-list-item>
         <v-list-item value="consumable-types" @click="goTo('ConsumableTypes')">
-          <v-list-item-title class="text-h6">Типы материалов</v-list-item-title>
+          <v-list-item-title class="text-h6"
+            >Типы комплектующих</v-list-item-title
+          >
         </v-list-item>
         <v-list-item value="consumables" @click="goTo('Consumables')">
-          <v-list-item-title class="text-h6">Материалы</v-list-item-title>
+          <v-list-item-title class="text-h6">Комплектующие</v-list-item-title>
         </v-list-item>
         <v-list-item value="defect-types" @click="goTo('DefectTypes')">
           <v-list-item-title class="text-h6"

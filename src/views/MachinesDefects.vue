@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isFetchLoading" variant="text">
+  <div v-if="!isFetchLoading" variant="text">
     <page-title
       >Неисправности станка
       {{ `${machine?.name} (${machine?.number})` }}</page-title

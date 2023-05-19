@@ -5,7 +5,7 @@
     class="pa-4 ma-auto mt-xl-15"
   >
     <page-title>{{
-      isEdit ? "Редактирование материалы" : "Добавление материала"
+      isEdit ? "Редактирование комплектующего" : "Добавление комплектующего"
     }}</page-title>
     <v-form ref="consumableForm">
       <v-text-field
@@ -68,7 +68,7 @@ const addConsumable = async () => {
     });
 
     store.commit("snackbar/showSnackbarSuccess", {
-      message: `Материал успешно ${props.isEdit ? "изменён" : "добавлен"}`,
+      message: `Комплектующий успешно ${props.isEdit ? "изменён" : "добавлен"}`,
     });
     goTo("Consumables");
   } catch (e: any) {
@@ -78,7 +78,7 @@ const addConsumable = async () => {
         e.response.data.message ||
         `Произошла ошибка при ${
           props.isEdit ? "изменение" : "добавление"
-        }  материала`,
+        }  комплектующего`,
     });
   } finally {
     isLoading.value = false;
@@ -91,7 +91,7 @@ onMounted(async () => {
     await store.dispatch("consumableTypes/fetch");
   } catch {
     store.commit("snackbar/showSnackbarSuccess", {
-      message: "Произошла ошибка при получение типов материала",
+      message: "Произошла ошибка при получение типов комплектующих",
     });
   } finally {
     isEditLoading.value = false;

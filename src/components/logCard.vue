@@ -20,7 +20,7 @@
         <v-expansion-panel-title color="primary"
           >Описание:
         </v-expansion-panel-title>
-        <v-expansion-panel-text class="text-wrap">
+        <v-expansion-panel-text class="text-wrap pa-1">
           <v-card-title
             class="ma-0 pa-0 text-wrap text-subtitle-1 text-lg-h6 text-md-h6 text-sm-h6"
           >
