@@ -98,6 +98,6 @@ watch(isLogedIn, (newVal) => {
 
 <style>
 .v-expansion-panel-text__wrapper {
-  padding: 0rem !important;
+  padding: 0rem 0.2rem !important;
 }
 </style>
