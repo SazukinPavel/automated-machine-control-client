@@ -13,7 +13,7 @@
         <v-expansion-panel-title color="primary"
           >Описание:
         </v-expansion-panel-title>
-        <v-expansion-panel-text>
+        <v-expansion-panel-text class="pa-1">
           <v-card-title class="text-wrap">
             Тип неисправности: {{ props.defect?.type.name }}
           </v-card-title>

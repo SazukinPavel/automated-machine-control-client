@@ -38,6 +38,9 @@ const vuetify = createVuetify({
     VExpansionPanel: {
       color: "primary",
     },
+    VExpansionPanelText: {
+      class: "pa-0",
+    },
     VTextField: {
       color: "primary",
       variant: "outlined",

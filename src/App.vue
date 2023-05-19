@@ -95,3 +95,9 @@ watch(isLogedIn, (newVal) => {
   }
 });
 </script>
+
+<style>
+.v-expansion-panel-text__wrapper {
+  padding: 0rem !important;
+}
+</style>

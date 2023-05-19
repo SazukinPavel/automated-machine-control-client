@@ -19,7 +19,7 @@
         <v-expansion-panel-title color="primary"
           >Описание:
         </v-expansion-panel-title>
-        <v-expansion-panel-text class="text-wrap">
+        <v-expansion-panel-text class="pa-0 text-wrap">
           <v-card-title class="text-wrap"
             >Модель: {{ props.machine.model || "-" }}
           </v-card-title>

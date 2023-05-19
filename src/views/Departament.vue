@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title>{{
+    <page-title v-if="!isLoading">{{
       id ? `Станки в ${departament?.name}` : `Все станки`
     }}</page-title>
     <v-row class="ma-4" dense="dense">
