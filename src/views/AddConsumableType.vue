@@ -6,7 +6,9 @@
   >
     <page-title>
       {{
-        isEdit ? "Редактирование типа материалы" : "Добавление типа материала"
+        isEdit
+          ? "Редактирование типа комплектующих"
+          : "Добавление типа комплектующих"
       }}</page-title
     >
     <v-form ref="typeForm">
@@ -69,7 +71,9 @@ const addType = async () => {
     }
 
     store.commit("snackbar/showSnackbarSuccess", {
-      message: `Тип материала успешно ${props.isEdit ? "изменён" : "добавлен"}`,
+      message: `Тип комплектующих успешно ${
+        props.isEdit ? "изменён" : "добавлен"
+      }`,
     });
     goTo("ConsumableTypes");
   } catch (e: any) {
@@ -78,7 +82,7 @@ const addType = async () => {
         e?.response?.data?.message ||
         `Произошла ошибка при ${
           props.isEdit ? "изменение" : "добавление"
-        } типа материала`,
+        } типа комплектующих`,
     });
   } finally {
     isLoading.value = false;
@@ -95,7 +99,7 @@ onMounted(async () => {
       addTypeDto.value = { ...response.data };
     } catch {
       store.commit("snackbar/showSnackbarSuccess", {
-        message: "Произошла ошибка при получение типа материала",
+        message: "Произошла ошибка при получение типа комплектующих",
       });
       goBack();
     } finally {

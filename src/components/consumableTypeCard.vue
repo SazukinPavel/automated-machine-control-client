@@ -4,7 +4,7 @@
     <v-row class="pa-3" justify="end">
       <confitm-dialog
         v-model="isDeleteDialog"
-        :message="`Вы точно хотите удалить ${props.type?.name}, все материалы с типом ${props.type?.name} будут удалены ?`"
+        :message="`Вы точно хотите удалить ${props.type?.name}, все комплектующие с типом ${props.type?.name} будут удалены ?`"
         @confirm="deleteType"
       >
         <v-btn

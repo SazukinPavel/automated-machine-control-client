@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title>Типы материалов</page-title>
+    <page-title>Типы комплектующих</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col cols="6">
         <search v-model="searchParam" />
@@ -52,7 +52,7 @@ onMounted(async () => {
     await store.dispatch("consumableTypes/fetch");
   } catch {
     store.commit("snackbar/showSnackbarError", {
-      message: "Произошла ошибка при запросе типов материалов",
+      message: "Произошла ошибка при запросе типов комплектующих",
     });
   } finally {
     isLoading.value = false;

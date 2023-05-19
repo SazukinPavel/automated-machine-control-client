@@ -26,7 +26,7 @@
               >{{ responsible.login }}
             </v-list-item-title>
           </v-list>
-          <v-card-title class="text-wrap"> Материалы:</v-card-title>
+          <v-card-title class="text-wrap"> Комплектуюшие:</v-card-title>
           <v-list
             density="comfortable"
             v-if="props.defect?.consumables"

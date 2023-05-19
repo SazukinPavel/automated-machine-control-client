@@ -11,7 +11,9 @@
       >{{ `${props.machine.name} (${props.machine.number})` }}
     </v-card-title>
     <v-card-text class="text-end"
-      ><span class="mx-2 text-wrap">Создан:{{ props.machine.createdAt }}</span>
+      ><span class="mx-2 text-wrap"
+        >Добавлен:{{ props.machine.createdAt }}</span
+      >
       <span class="mx-2 text-wrap"> Обновлён:{{ props.machine.updateAt }}</span>
     </v-card-text>
     <v-expansion-panels>
