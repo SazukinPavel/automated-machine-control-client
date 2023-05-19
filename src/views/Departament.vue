@@ -1,7 +1,7 @@
 <template>
   <div>
-    <page-title v-if="!isLoading">{{
-      id ? `Станки в ${departament?.name}` : `Все станки`
+    <page-title v-if="!isLoading && (departament?.name || !id)">{{
+      id ? `Станки в ${departament.name}` : `Все станки`
     }}</page-title>
     <v-row class="ma-4" dense="dense">
       <v-col cols="6">
@@ -65,6 +65,7 @@ const stateItems = ref([
 const id = computed(() => route.params.id);
 
 onMounted(() => {
+  setTitle(departament.value?.name);
   fetchMachines();
 });
 
