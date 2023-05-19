@@ -3,7 +3,7 @@
     <app-main v-if="!isAuthLoading">
       <router-view />
     </app-main>
-    <loading v-else></loading>
+    <loading all-space v-else></loading>
   </v-app>
 </template>
 
