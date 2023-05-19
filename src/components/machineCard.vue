@@ -4,7 +4,7 @@
       <v-chip
         variant="outlined"
         :color="props.machine?.isActive ? 'green' : 'red'"
-        >{{ props.machine.isActive ? "Исправна" : "Не исправна" }}
+        >{{ props.machine.isActive ? "Исправен" : "Неисправен" }}
       </v-chip>
     </v-card-title>
     <v-card-title class="text-wrap"
