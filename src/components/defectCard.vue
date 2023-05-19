@@ -39,6 +39,10 @@
               >{{ consumable.name }}
             </v-list-item-title>
           </v-list>
+          <v-card-title class="text-wrap"> Подробнее:</v-card-title>
+          <v-card-text v-if="props.defect?.description">
+            {{ props.defect?.description }}
+          </v-card-text>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
