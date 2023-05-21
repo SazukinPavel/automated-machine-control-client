@@ -1,11 +1,6 @@
 <template>
   <div ref="menu">
-    <v-navigation-drawer
-      v-model="drawer"
-      :rail="rail"
-      permanent
-      @click="rail = false"
-    >
+    <v-navigation-drawer v-model="drawer" :rail="rail" permanent>
       <v-list-item nav>
         <template v-slot:append>
           <v-btn
@@ -32,7 +27,8 @@
             :value="item.title"
             @click="goTo(item.routeName, item.params)"
           >
-            <v-list-item-title class="text-subtitle-1"
+            <v-list-item-title
+              :class="`text-subtitle-1 ${!rail && 'text-wrap'}`"
               >{{ item.title }}
             </v-list-item-title>
           </v-list-item>
@@ -90,7 +86,7 @@ import useNavigateTo from "@/hooks/useNavigateTo";
 import { onClickOutside } from "@vueuse/core";
 
 const store = useStore();
-const { goTo } = useNavigateTo();
+const navigation = useNavigateTo();
 
 const departaments = computed<Departament[]>(
   () => store.getters["departaments/departaments"]
@@ -120,9 +116,16 @@ const logout = () => {
   store.reset();
 };
 
-onClickOutside(menu, () => {
+const goTo = (name: string, params?: any) => {
+  closeMenu();
+  navigation.goTo(name, params);
+};
+
+const closeMenu = () => {
   rail.value = true;
-});
+};
+
+onClickOutside(menu, closeMenu);
 </script>
 
 <style scoped></style>
