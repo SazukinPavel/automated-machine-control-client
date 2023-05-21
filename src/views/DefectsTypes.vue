@@ -1,7 +1,7 @@
 <template>
   <div>
+    <page-title>Типы неисправностей</page-title>
     <v-row class="ma-4" dense="dense">
-      <page-title>Типы неисправностей</page-title>
       <v-col cols="6">
         <search v-model="searchParam" />
       </v-col>
