@@ -117,7 +117,7 @@ watch(id, () => {
 });
 
 watch(departament, () => {
-  setTitle(departament.value.name || "Станки");
+  setTitle(departament.value?.name || "Станки");
 });
 </script>
 
