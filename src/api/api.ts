@@ -8,6 +8,7 @@ import ConsumablesModule from "@/api/modules/consumables";
 import ConsumableTypesModule from "@/api/modules/consumableTypes";
 import DefectTypesModule from "@/api/modules/defectTypes";
 import LogsModule from "@/api/modules/logs";
+import DefectNamesModule from "@/api/modules/defectNames";
 
 export default class Api {
   public axios: AxiosInstance;
@@ -19,6 +20,7 @@ export default class Api {
   public consumables: ConsumablesModule;
   public consumableTypes: ConsumableTypesModule;
   public defectTypes: DefectTypesModule;
+  public defectNames: DefectNamesModule;
   public logs: LogsModule;
 
   constructor(baseURL: string) {
@@ -32,6 +34,7 @@ export default class Api {
     this.consumableTypes = new ConsumableTypesModule(this);
     this.defectTypes = new DefectTypesModule(this);
     this.logs = new LogsModule(this);
+    this.defectNames = new DefectNamesModule(this);
   }
 
   applyToken(token: string) {
