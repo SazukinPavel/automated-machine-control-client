@@ -5,7 +5,7 @@ import Consumable from "@/types/busnes/Consumable";
 
 export default class ConsumablesModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "consumables/");
+    super(api, "consumables");
   }
 
   list(params: any) {
@@ -17,6 +17,6 @@ export default class ConsumablesModule extends BaseApiModule {
   }
 
   drop(id: string) {
-    return this.delete(id);
+    return this.delete(`/${id}`);
   }
 }

@@ -5,18 +5,18 @@ import AuthResponseDto from "@/types/dto/auth/AuthResponseDto";
 
 export default class AuthModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "auth/");
+    super(api, "auth");
   }
 
   login(loginDto: LoginDto) {
-    return this.post<LoginDto, AuthResponseDto>("login", loginDto);
+    return this.post<LoginDto, AuthResponseDto>("/login", loginDto);
   }
 
   me() {
-    return this.post<null, AuthResponseDto>("me");
+    return this.post<null, AuthResponseDto>("/me");
   }
 
   logout() {
-    return this.post("logout");
+    return this.post("/logout");
   }
 }
