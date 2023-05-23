@@ -6,7 +6,7 @@ import UpdateMachineDto from "@/types/dto/machines/UpdateMachineDto";
 
 export default class MachinesModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "machines/");
+    super(api, "machines");
   }
 
   list(params: any) {
@@ -14,7 +14,7 @@ export default class MachinesModule extends BaseApiModule {
   }
 
   getById(id: string) {
-    return this.get<Machine>(id);
+    return this.get<Machine>(`/${id}`);
   }
   add(addMachineDto: AddMachineDto) {
     return this.post<AddMachineDto, Machine>("", addMachineDto);
@@ -25,6 +25,6 @@ export default class MachinesModule extends BaseApiModule {
   }
 
   drop(id: string) {
-    return this.delete(id);
+    return this.delete(`/${id}`);
   }
 }

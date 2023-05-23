@@ -6,7 +6,7 @@ import UpdateDefectTypeDto from "@/types/dto/defectTypes/UpdateDefectTypeDto";
 
 export default class DefectTypesModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "defect-types/");
+    super(api, "defect-types");
   }
 
   list(params: any) {
@@ -14,7 +14,7 @@ export default class DefectTypesModule extends BaseApiModule {
   }
 
   getById(id: string) {
-    return this.get<DefectType>(id);
+    return this.get<DefectType>("/" + id);
   }
   add(dto: AddDefectTypeDto) {
     return this.post<AddDefectTypeDto, DefectType>("", dto);
@@ -25,6 +25,6 @@ export default class DefectTypesModule extends BaseApiModule {
   }
 
   drop(id: string) {
-    return this.delete(id);
+    return this.delete("/" + id);
   }
 }

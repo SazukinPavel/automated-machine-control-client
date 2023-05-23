@@ -6,7 +6,7 @@ import UpdateConsumableTypeDto from "@/types/dto/consumable-types/UpdateConsumab
 
 export default class ConsumableTypesModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "consumable-types/");
+    super(api, "consumable-types");
   }
 
   list(params: any) {
@@ -14,7 +14,7 @@ export default class ConsumableTypesModule extends BaseApiModule {
   }
 
   getById(id: string) {
-    return this.get<ConsumableType>(id);
+    return this.get<ConsumableType>(`/${id}`);
   }
   add(dto: AddConsumableTypeDto) {
     return this.post<AddConsumableTypeDto, ConsumableType>("", dto);
@@ -25,6 +25,6 @@ export default class ConsumableTypesModule extends BaseApiModule {
   }
 
   drop(id: string) {
-    return this.delete(id);
+    return this.delete(`/${id}`);
   }
 }

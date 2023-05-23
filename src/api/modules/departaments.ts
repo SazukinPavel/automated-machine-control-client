@@ -6,7 +6,7 @@ import Departament from "@/types/busnes/Departament";
 
 export default class DepartamentModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "departaments/");
+    super(api, "departaments");
   }
 
   list() {
@@ -14,7 +14,7 @@ export default class DepartamentModule extends BaseApiModule {
   }
 
   getById(id: string) {
-    return this.get<Departament>(id);
+    return this.get<Departament>(`${id}`);
   }
   add(addDepartamnetDto: AddDepartamentDto) {
     return this.post<AddDepartamentDto, Departament>("", addDepartamnetDto);
@@ -28,6 +28,6 @@ export default class DepartamentModule extends BaseApiModule {
   }
 
   drop(id: string) {
-    return this.delete(id);
+    return this.delete(`/${id}`);
   }
 }

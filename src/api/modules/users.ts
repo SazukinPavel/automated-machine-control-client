@@ -6,13 +6,13 @@ import User from "@/types/busnes/User";
 
 export default class UsersModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "users/");
+    super(api, "users");
   }
   list() {
     return this.get<User[]>();
   }
   getById(id: string) {
-    return this.get<User>(id);
+    return this.get<User>(`/${id}`);
   }
   add(addUserDto: AddUserDto) {
     return this.post<AddUserDto, User>("", addUserDto);
@@ -21,6 +21,6 @@ export default class UsersModule extends BaseApiModule {
     return this.put<UpdateUserDto, User>("", updateUserDto);
   }
   drop(id: string) {
-    return this.delete(id);
+    return this.delete(`/${id}`);
   }
 }

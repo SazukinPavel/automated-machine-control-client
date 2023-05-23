@@ -7,7 +7,9 @@
         >{{ props.defect?.decisionDate }}
       </v-chip>
     </div>
-    <v-card-title class="text-wrap">{{ props.defect?.name }}</v-card-title>
+    <v-card-title class="text-wrap">{{
+      props.defect?.name.defectName
+    }}</v-card-title>
     <v-expansion-panels>
       <v-expansion-panel color="primary">
         <v-expansion-panel-title color="primary"
@@ -79,7 +81,7 @@
       </v-btn>
       <confitm-dialog
         v-model="isDeleteDialog"
-        :message="`Вы точно хотите удалить ${props.defect?.name}, все использованые матрериалы будут возвращены?`"
+        :message="`Вы точно хотите удалить ${props.defect?.name?.defectName}, все использованые матрериалы будут возвращены?`"
         @confirm="deleteDefect"
       >
         <v-btn
@@ -178,11 +180,11 @@ const deleteDefect = async () => {
   try {
     await store.dispatch("defects/delete", props.defect?.id);
     store.commit("snackbar/showSnackbarSuccess", {
-      message: `${props.defect?.name} успешно удалён`,
+      message: `${props.defect?.name?.defectName} успешно удалён`,
     });
   } catch {
     store.commit("snackbar/showSnackbarError", {
-      message: `Произошла ошибка при удаление ${props.defect?.name}`,
+      message: `Произошла ошибка при удаление ${props.defect?.name?.defectName}`,
     });
   } finally {
     isDeleteLoading.value = false;

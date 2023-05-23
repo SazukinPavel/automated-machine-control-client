@@ -4,7 +4,7 @@ import Log from "@/types/busnes/Log";
 
 export default class LogsModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "logs/");
+    super(api, "logs");
   }
   list({ page = 1, limit = 10 }) {
     return this.get<Log[]>("", { params: { page, limit } });

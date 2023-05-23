@@ -6,7 +6,7 @@ import Defect from "@/types/busnes/Defect";
 
 export default class DefectsModule extends BaseApiModule {
   constructor(api: Api) {
-    super(api, "defects/");
+    super(api, "defects");
   }
 
   list(params: any) {
@@ -14,7 +14,7 @@ export default class DefectsModule extends BaseApiModule {
   }
 
   getById(id: string) {
-    return this.get<Defect>(id);
+    return this.get<Defect>(`${id}`);
   }
   add(addDefectDto: AddDefectDto) {
     return this.post<AddDefectDto, Defect>("", addDefectDto);
@@ -25,6 +25,6 @@ export default class DefectsModule extends BaseApiModule {
   }
 
   drop(id: string, params: any) {
-    return this.delete(id, { params });
+    return this.delete(`/${id}`, { params });
   }
 }

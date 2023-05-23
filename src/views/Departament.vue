@@ -65,7 +65,7 @@ const stateItems = ref([
 const id = computed(() => route.params.id);
 
 onMounted(() => {
-  setTitle(departament.value?.name);
+  setTitle(departament.value?.name || "Станки");
   fetchMachines();
 });
 
@@ -117,7 +117,7 @@ watch(id, () => {
 });
 
 watch(departament, () => {
-  setTitle(departament.value.name);
+  setTitle(departament.value?.name || "Станки");
 });
 </script>
 
