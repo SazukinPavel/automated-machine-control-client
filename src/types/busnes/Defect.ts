@@ -2,11 +2,12 @@ import Consumable from "@/types/busnes/Consumable";
 import User from "@/types/busnes/User";
 import Machine from "@/types/busnes/Machine";
 import DefectType from "@/types/busnes/DefectType";
+import DefectName from "@/types/busnes/DefectName";
 
 interface Defect {
   id?: string;
 
-  name?: string;
+  name?: DefectName;
 
   description?: string;
 
