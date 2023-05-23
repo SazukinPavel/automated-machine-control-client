@@ -38,13 +38,18 @@
         label="Тип"
         :rules="[requiredRule]"
       />
-      <v-text-field
+      <v-combobox
+        @update:search="updateDefectNamesDebounce"
         class="my-2"
         :rules="[requiredRule]"
         variant="outlined"
         label="Название"
+        :items="defectNames"
+        item-title="defectName"
+        item-value="defectName"
         color="primary"
-        v-model="addDefectDto.name"
+        :model-value="addDefectDto.name"
+        @update:model-value="addDefectDto.name = $event.defectName || $event"
       />
       <v-textarea
         class="my-2"
@@ -105,6 +110,8 @@ import PageTitle from "@/components/ui/pageTitle.vue";
 import api from "@/api";
 import useDateFormater from "@/hooks/useDateFormater";
 import UpdateDefectDto from "@/types/dto/defects/UpdateDefectDto";
+import DefectName from "@/types/busnes/DefectName";
+import debounce from "@/utils/debouce";
 
 const props = defineProps({ isEdit: { type: Boolean, default: false } });
 
@@ -119,6 +126,7 @@ const isAddLoading = ref(false);
 const isFetchLoading = ref(false);
 const defectForm = ref<any | null>(null);
 const localConsumable = ref<Consumable[]>([]);
+const defectNames = ref<DefectName[]>([]);
 
 const machines = computed<Machine[]>(() =>
   store.getters["machines/machines"].map((m: Machine) => ({
@@ -190,11 +198,11 @@ onMounted(async () => {
       const defect = await api.defects.getById(route.params.id.toString());
       addDefectDto.value = {
         ...defect.data,
-        type: defect.data.type.id,
+        type: defect.data.type?.id,
         machineId: defect.data.machine?.id,
         decisionDate: formatToInput(defect.data.decisionDate),
-        responsible: defect.data.responsible?.map((r) => r.id),
-        consumables: defect.data.consumables?.map((r) => r.id),
+        responsible: defect.data.responsible?.map((r) => r.id) || [],
+        consumables: defect.data.consumables?.map((r) => r.id) || [],
       };
       localConsumable.value = defect.data.consumables;
     }
@@ -207,6 +215,12 @@ onMounted(async () => {
     isFetchLoading.value = false;
   }
 });
+
+const updateDefectNames = async (val: string) => {
+  defectNames.value = (await api.defectNames.list({ name: val })).data;
+};
+
+const updateDefectNamesDebounce = debounce(updateDefectNames, 300);
 </script>
 
 <style scoped></style>
