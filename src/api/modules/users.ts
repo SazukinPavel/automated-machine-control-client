@@ -3,6 +3,8 @@ import BaseApiModule from "@/types/utils/BaseApiModule";
 import AddUserDto from "@/types/dto/users/AddUserDto";
 import UpdateUserDto from "@/types/dto/users/UpdateUserDto";
 import User from "@/types/busnes/User";
+import RegeneratePassDto from "@/types/dto/users/RegeneratePassDto";
+import RegeneratePassResponseDto from "@/types/dto/users/RegeneratePassResponseDto";
 
 export default class UsersModule extends BaseApiModule {
   constructor(api: Api) {
@@ -22,5 +24,12 @@ export default class UsersModule extends BaseApiModule {
   }
   drop(id: string) {
     return this.delete(`/${id}`);
+  }
+
+  regeneratePass(dto: RegeneratePassDto) {
+    return this.patch<RegeneratePassDto, RegeneratePassResponseDto>(
+      "/regenerate-pass",
+      dto
+    );
   }
 }
