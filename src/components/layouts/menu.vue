@@ -58,6 +58,9 @@
             >Типы неисправностей
           </v-list-item-title>
         </v-list-item>
+        <v-list-item value="specializations" @click="goTo('Specializations')">
+          <v-list-item-title class="text-h6">Специальности</v-list-item-title>
+        </v-list-item>
         <v-list-item value="logging" @click="goTo('Logging')">
           <v-list-item-title class="text-h6">Логирование</v-list-item-title>
         </v-list-item>
