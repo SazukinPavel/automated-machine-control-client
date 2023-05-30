@@ -52,8 +52,7 @@ const vuetify = createVuetify({
     VSelect: {
       color: "primary",
       variant: "outlined",
-      hideNoData: true,
-      noDataText: "",
+      noDataText: "Нету данных",
     },
     VListItem: {
       color: "primary",
@@ -67,7 +66,6 @@ const vuetify = createVuetify({
       color: "primary",
       variant: "outlined",
       hideNoData: true,
-      noDataText: "",
     },
   },
   directives,
