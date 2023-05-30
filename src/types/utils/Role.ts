@@ -1,2 +1,2 @@
-type Role = "admin" | "user";
+type Role = "admin" | "worker" | "sudo";
 export default Role;
