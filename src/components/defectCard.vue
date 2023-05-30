@@ -118,7 +118,7 @@ import Defect from "@/types/busnes/Defect";
 import { useStore } from "vuex";
 import useValidators from "@/hooks/useValidators";
 import useDateFormater from "@/hooks/useDateFormater";
-import ConfitmDialog from "@/components/confitmDialog.vue";
+import ConfitmDialog from "@/components/confirmDialog.vue";
 
 const props = defineProps({
   defect: { type: Object as PropType<Defect>, required: true },

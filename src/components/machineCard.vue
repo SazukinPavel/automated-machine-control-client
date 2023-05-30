@@ -80,7 +80,7 @@
 import Machine from "@/types/busnes/Machine";
 import { PropType, defineProps, ref } from "vue";
 import { useStore } from "vuex";
-import ConfitmDialog from "@/components/confitmDialog.vue";
+import ConfitmDialog from "@/components/confirmDialog.vue";
 
 const props = defineProps({
   machine: { type: Object as PropType<Machine>, required: true },
