@@ -10,7 +10,7 @@ export default {
       state.specializations = specializations;
     },
     push(state, specialization) {
-      state.types.unshift(specialization);
+      state.specializations.unshift(specialization);
     },
     replace(state, specialization) {
       state.specializations = state.specializations.map((d) =>
