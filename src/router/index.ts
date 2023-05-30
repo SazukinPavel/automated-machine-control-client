@@ -101,6 +101,13 @@ const routes = [
     meta: { isAdminRoute: true, title: "Добавление ответственного" },
   },
   {
+    path: "/users/:id/edit",
+    name: "EditUser",
+    component: AddUser,
+    props: { isEdit: true },
+    meta: { isAdminRoute: true, title: "Изменение ответственного" },
+  },
+  {
     path: "/consumable-types",
     name: "ConsumableTypes",
     component: ConsumableTypes,

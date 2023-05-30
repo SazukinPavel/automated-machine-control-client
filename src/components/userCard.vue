@@ -7,6 +7,14 @@
     <v-row justify="end" class="pa-3">
       <v-btn
         density="comfortable"
+        class="mx-1 my-2 mx-lg-5"
+        :to="{ name: 'EditUser', params: { id: props.user?.id } }"
+      >
+        Изменить
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
+      <v-btn
+        density="comfortable"
         :loading="isGeneratePassLoading"
         class="mx-1 my-2 mx-lg-5"
         @click="generatePass"

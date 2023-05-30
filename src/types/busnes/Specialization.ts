@@ -4,4 +4,5 @@ export default interface Specialization {
   name: string;
   types: DefectType[];
   id: string;
+  isHide: boolean;
 }
