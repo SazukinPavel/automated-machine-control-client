@@ -15,6 +15,8 @@ import Consumables from "@/views/Consumables.vue";
 import AddDefectType from "@/views/AddDefectType.vue";
 import DefectsTypes from "@/views/DefectsTypes.vue";
 import Logging from "@/views/Logging.vue";
+import Specializations from "@/views/Specializations.vue";
+import AddSpecialization from "@/views/AddSpecialization.vue";
 
 const routes = [
   {
@@ -147,6 +149,25 @@ const routes = [
     component: AddDefectType,
     props: { isEdit: true },
     meta: { isAdminRoute: true, title: "Редактирование типа неисправностей" },
+  },
+  {
+    path: "/specializations/",
+    name: "Specializations",
+    component: Specializations,
+    meta: { isAdminRoute: true, title: "Специальности" },
+  },
+  {
+    path: "/specializations/add",
+    name: "AddSpecialization",
+    component: AddSpecialization,
+    meta: { isAdminRoute: true, title: "Добавление специальности" },
+  },
+  {
+    path: "/specializations/:id/edit",
+    name: "EditSpecialization",
+    component: AddSpecialization,
+    props: { isEdit: true },
+    meta: { isAdminRoute: true, title: "Редактирование специальности" },
   },
   {
     path: "/logging",
