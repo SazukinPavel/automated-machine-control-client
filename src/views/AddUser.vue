@@ -26,6 +26,15 @@
         item-value="value"
         v-model="addUserDto.role"
       />
+      <v-select
+        v-if="addUserDto.role === 'worker'"
+        label="Специальность"
+        :rules="[requiredRule]"
+        :items="specializations"
+        item-title="name"
+        item-value="id"
+        v-model="addUserDto.specializationId"
+      />
     </v-form>
     <div class="d-flex justify-end align-center">
       <v-btn class="mx-5" :disabled="isLoading" @click="goBack">Назад</v-btn>
@@ -38,7 +47,7 @@
 import { useStore } from "vuex";
 import useValidators from "@/hooks/useValidators";
 import useNavigateTo from "@/hooks/useNavigateTo";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import AddUserDto from "@/types/dto/users/AddUserDto";
 import PageTitle from "@/components/ui/pageTitle.vue";
 import PasswordInput from "@/components/ui/passwordInput.vue";
@@ -49,11 +58,15 @@ const { goBack, goTo } = useNavigateTo();
 
 const isLoading = ref(false);
 const userForm = ref<any | null>(null);
-const addUserDto = ref<AddUserDto>({ login: "", role: "user", password: "" });
+const addUserDto = ref<AddUserDto>({ login: "", role: "worker", password: "" });
 const roles = ref([
   { title: "Админ", value: "admin" },
-  { title: "Работник", value: "user" },
+  { title: "Работник", value: "worker" },
 ]);
+
+const specializations = computed(
+  () => store.getters["specializations/specializations"]
+);
 
 const add = async () => {
   if (!(await userForm.value?.validate()).valid) {
@@ -78,7 +91,9 @@ const add = async () => {
   }
 };
 
-onMounted(async () => {});
+onMounted(async () => {
+  await store.dispatch("specializations/fetch");
+});
 </script>
 
 <style scoped></style>
