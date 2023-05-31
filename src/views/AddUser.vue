@@ -102,11 +102,13 @@ const add = async () => {
       message: `Ответственный успешно ${props.isEdit ? "изменён" : "добавлен"}`,
     });
     goTo("Users");
-  } catch {
+  } catch (e: any) {
     store.commit("snackbar/showSnackbarError", {
-      message: `Произошла ошибка при ${
-        props.isEdit ? "добавлении" : "изменении"
-      } ответсвенного`,
+      message:
+        e.response?.data?.message ||
+        `Произошла ошибка при ${
+          props.isEdit ? "добавлении" : "изменении"
+        } ответсвенного`,
     });
   } finally {
     isLoading.value = false;

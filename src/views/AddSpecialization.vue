@@ -92,12 +92,13 @@ const addSpecialization = async () => {
       }`,
     });
     goTo("Specializations");
-  } catch (e) {
-    console.log(e);
+  } catch (e: any) {
     store.commit("snackbar/showSnackbarError", {
-      message: `Произошла ошибка при ${
-        props.isEdit ? "изменение" : "добавление"
-      } специализации`,
+      message:
+        e.response?.data?.message ||
+        `Произошла ошибка при ${
+          props.isEdit ? "изменение" : "добавление"
+        } специализации`,
     });
   } finally {
     isLoading.value = false;

@@ -94,12 +94,13 @@ const addMachine = async () => {
       message: `Станок успешно ${props.isEdit ? "изменён" : "добавлен"}`,
     });
     goTo("Departament", { id: departament.value });
-  } catch (e) {
-    console.log(e);
+  } catch (e: any) {
     store.commit("snackbar/showSnackbarError", {
-      message: `Произошла ошибка при ${
-        props.isEdit ? "изменение" : "добавление"
-      } станка`,
+      message:
+        e.response?.data?.message ||
+        `Произошла ошибка при ${
+          props.isEdit ? "изменение" : "добавление"
+        } станка`,
     });
   } finally {
     isLoading.value = false;

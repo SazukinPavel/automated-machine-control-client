@@ -164,11 +164,13 @@ const add = async () => {
       } успешно`,
     });
     goTo("MachinesDefects", { id: addDefectDto.value.machineId });
-  } catch (e) {
+  } catch (e: any) {
     store.commit("snackbar/showSnackbarError", {
-      message: `Произошла ошибка при ${
-        props.isEdit ? "обновление" : "создании"
-      } неисправности`,
+      message:
+        e.response?.data?.message ||
+        `Произошла ошибка при ${
+          props.isEdit ? "обновление" : "создании"
+        } неисправности`,
     });
   } finally {
     isAddLoading.value = false;
