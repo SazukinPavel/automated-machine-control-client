@@ -36,7 +36,15 @@
         item-value="id"
         item-title="login"
         multiple
-      />
+      >
+        <template v-slot:item="{ props, item }">
+          <v-list-item
+            v-bind="props"
+            :title="item?.raw?.login"
+            :subtitle="item?.raw?.specialization?.name"
+          ></v-list-item>
+        </template>
+      </v-autocomplete>
       <v-combobox
         @update:search="updateDefectNamesDebounce"
         class="my-2"
