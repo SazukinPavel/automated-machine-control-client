@@ -79,14 +79,20 @@ const routes = [
     path: "/defects/add",
     name: "AddDefect",
     component: AddDefect,
-    meta: { isAdminRoute: true, title: "Добавление неисправности" },
+    meta: {
+      isAuthorize: true,
+      title: "Добавление неисправности",
+    },
   },
   {
     path: "/defects/:id/edit",
     name: "EditDefect",
     component: AddDefect,
     props: { isEdit: true },
-    meta: { isAdminRoute: true, title: "Редактирование неисправности" },
+    meta: {
+      isAuthorize: true,
+      title: "Редактирование неисправности",
+    },
   },
   {
     path: "/users",
