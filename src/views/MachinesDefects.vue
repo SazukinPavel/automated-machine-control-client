@@ -7,14 +7,14 @@
     <div class="mx-3">
       <search v-model="searchValue" />
     </div>
-    <div class="d-flex justify-end">
-      <v-btn class="mx-3" @click="goBack">Назад</v-btn>
-      <v-btn class="mx-3" @click="downloadXlsx">Отчёт</v-btn>
+    <v-row justify="end" class="mx-3">
+      <v-btn class="mr-3 mt-3" @click="goBack">Назад</v-btn>
+      <v-btn class="mr-3 mt-3" @click="downloadXlsx">Отчёт</v-btn>
       <add-btn
-        class="mx-3"
+        class="mr-3 mt-3"
         :to="{ name: 'AddDefect', query: { machine: machineId } }"
       />
-    </div>
+    </v-row>
     <defect-card
       v-for="defect in filtredDefects"
       :key="defect.id"
