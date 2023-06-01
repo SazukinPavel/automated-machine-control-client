@@ -72,10 +72,18 @@ const isLoading = ref(false);
 const isFetchLoading = ref(false);
 const userForm = ref<any | null>(null);
 const addUserDto = ref<AddUserDto>({ login: "", role: "worker", password: "" });
-const roles = ref([
-  { title: "Админ", value: "admin" },
-  { title: "Работник", value: "worker" },
-]);
+
+const role = computed(() => store.getters["auth/role"]);
+const roles = computed(() => {
+  if (role.value === "sudo") {
+    return [
+      { title: "Админ", value: "admin" },
+      { title: "Работник", value: "worker" },
+    ];
+  } else {
+    return [{ title: "Работник", value: "worker" }];
+  }
+});
 
 const specializations = computed(
   () => store.getters["specializations/specializations"]
