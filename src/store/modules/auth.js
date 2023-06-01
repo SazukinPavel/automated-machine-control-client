@@ -61,5 +61,8 @@ export default {
     role(state) {
       return state.user?.role;
     },
+    isAdmin(state) {
+      return ["sudo", "admin"].includes(state.user?.role);
+    },
   },
 };

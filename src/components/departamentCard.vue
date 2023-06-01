@@ -1,7 +1,7 @@
 <template>
   <v-card color="primary" variant="outlined" class="ma-5 pa-1">
     <v-card-title class="=text-wrap">{{ props.departament.name }}</v-card-title>
-    <v-row justify="end" class="pa-3">
+    <v-row v-if="isAdmin" justify="end" class="pa-3">
       <confitm-dialog
         v-model="isDeleteDialog"
         :message="`Вы точно хотите удалить ${props.departament?.name}, станки в этом цеху тоже будут удалены?`"
@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, defineProps } from "vue";
+import { PropType, ref, defineProps, computed } from "vue";
 import Departament from "@/types/busnes/Departament";
 import ConfitmDialog from "@/components/confirmDialog.vue";
 import { useStore } from "vuex";
@@ -53,6 +53,8 @@ const store = useStore();
 
 const isDeleteDialog = ref(false);
 const isDeleteLoading = ref(false);
+
+const isAdmin = computed(() => store.getters["auth/isAdmin"]);
 
 const deleteDepartament = async () => {
   isDeleteLoading.value = true;

@@ -14,7 +14,7 @@ export default class DefectsModule extends BaseApiModule {
   }
 
   getById(id: string) {
-    return this.get<Defect>(`${id}`);
+    return this.get<Defect>(`/${id}`);
   }
   add(addDefectDto: AddDefectDto) {
     return this.post<AddDefectDto, Defect>("", addDefectDto);

@@ -21,22 +21,21 @@
       >
       </v-autocomplete>
       <v-autocomplete
-        ref="responsibleAutoComplete"
-        v-model="addDefectDto.responsible"
-        :items="users"
-        label="Ответственный"
-        :rules="[requiredRule]"
-        item-value="id"
-        item-title="login"
-        multiple
-      />
-      <v-autocomplete
         v-model="addDefectDto.type"
         :items="types"
         item-title="name"
         item-value="id"
         label="Тип"
+      />
+      <v-autocomplete
+        ref="responsibleAutoComplete"
+        v-model="addDefectDto.responsible"
+        :items="filtredUsers"
+        label="Ответственные"
         :rules="[requiredRule]"
+        item-value="id"
+        item-title="login"
+        multiple
       />
       <v-combobox
         @update:search="updateDefectNamesDebounce"
@@ -67,7 +66,6 @@
         item-title="name"
         item-value="id"
         multiple
-        :rules="[requiredRule]"
         color="primary"
         v-model="addDefectDto.consumables"
       >
@@ -135,6 +133,17 @@ const machines = computed<Machine[]>(() =>
   }))
 );
 const users = computed<User[]>(() => store.getters["users/users"]);
+const filtredUsers = computed<User[]>(() => {
+  return users.value.filter(
+    (u) =>
+      !addDefectDto.value.type ||
+      u.specialization.types
+        ?.map((t) => {
+          return t.id;
+        })
+        .includes(addDefectDto.value?.type || "")
+  );
+});
 const consumables = computed<Consumable[]>(() =>
   store.getters["consumables/consumables"]
     .filter((d: Consumable) => d.isAvailable)
@@ -205,6 +214,7 @@ onMounted(async () => {
         decisionDate: formatToInput(defect.data.decisionDate),
         responsible: defect.data.responsible?.map((r) => r.id) || [],
         consumables: defect.data.consumables?.map((r) => r.id) || [],
+        name: defect.data.name.defectName,
       };
       localConsumable.value = defect.data.consumables;
     }

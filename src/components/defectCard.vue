@@ -8,7 +8,7 @@
       </v-chip>
     </div>
     <v-card-title class="text-wrap">{{
-      props.defect?.name.defectName
+      props.defect?.name?.defectName
     }}</v-card-title>
     <v-expansion-panels>
       <v-expansion-panel color="primary">
@@ -50,7 +50,7 @@
     </v-expansion-panels>
     <v-row justify="end" class="pa-3" v-if="!props.defect?.isResolved">
       <v-spacer />
-      <v-btn class="mt-3" density="comfortable"
+      <v-btn class="mt-3 mx-3" density="comfortable"
         >Передвинуть дату
         <v-dialog
           v-model="isChangeDateDialog"
@@ -87,7 +87,7 @@
         <v-btn
           density="comfortable"
           :loading="isDeleteLoading"
-          class="mt-3"
+          class="mt-3 mx-3"
           @click="isDeleteDialog = true"
         >
           Удалить
@@ -96,14 +96,14 @@
       </confitm-dialog>
       <v-btn
         density="comfortable"
-        class="mt-3"
+        class="mt-3 mx-3"
         :to="{ name: 'EditDefect', params: { id: props.defect?.id } }"
         >Редактировать
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn
         density="comfortable"
-        class="mt-3"
+        class="mt-3 mx-3"
         @click="fixDefect"
         :loading="isFixDefectLoading"
         >Исправить

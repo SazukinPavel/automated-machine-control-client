@@ -49,10 +49,11 @@ const searchValue = ref("");
 const isFetchLoading = ref(false);
 
 const machineId = computed(() => route.params.id);
-const machine = computed<Machine | undefined>(() =>
-  store.getters["machines/machines"].find(
-    (m: Machine) => m.id == machineId.value
-  )
+const machine = computed<Machine | undefined>(
+  () =>
+    store.getters["machines/machines"].find(
+      (m: Machine) => m.id == machineId.value
+    ) || defects.value.find((d) => d.machine)?.machine
 );
 
 const defects = computed<Defect[]>(() =>
