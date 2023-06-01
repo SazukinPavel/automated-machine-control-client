@@ -32,7 +32,6 @@
         v-model="addDefectDto.responsible"
         :items="filtredUsers"
         label="Ответственные"
-        :rules="[requiredRule]"
         item-value="id"
         item-title="login"
         multiple
