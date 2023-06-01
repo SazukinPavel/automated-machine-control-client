@@ -145,6 +145,13 @@ const routes = [
     meta: { title: "Добавление комплектующего", isAuthorize: true },
   },
   {
+    path: "/consumables/:id/edit",
+    name: "EditConsumable",
+    component: AddConsumable,
+    props: { isEdit: true },
+    meta: { title: "Редактирование комплектующего", isAuthorize: true },
+  },
+  {
     path: "/defect-types/",
     name: "DefectTypes",
     component: DefectsTypes,

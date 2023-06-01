@@ -79,7 +79,7 @@
         <template v-slot:item="{ props, item }">
           <v-list-item
             v-bind="props"
-            :title="item?.raw?.name"
+            :title="`${item?.raw?.name} (${item?.raw?.number})`"
             :subtitle="item?.raw?.type?.name"
           ></v-list-item>
         </template>
