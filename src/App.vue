@@ -42,8 +42,9 @@ const setupRouter = () => {
     if (!isLogedIn.value && to.path !== "/login") {
       redirectToLogin();
     } else if (
-      !to.matched.some((el: any) => el.meta.isAdminRoute) &&
-      role.value === "admin"
+      (!to.matched.some((el: any) => el.meta.isAdminRoute) &&
+        role.value === "admin") ||
+      (!to.matched.some((el: any) => el.meta.isAuthorize) && isLogedIn)
     ) {
       next(from);
     } else {
@@ -71,6 +72,18 @@ const redirect = () => {
   switch (role.value) {
     case "admin": {
       if (!route.meta.isAdminRoute) {
+        router.replace({ name: "LastDepartament" });
+      }
+      break;
+    }
+    case "sudo": {
+      if (!route.meta.isAdminRoute) {
+        router.replace({ name: "LastDepartament" });
+      }
+      break;
+    }
+    case "worker": {
+      if (!route.meta.isAuthorize) {
         router.replace({ name: "LastDepartament" });
       }
       break;

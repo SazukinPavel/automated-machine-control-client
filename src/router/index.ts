@@ -29,7 +29,7 @@ const routes = [
     path: "/departaments/",
     name: "Departaments",
     component: Departaments,
-    meta: { isAdminRoute: true, title: "Цеха" },
+    meta: { title: "Цеха", isAuthorize: true },
   },
   {
     path: "/departaments/add",
@@ -48,13 +48,13 @@ const routes = [
     path: "/departaments/machines/",
     name: "LastDepartament",
     component: Departament,
-    meta: { isAdminRoute: true, title: "Станки" },
+    meta: { title: "Станки", isAuthorize: true },
   },
   {
     path: "/departaments/:id/machines",
     name: "Departament",
     component: Departament,
-    meta: { isAdminRoute: true },
+    meta: { isAuthorize: true },
   },
   {
     path: "/machines/add",
@@ -73,7 +73,7 @@ const routes = [
     path: "/machines/:id/defects",
     name: "MachinesDefects",
     component: MachinesDefects,
-    meta: { isAdminRoute: true },
+    meta: { isAuthorize: true },
   },
   {
     path: "/defects/add",
@@ -130,13 +130,13 @@ const routes = [
     path: "/consumables",
     name: "Consumables",
     component: Consumables,
-    meta: { isAdminRoute: true, title: "Комплектующие" },
+    meta: { title: "Комплектующие", isAuthorize: true },
   },
   {
     path: "/consumables/add",
     name: "AddConsumable",
     component: AddConsumable,
-    meta: { isAdminRoute: true, title: "Добавление комплектующего" },
+    meta: { title: "Добавление комплектующего", isAuthorize: true },
   },
   {
     path: "/defect-types/",
