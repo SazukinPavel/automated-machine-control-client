@@ -86,9 +86,22 @@
         </template>
       </v-autocomplete>
       <v-text-field
+        label="Предполагаймая дата решения"
         type="datetime-local"
         v-model="addDefectDto.decisionDate"
         :rules="[requiredRule]"
+      />
+      <v-select
+        v-if="isEdit"
+        class="my-2"
+        variant="outlined"
+        label="Исправлено"
+        color="primary"
+        :items="[
+          { title: 'Да', value: true },
+          { title: 'Нет', value: false },
+        ]"
+        v-model="addDefectDto.isResolved"
       />
     </v-form>
     <div class="d-flex justify-end align-center">

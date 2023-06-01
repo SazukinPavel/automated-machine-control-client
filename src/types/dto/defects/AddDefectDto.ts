@@ -14,4 +14,6 @@ export default interface AddDefectDto {
 
   decisionDate?: Date;
   type?: string;
+
+  isResolved?: boolean;
 }
