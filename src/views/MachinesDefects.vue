@@ -9,6 +9,7 @@
     </div>
     <div class="d-flex justify-end">
       <v-btn class="mx-3" @click="goBack">Назад</v-btn>
+      <v-btn class="mx-3" @click="downloadXlsx">Отчёт</v-btn>
       <add-btn
         class="mx-3"
         :to="{ name: 'AddDefect', query: { machine: machineId } }"
@@ -38,6 +39,7 @@ import PageTitle from "@/components/ui/pageTitle.vue";
 import useSeo from "@/hooks/useSeo";
 import useDateFormater from "@/hooks/useDateFormater";
 import Loading from "@/components/loading.vue";
+import XlsxService from "@/services/XlsxService";
 
 const store = useStore();
 const route = useRoute();
@@ -68,6 +70,10 @@ const filtredDefects = computed<Defect[]>(() => {
   }
   return deepObjectSearch(defects.value, searchValue.value);
 });
+
+const downloadXlsx = () => {
+  return XlsxService.downloadXlsx(defects.value);
+};
 
 onMounted(async () => {
   isFetchLoading.value = true;
