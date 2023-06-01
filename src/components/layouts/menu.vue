@@ -39,27 +39,16 @@
             </v-list-item-title>
           </v-list-item>
         </v-list-group>
-        <v-list-item value="departaments" @click="goTo('Departaments')">
-          <v-list-item-title class="text-h6">Цеха</v-list-item-title>
-        </v-list-item>
-        <v-list-item value="users" @click="goTo('Users')">
-          <v-list-item-title class="text-h6">Ответственные</v-list-item-title>
-        </v-list-item>
-        <v-list-item value="consumable-types" @click="goTo('ConsumableTypes')">
+        <v-list-item
+          v-for="item in menuItems"
+          :key="item.title"
+          :value="item.title"
+          @click="goTo(item.routeName, item.params)"
+          :active="isActive(item.routeName)"
+        >
           <v-list-item-title class="text-h6"
-            >Типы комплектующих</v-list-item-title
-          >
-        </v-list-item>
-        <v-list-item value="consumables" @click="goTo('Consumables')">
-          <v-list-item-title class="text-h6">Комплектующие</v-list-item-title>
-        </v-list-item>
-        <v-list-item value="defect-types" @click="goTo('DefectTypes')">
-          <v-list-item-title class="text-h6"
-            >Типы неисправностей
+            >{{ item.title }}
           </v-list-item-title>
-        </v-list-item>
-        <v-list-item value="logging" @click="goTo('Logging')">
-          <v-list-item-title class="text-h6">Логирование</v-list-item-title>
         </v-list-item>
         <v-list-item
           v-once
@@ -84,13 +73,17 @@ import Departament from "@/types/busnes/Departament";
 import MenuItem from "@/types/utils/MenuItem";
 import useNavigateTo from "@/hooks/useNavigateTo";
 import { onClickOutside } from "@vueuse/core";
+import User from "@/types/busnes/User";
+import { useRoute } from "vue-router";
 
 const store = useStore();
+const route = useRoute();
 const navigation = useNavigateTo();
 
 const departaments = computed<Departament[]>(
   () => store.getters["departaments/departaments"]
 );
+const user = computed<User>(() => store.getters["auth/user"]);
 const drawer = ref(true);
 const rail = ref(true);
 const menu = ref(null);
@@ -109,6 +102,27 @@ const departamnetsRoutes = computed<MenuItem[]>(() => {
 
   return departamnents;
 });
+
+const menuItems = computed<MenuItem[]>(() => {
+  if (user.value.role === "worker") {
+    return [
+      { title: "Цеха", routeName: "Departaments" },
+      { title: "Комплектующие", routeName: "Consumables" },
+    ];
+  } else {
+    return [
+      { title: "Цеха", routeName: "Departaments" },
+      { title: "Ответственные", routeName: "Users" },
+      { title: "Типы комплектующих", routeName: "ConsumableTypes" },
+      { title: "Комплектующие", routeName: "Consumables" },
+      { title: "Типы неисправностей", routeName: "DefectTypes" },
+      { title: "Специальности", routeName: "Specializations" },
+      { title: "Логирование", routeName: "Logging" },
+    ];
+  }
+});
+
+const isActive = (name: string) => route.name === name;
 
 const logout = () => {
   store.commit("auth/logout");

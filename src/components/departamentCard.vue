@@ -2,30 +2,35 @@
   <v-card color="primary" variant="outlined" class="ma-5 pa-1">
     <v-card-title class="=text-wrap">{{ props.departament.name }}</v-card-title>
     <v-row justify="end" class="pa-3">
-      <confitm-dialog
-        v-model="isDeleteDialog"
-        :message="`Вы точно хотите удалить ${props.departament?.name}, станки в этом цеху тоже будут удалены?`"
-        @confirm="deleteDepartament"
-      >
+      <template v-if="isAdmin">
+        <confitm-dialog
+          v-model="isDeleteDialog"
+          :message="`Вы точно хотите удалить ${props.departament?.name}, станки в этом цеху тоже будут удалены?`"
+          @confirm="deleteDepartament"
+        >
+          <v-btn
+            density="comfortable"
+            :loading="isDeleteLoading"
+            class="mx-1 my-2 mx-lg-5"
+            @click="isDeleteDialog = true"
+          >
+            Удалить
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
+        </confitm-dialog>
         <v-btn
           density="comfortable"
-          :loading="isDeleteLoading"
           class="mx-1 my-2 mx-lg-5"
-          @click="isDeleteDialog = true"
+          :disabled="isDeleteLoading"
+          :to="{
+            name: 'EditDepartament',
+            params: { id: props.departament?.id },
+          }"
         >
-          Удалить
-          <v-icon>mdi-delete</v-icon>
+          Изменить
+          <v-icon>mdi-pencil</v-icon>
         </v-btn>
-      </confitm-dialog>
-      <v-btn
-        density="comfortable"
-        class="mx-1 my-2 mx-lg-5"
-        :disabled="isDeleteLoading"
-        :to="{ name: 'EditDepartament', params: { id: props.departament?.id } }"
-      >
-        Изменить
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
+      </template>
       <v-btn
         density="comfortable"
         :disabled="isDeleteLoading"
@@ -40,9 +45,9 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, defineProps } from "vue";
+import { PropType, ref, defineProps, computed } from "vue";
 import Departament from "@/types/busnes/Departament";
-import ConfitmDialog from "@/components/confitmDialog.vue";
+import ConfitmDialog from "@/components/confirmDialog.vue";
 import { useStore } from "vuex";
 
 const props = defineProps({
@@ -53,6 +58,8 @@ const store = useStore();
 
 const isDeleteDialog = ref(false);
 const isDeleteLoading = ref(false);
+
+const isAdmin = computed(() => store.getters["auth/isAdmin"]);
 
 const deleteDepartament = async () => {
   isDeleteLoading.value = true;

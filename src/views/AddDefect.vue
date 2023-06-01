@@ -21,23 +21,29 @@
       >
       </v-autocomplete>
       <v-autocomplete
-        ref="responsibleAutoComplete"
-        v-model="addDefectDto.responsible"
-        :items="users"
-        label="Ответственный"
-        :rules="[requiredRule]"
-        item-value="id"
-        item-title="login"
-        multiple
-      />
-      <v-autocomplete
         v-model="addDefectDto.type"
         :items="types"
         item-title="name"
         item-value="id"
         label="Тип"
-        :rules="[requiredRule]"
       />
+      <v-autocomplete
+        ref="responsibleAutoComplete"
+        v-model="addDefectDto.responsible"
+        :items="filtredUsers"
+        label="Ответственные"
+        item-value="id"
+        item-title="login"
+        multiple
+      >
+        <template v-slot:item="{ props, item }">
+          <v-list-item
+            v-bind="props"
+            :title="item?.raw?.login"
+            :subtitle="item?.raw?.specialization?.name"
+          ></v-list-item>
+        </template>
+      </v-autocomplete>
       <v-combobox
         @update:search="updateDefectNamesDebounce"
         class="my-2"
@@ -67,22 +73,34 @@
         item-title="name"
         item-value="id"
         multiple
-        :rules="[requiredRule]"
         color="primary"
         v-model="addDefectDto.consumables"
       >
         <template v-slot:item="{ props, item }">
           <v-list-item
             v-bind="props"
-            :title="item?.raw?.name"
+            :title="`${item?.raw?.name} (${item?.raw?.number})`"
             :subtitle="item?.raw?.type?.name"
           ></v-list-item>
         </template>
       </v-autocomplete>
       <v-text-field
+        label="Предполагаймая дата решения"
         type="datetime-local"
         v-model="addDefectDto.decisionDate"
         :rules="[requiredRule]"
+      />
+      <v-select
+        v-if="isEdit"
+        class="my-2"
+        variant="outlined"
+        label="Исправлено"
+        color="primary"
+        :items="[
+          { title: 'Да', value: true },
+          { title: 'Нет', value: false },
+        ]"
+        v-model="addDefectDto.isResolved"
       />
     </v-form>
     <div class="d-flex justify-end align-center">
@@ -135,6 +153,17 @@ const machines = computed<Machine[]>(() =>
   }))
 );
 const users = computed<User[]>(() => store.getters["users/users"]);
+const filtredUsers = computed<User[]>(() => {
+  return users.value.filter(
+    (u) =>
+      !addDefectDto.value.type ||
+      u.specialization.types
+        ?.map((t) => {
+          return t.id;
+        })
+        .includes(addDefectDto.value?.type || "")
+  );
+});
 const consumables = computed<Consumable[]>(() =>
   store.getters["consumables/consumables"]
     .filter((d: Consumable) => d.isAvailable)
@@ -164,11 +193,13 @@ const add = async () => {
       } успешно`,
     });
     goTo("MachinesDefects", { id: addDefectDto.value.machineId });
-  } catch (e) {
+  } catch (e: any) {
     store.commit("snackbar/showSnackbarError", {
-      message: `Произошла ошибка при ${
-        props.isEdit ? "обновление" : "создании"
-      } неисправности`,
+      message:
+        e.response?.data?.message ||
+        `Произошла ошибка при ${
+          props.isEdit ? "обновление" : "создании"
+        } неисправности`,
     });
   } finally {
     isAddLoading.value = false;
@@ -203,6 +234,7 @@ onMounted(async () => {
         decisionDate: formatToInput(defect.data.decisionDate),
         responsible: defect.data.responsible?.map((r) => r.id) || [],
         consumables: defect.data.consumables?.map((r) => r.id) || [],
+        name: defect.data.name.defectName,
       };
       localConsumable.value = defect.data.consumables;
     }

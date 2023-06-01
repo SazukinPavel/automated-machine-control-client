@@ -14,7 +14,14 @@
         label="Название"
         v-model="addConsumableDto.name"
       />
+      <v-text-field
+        class="my-2"
+        :rules="[requiredRule]"
+        label="Инвентарный номер"
+        v-model="addConsumableDto.number"
+      />
       <v-select
+        v-if="!props.isEdit"
         class="my-2"
         :rules="[requiredRule]"
         label="Тип"
@@ -43,10 +50,13 @@ import Loading from "@/components/loading.vue";
 import ConsumableType from "@/types/busnes/ConsumableType";
 import AddConsumableDto from "@/types/dto/consumables/AddConsumableDto";
 import PageTitle from "@/components/ui/pageTitle.vue";
+import api from "@/api";
+import { useRoute } from "vue-router";
 
 const props = defineProps({ isEdit: { type: Boolean, default: false } });
 
 const store = useStore();
+const route = useRoute();
 const { requiredRule } = useValidators();
 const { goTo, goBack } = useNavigateTo();
 
@@ -63,9 +73,16 @@ const addConsumable = async () => {
   isLoading.value = true;
 
   try {
-    await store.dispatch("consumables/add", {
-      ...addConsumableDto.value,
-    });
+    if (props.isEdit) {
+      const consumable = await api.consumables.update({
+        ...addConsumableDto.value,
+      });
+      store.commit("consumables/replace", consumable);
+    } else {
+      await store.dispatch("consumables/add", {
+        ...addConsumableDto.value,
+      });
+    }
 
     store.commit("snackbar/showSnackbarSuccess", {
       message: `Комплектующий успешно ${props.isEdit ? "изменён" : "добавлен"}`,
@@ -89,6 +106,13 @@ onMounted(async () => {
   isEditLoading.value = true;
   try {
     await store.dispatch("consumableTypes/fetch");
+    if (props.isEdit) {
+      const real = await api.consumables.getById(route.params.id.toString());
+      addConsumableDto.value = {
+        ...addConsumableDto.value,
+        ...(real.data as AddConsumableDto),
+      };
+    }
   } catch {
     store.commit("snackbar/showSnackbarSuccess", {
       message: "Произошла ошибка при получение типов комплектующих",

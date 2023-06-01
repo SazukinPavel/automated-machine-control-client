@@ -5,4 +5,5 @@ export default interface AddUserDto {
   password?: string;
   login: string;
   departamentId?: string;
+  specializationId?: string;
 }

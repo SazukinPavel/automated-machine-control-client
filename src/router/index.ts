@@ -15,6 +15,8 @@ import Consumables from "@/views/Consumables.vue";
 import AddDefectType from "@/views/AddDefectType.vue";
 import DefectsTypes from "@/views/DefectsTypes.vue";
 import Logging from "@/views/Logging.vue";
+import Specializations from "@/views/Specializations.vue";
+import AddSpecialization from "@/views/AddSpecialization.vue";
 
 const routes = [
   {
@@ -27,7 +29,7 @@ const routes = [
     path: "/departaments/",
     name: "Departaments",
     component: Departaments,
-    meta: { isAdminRoute: true, title: "Цеха" },
+    meta: { title: "Цеха", isAuthorize: true },
   },
   {
     path: "/departaments/add",
@@ -46,13 +48,13 @@ const routes = [
     path: "/departaments/machines/",
     name: "LastDepartament",
     component: Departament,
-    meta: { isAdminRoute: true, title: "Станки" },
+    meta: { title: "Станки", isAuthorize: true },
   },
   {
     path: "/departaments/:id/machines",
     name: "Departament",
     component: Departament,
-    meta: { isAdminRoute: true },
+    meta: { isAuthorize: true },
   },
   {
     path: "/machines/add",
@@ -71,20 +73,26 @@ const routes = [
     path: "/machines/:id/defects",
     name: "MachinesDefects",
     component: MachinesDefects,
-    meta: { isAdminRoute: true },
+    meta: { isAuthorize: true },
   },
   {
     path: "/defects/add",
     name: "AddDefect",
     component: AddDefect,
-    meta: { isAdminRoute: true, title: "Добавление неисправности" },
+    meta: {
+      isAuthorize: true,
+      title: "Добавление неисправности",
+    },
   },
   {
     path: "/defects/:id/edit",
     name: "EditDefect",
     component: AddDefect,
     props: { isEdit: true },
-    meta: { isAdminRoute: true, title: "Редактирование неисправности" },
+    meta: {
+      isAuthorize: true,
+      title: "Редактирование неисправности",
+    },
   },
   {
     path: "/users",
@@ -97,6 +105,13 @@ const routes = [
     name: "AddUser",
     component: AddUser,
     meta: { isAdminRoute: true, title: "Добавление ответственного" },
+  },
+  {
+    path: "/users/:id/edit",
+    name: "EditUser",
+    component: AddUser,
+    props: { isEdit: true },
+    meta: { isAdminRoute: true, title: "Изменение ответственного" },
   },
   {
     path: "/consumable-types",
@@ -121,13 +136,20 @@ const routes = [
     path: "/consumables",
     name: "Consumables",
     component: Consumables,
-    meta: { isAdminRoute: true, title: "Комплектующие" },
+    meta: { title: "Комплектующие", isAuthorize: true },
   },
   {
     path: "/consumables/add",
     name: "AddConsumable",
     component: AddConsumable,
-    meta: { isAdminRoute: true, title: "Добавление комплектующего" },
+    meta: { title: "Добавление комплектующего", isAuthorize: true },
+  },
+  {
+    path: "/consumables/:id/edit",
+    name: "EditConsumable",
+    component: AddConsumable,
+    props: { isEdit: true },
+    meta: { title: "Редактирование комплектующего", isAuthorize: true },
   },
   {
     path: "/defect-types/",
@@ -147,6 +169,25 @@ const routes = [
     component: AddDefectType,
     props: { isEdit: true },
     meta: { isAdminRoute: true, title: "Редактирование типа неисправностей" },
+  },
+  {
+    path: "/specializations/",
+    name: "Specializations",
+    component: Specializations,
+    meta: { isAdminRoute: true, title: "Специальности" },
+  },
+  {
+    path: "/specializations/add",
+    name: "AddSpecialization",
+    component: AddSpecialization,
+    meta: { isAdminRoute: true, title: "Добавление специальности" },
+  },
+  {
+    path: "/specializations/:id/edit",
+    name: "EditSpecialization",
+    component: AddSpecialization,
+    props: { isEdit: true },
+    meta: { isAdminRoute: true, title: "Редактирование специальности" },
   },
   {
     path: "/logging",

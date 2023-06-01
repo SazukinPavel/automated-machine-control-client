@@ -9,6 +9,7 @@
     </div>
     <div class="d-flex justify-end">
       <v-btn class="mx-3" @click="goBack">Назад</v-btn>
+      <v-btn class="mx-3" @click="downloadXlsx">Отчёт</v-btn>
       <add-btn
         class="mx-3"
         :to="{ name: 'AddDefect', query: { machine: machineId } }"
@@ -38,6 +39,7 @@ import PageTitle from "@/components/ui/pageTitle.vue";
 import useSeo from "@/hooks/useSeo";
 import useDateFormater from "@/hooks/useDateFormater";
 import Loading from "@/components/loading.vue";
+import XlsxService from "@/services/XlsxService";
 
 const store = useStore();
 const route = useRoute();
@@ -49,10 +51,11 @@ const searchValue = ref("");
 const isFetchLoading = ref(false);
 
 const machineId = computed(() => route.params.id);
-const machine = computed<Machine | undefined>(() =>
-  store.getters["machines/machines"].find(
-    (m: Machine) => m.id == machineId.value
-  )
+const machine = computed<Machine | undefined>(
+  () =>
+    store.getters["machines/machines"].find(
+      (m: Machine) => m.id == machineId.value
+    ) || defects.value.find((d) => d.machine)?.machine
 );
 
 const defects = computed<Defect[]>(() =>
@@ -67,6 +70,10 @@ const filtredDefects = computed<Defect[]>(() => {
   }
   return deepObjectSearch(defects.value, searchValue.value);
 });
+
+const downloadXlsx = () => {
+  return XlsxService.downloadXlsx(defects.value);
+};
 
 onMounted(async () => {
   isFetchLoading.value = true;

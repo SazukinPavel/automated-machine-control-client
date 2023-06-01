@@ -22,6 +22,47 @@
           >Описание:
         </v-expansion-panel-title>
         <v-expansion-panel-text class="pa-0 text-wrap">
+          <v-row
+            class="pa-1 mt-lg-10"
+            justify="end"
+            align-content="end"
+            align="end"
+            dense
+          >
+            <confitm-dialog
+              v-model="isDeleteDialog"
+              :message="`Вы точно хотите удалить станок ${props.machine?.name}?`"
+              @confirm="deleteMachine"
+            >
+              <v-btn
+                class="mx-1 my-3 mx-lg-5"
+                @click="isDeleteDialog = true"
+                density="comfortable"
+              >
+                Удалить
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
+            </confitm-dialog>
+            <v-btn
+              class="mx-1 my-3 mx-lg-5"
+              :to="{
+                name: 'MachinesDefects',
+                params: { id: props.machine?.id },
+              }"
+              density="comfortable"
+            >
+              История
+              <v-icon>mdi-arrow-right-bold-outline</v-icon>
+            </v-btn>
+            <v-btn
+              density="comfortable"
+              class="mx-1 mx-lg-5 my-3"
+              :to="{ name: 'EditMachine', params: { id: props.machine?.id } }"
+            >
+              Изменить
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+          </v-row>
           <v-card-title class="text-wrap"
             >Модель: {{ props.machine.model || "-" }}
           </v-card-title>
@@ -36,7 +77,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
     <v-row
-      class="pa-3 mt-lg-10"
+      class="pa-1 mt-lg-10"
       justify="end"
       align-content="end"
       align="end"
@@ -45,32 +86,17 @@
       <v-btn
         density="comfortable"
         class="mx-1 mx-lg-5 my-3"
-        :to="{ name: 'EditMachine', params: { id: props.machine?.id } }"
+        :to="
+          props.machine?.isActive
+            ? { name: 'AddDefect', query: { machine: props.machine?.id } }
+            : {
+                name: 'EditDefect',
+                params: { id: props.machine?.defects[0]?.id },
+              }
+        "
       >
-        Изменить
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
-      <confitm-dialog
-        v-model="isDeleteDialog"
-        :message="`Вы точно хотите удалить станок ${props.machine?.name}?`"
-        @confirm="deleteMachine"
-      >
-        <v-btn
-          class="mx-1 my-3 mx-lg-5"
-          @click="isDeleteDialog = true"
-          density="comfortable"
-        >
-          Удалить
-          <v-icon>mdi-delete</v-icon>
-        </v-btn>
-      </confitm-dialog>
-      <v-btn
-        class="mx-1 my-3 mx-lg-5"
-        :to="{ name: 'MachinesDefects', params: { id: props.machine?.id } }"
-        density="comfortable"
-      >
-        Неисправности
-        <v-icon>mdi-arrow-right-bold-outline</v-icon>
+        Неисправен
+        <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-row>
   </v-card>
@@ -80,7 +106,7 @@
 import Machine from "@/types/busnes/Machine";
 import { PropType, defineProps, ref } from "vue";
 import { useStore } from "vuex";
-import ConfitmDialog from "@/components/confitmDialog.vue";
+import ConfitmDialog from "@/components/confirmDialog.vue";
 
 const props = defineProps({
   machine: { type: Object as PropType<Machine>, required: true },

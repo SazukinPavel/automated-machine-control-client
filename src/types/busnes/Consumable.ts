@@ -6,6 +6,8 @@ export default interface Consumable {
 
   name?: string;
 
+  number?: string;
+
   defects: Defect[];
 
   type: ConsumableType;

@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { PropType, ref, defineProps } from "vue";
-import ConfitmDialog from "@/components/confitmDialog.vue";
+import ConfitmDialog from "@/components/confirmDialog.vue";
 import { useStore } from "vuex";
 import ConsumableType from "@/types/busnes/ConsumableType";
 

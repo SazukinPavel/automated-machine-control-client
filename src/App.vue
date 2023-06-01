@@ -42,8 +42,8 @@ const setupRouter = () => {
     if (!isLogedIn.value && to.path !== "/login") {
       redirectToLogin();
     } else if (
-      !to.matched.some((el: any) => el.meta.isAdminRoute) &&
-      role.value === "admin"
+      !isAdmin.value &&
+      to.matched.some((el: any) => el.meta.isAdminRoute)
     ) {
       next(from);
     } else {
@@ -66,11 +66,26 @@ const redirectToLogin = () => {
 
 const isLogedIn = computed(() => store.getters["auth/isLogedIn"]);
 const role: ComputedRef<Role> = computed(() => store.getters["auth/role"]);
+const isAdmin: ComputedRef<boolean> = computed(
+  () => store.getters["auth/isAdmin"]
+);
 
 const redirect = () => {
   switch (role.value) {
     case "admin": {
       if (!route.meta.isAdminRoute) {
+        router.replace({ name: "LastDepartament" });
+      }
+      break;
+    }
+    case "sudo": {
+      if (!route.meta.isAdminRoute) {
+        router.replace({ name: "LastDepartament" });
+      }
+      break;
+    }
+    case "worker": {
+      if (!route.meta.isAuthorize) {
         router.replace({ name: "LastDepartament" });
       }
       break;
