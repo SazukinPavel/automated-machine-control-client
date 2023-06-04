@@ -17,6 +17,7 @@ import DefectsTypes from "@/views/DefectsTypes.vue";
 import Logging from "@/views/Logging.vue";
 import Specializations from "@/views/Specializations.vue";
 import AddSpecialization from "@/views/AddSpecialization.vue";
+import Tasks from "@/views/Tasks.vue";
 
 const routes = [
   {
@@ -60,14 +61,14 @@ const routes = [
     path: "/machines/add",
     name: "AddMachine",
     component: AddMachine,
-    meta: { isAdminRoute: true, title: "Добавление станка" },
+    meta: { isAuthorize: true, title: "Добавление станка" },
   },
   {
     path: "/machines/edit/:id",
     name: "EditMachine",
     component: AddMachine,
     props: { isEdit: true },
-    meta: { isAdminRoute: true, title: "Редактирование станка" },
+    meta: { isAuthorize: true, title: "Редактирование станка" },
   },
   {
     path: "/machines/:id/defects",
@@ -194,6 +195,12 @@ const routes = [
     name: "Logging",
     component: Logging,
     meta: { isAdminRoute: true, title: "Логирование" },
+  },
+  {
+    path: "/tasks",
+    name: "Tasks",
+    component: Tasks,
+    meta: { title: "Мои задачи", isAuthorize: true },
   },
   { path: "/:pathMatch(.*)*", redirect: "/login" },
 ];

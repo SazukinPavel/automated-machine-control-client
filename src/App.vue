@@ -86,7 +86,7 @@ const redirect = () => {
     }
     case "worker": {
       if (!route.meta.isAuthorize) {
-        router.replace({ name: "LastDepartament" });
+        router.replace({ name: "Tasks" });
       }
       break;
     }
