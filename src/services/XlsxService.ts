@@ -75,7 +75,7 @@ export default class XlsxService {
       item.consumables?.map((r) => r.name).join(", "),
       item.consumables?.map((r) => r.number).join(", "),
       item.isResolved ? "Да" : "Нет",
-      item.isResolved && formatToXlsxDate(item?.updateAt),
+      (item.isResolved && formatToXlsxDate(item?.updateAt)) || "",
     ];
   }
   static generatePageByHeaderAndItems(
