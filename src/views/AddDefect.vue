@@ -157,10 +157,9 @@ const filtredUsers = computed<User[]>(() => {
   return users.value.filter(
     (u) =>
       !addDefectDto.value.type ||
-      u.specialization.types
-        ?.map((t) => {
-          return t.id;
-        })
+      !u.specialization ||
+      u.specialization?.types
+        ?.map((t) => t.id)
         .includes(addDefectDto.value?.type || "")
   );
 });

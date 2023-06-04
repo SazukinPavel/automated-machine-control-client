@@ -23,7 +23,7 @@
           <v-list density="comfortable" v-if="props.defect?.responsible">
             <v-list-item-title
               v-for="responsible in props.defect.responsible"
-              class="text-wrap"
+              class="text-wrap ml-2"
               :key="responsible.id"
               >{{ responsible.login }}
             </v-list-item-title>
@@ -36,7 +36,7 @@
           >
             <v-list-item-title
               v-for="consumable in props.defect.consumables"
-              class="text-wrap"
+              class="text-wrap ml-2"
               :key="consumable.id"
               >{{ consumable.name }}
             </v-list-item-title>
