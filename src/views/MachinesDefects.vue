@@ -9,7 +9,7 @@
     </div>
     <div class="d-flex justify-end">
       <v-btn class="mx-3" @click="goBack">Назад</v-btn>
-      <v-btn class="mx-3" @click="downloadXlsx">Отчёт</v-btn>
+      <doc-button @download="downloadXlsx" />
       <add-btn
         class="mx-3"
         :to="{ name: 'AddDefect', query: { machine: machineId } }"
@@ -40,6 +40,8 @@ import useSeo from "@/hooks/useSeo";
 import useDateFormater from "@/hooks/useDateFormater";
 import Loading from "@/components/loading.vue";
 import XlsxService from "@/services/XlsxService";
+import DocButton from "@/components/ui/docButton.vue";
+import moment from "moment";
 
 const store = useStore();
 const route = useRoute();
@@ -59,7 +61,7 @@ const machine = computed<Machine | undefined>(
 );
 
 const defects = computed<Defect[]>(() =>
-  store.getters["defects/defects"].map((d: Defect) => ({
+  store.getters["defects/defects"]?.map((d: Defect) => ({
     ...d,
     decisionDate: formatDateTime(d.decisionDate),
   }))
@@ -71,8 +73,17 @@ const filtredDefects = computed<Defect[]>(() => {
   return deepObjectSearch(defects.value, searchValue.value);
 });
 
-const downloadXlsx = () => {
-  return XlsxService.downloadXlsx(defects.value);
+const downloadXlsx = ({ endDate, startDate }) => {
+  const filtredDefects = defects.value.filter((d) => {
+    return (
+      !endDate ||
+      !startDate ||
+      (moment(endDate) >= moment(d.createdAt) &&
+        moment(startDate) <= moment(d.createdAt))
+    );
+  });
+
+  return XlsxService.downloadXlsx(filtredDefects);
 };
 
 onMounted(async () => {
@@ -83,7 +94,7 @@ onMounted(async () => {
     await store.dispatch("defects/fetch", { machine: machineId.value });
   } catch {
     store.commit("snackbar/showSnackbarError", {
-      message: "Произошла ошибка при запросе дефектов станка",
+      message: "Произошла ошибка при запросе неисправностей станка",
     });
   } finally {
     isFetchLoading.value = false;
