@@ -34,7 +34,6 @@
       <v-select
         v-if="addUserDto.role === 'worker'"
         label="Специальность"
-        :rules="[requiredRule]"
         :items="specializations"
         item-title="name"
         item-value="id"

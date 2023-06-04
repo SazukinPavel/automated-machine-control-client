@@ -35,6 +35,7 @@
               @confirm="deleteMachine"
             >
               <v-btn
+                v-if="isAdmin"
                 class="mx-1 my-3 mx-lg-5"
                 @click="isDeleteDialog = true"
                 density="comfortable"
@@ -104,7 +105,7 @@
 
 <script setup lang="ts">
 import Machine from "@/types/busnes/Machine";
-import { PropType, defineProps, ref } from "vue";
+import { PropType, defineProps, ref, computed } from "vue";
 import { useStore } from "vuex";
 import ConfitmDialog from "@/components/confirmDialog.vue";
 
@@ -113,6 +114,8 @@ const props = defineProps({
 });
 
 const store = useStore();
+
+const isAdmin = computed(() => store.getters["auth/isAdmin"]);
 
 const isDeleteLoading = ref(false);
 const isDeleteDialog = ref(false);

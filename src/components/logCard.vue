@@ -27,7 +27,12 @@
             Тело запроса:
           </v-card-title>
 
-          <v-textarea :model-value="props.log?.body" readonly></v-textarea>
+          <v-textarea
+            :model-value="
+              JSON.stringify(JSON.parse(props.log?.body || '{}'), null, 2)
+            "
+            readonly
+          ></v-textarea>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>

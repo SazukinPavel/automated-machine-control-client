@@ -19,8 +19,8 @@ export default {
 
       commit("setLogs", logs.data);
     },
-    async count({ commit }) {
-      const count = await api.logs.count();
+    async count({ commit }, params) {
+      const count = await api.logs.count(params);
 
       commit("setCount", count.data);
     },

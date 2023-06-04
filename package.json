@@ -28,6 +28,7 @@
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
     "@types/axios": "^0.14.0",
+    "@types/file-saver": "^2.0.5",
     "@types/js-cookie": "^3.0.3",
     "@types/moment": "^2.13.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
