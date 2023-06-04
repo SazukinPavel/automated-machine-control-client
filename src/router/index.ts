@@ -193,14 +193,14 @@ const routes = [
     path: "/logging",
     name: "Logging",
     component: Logging,
-    meta: { isAdminRoute: true, title: "Логирвание" },
+    meta: { isAdminRoute: true, title: "Логирование" },
   },
   { path: "/:pathMatch(.*)*", redirect: "/login" },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes, // short for `routes: routes`
+  routes,
 });
 
 export default router;
