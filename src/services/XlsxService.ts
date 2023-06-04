@@ -15,8 +15,11 @@ function formatToXlsxDate(date?: Date) {
 }
 export default class XlsxService {
   static headers = [
-    "Название дефекта",
+    "Название неисправности",
     "Дата поломки",
+    "Станок",
+    "Инвентарный номер станка",
+    "Цех",
     "Ответственные",
     "Материалы",
     "Инвентарные номера материалов",
@@ -71,6 +74,9 @@ export default class XlsxService {
     return [
       item?.name?.defectName,
       formatToXlsxDate(item?.createdAt),
+      item.machine?.name,
+      item.machine?.number,
+      item.machine?.departament?.name,
       item.responsible?.map((r) => r.login).join(", "),
       item.consumables?.map((r) => r.name).join(", "),
       item.consumables?.map((r) => r.number).join(", "),
