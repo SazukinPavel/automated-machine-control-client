@@ -16,10 +16,10 @@
         ></v-select>
       </v-col>
       <v-col class="d-flex justify-end">
-        <add-btn
-          v-if="id"
-          :to="{ name: 'AddMachine', query: { departament: id } }"
-        />
+        <doc-button :loading="isDocLoading" @download="downloadDoc" />
+      </v-col>
+      <v-col v-if="id" class="d-flex justify-end">
+        <add-btn :to="{ name: 'AddMachine', query: { departament: id } }" />
       </v-col>
     </v-row>
     <template v-if="!isLoading">
@@ -47,6 +47,9 @@ import deepObjectSearch from "@/utils/deepObjectSearch";
 import PageTitle from "@/components/ui/pageTitle.vue";
 import Departament from "@/types/busnes/Departament";
 import useSeo from "@/hooks/useSeo";
+import DocButton from "@/components/ui/docButton.vue";
+import api from "@/api";
+import XlsxService from "@/services/XlsxService";
 
 const route = useRoute();
 const store = useStore();
@@ -54,6 +57,7 @@ const { formatDateTime } = useDateFormater();
 const { setTitle } = useSeo();
 
 const isLoading = ref(false);
+const isDocLoading = ref(false);
 const searchParam = ref("");
 const selectedState = ref("");
 const stateItems = ref([
@@ -119,6 +123,26 @@ watch(id, () => {
 watch(departament, () => {
   setTitle(departament.value?.name || "Станки");
 });
+
+const downloadDoc = async ({ startDate, endDate }: any) => {
+  try {
+    isDocLoading.value = true;
+    const defects = await api.defects.list({
+      startDate,
+      endDate,
+      departament: id.value,
+      all: !id.value,
+    });
+
+    XlsxService.downloadXlsx(defects.data);
+  } catch {
+    store.commit("snackbar/showSnackbarError", {
+      message: "Произошла ошибка при формирование отчёта",
+    });
+  } finally {
+    isDocLoading.value = false;
+  }
+};
 </script>
 
 <style scoped></style>

@@ -106,6 +106,7 @@ const departamnetsRoutes = computed<MenuItem[]>(() => {
 const menuItems = computed<MenuItem[]>(() => {
   if (user.value.role === "worker") {
     return [
+      { title: "Мои задачи", routeName: "Tasks" },
       { title: "Цеха", routeName: "Departaments" },
       { title: "Комплектующие", routeName: "Consumables" },
     ];

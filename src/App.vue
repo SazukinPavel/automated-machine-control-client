@@ -73,20 +73,20 @@ const isAdmin: ComputedRef<boolean> = computed(
 const redirect = () => {
   switch (role.value) {
     case "admin": {
-      if (!route.meta.isAdminRoute) {
+      if (!route.meta.isAdminRoute && !route.meta.isAuthorize) {
         router.replace({ name: "LastDepartament" });
       }
       break;
     }
     case "sudo": {
-      if (!route.meta.isAdminRoute) {
+      if (!route.meta.isAdminRoute && !route.meta.isAuthorize) {
         router.replace({ name: "LastDepartament" });
       }
       break;
     }
     case "worker": {
       if (!route.meta.isAuthorize) {
-        router.replace({ name: "LastDepartament" });
+        router.replace({ name: "Tasks" });
       }
       break;
     }
