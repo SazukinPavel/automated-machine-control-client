@@ -22,6 +22,16 @@
           >Описание:
         </v-expansion-panel-title>
         <v-expansion-panel-text class="pa-0 text-wrap">
+          <v-card-title class="text-wrap"
+            >Модель: {{ props.machine.model || "-" }}
+          </v-card-title>
+          <v-card-title class="text-wrap"
+            >Год ввода: {{ props.machine.startYear || "-" }}
+          </v-card-title>
+          <v-card-text v-if="props.machine?.description" class="text-wrap">
+            <span class="v-card-subtitle ma-0 pa-0">Описание:</span
+            >{{ props.machine.description }}
+          </v-card-text>
           <v-row
             class="pa-1 mt-lg-10"
             justify="end"
@@ -63,16 +73,6 @@
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </v-row>
-          <v-card-title class="text-wrap"
-            >Модель: {{ props.machine.model || "-" }}
-          </v-card-title>
-          <v-card-title class="text-wrap"
-            >Год ввода: {{ props.machine.startYear || "-" }}
-          </v-card-title>
-          <v-card-text v-if="props.machine?.description" class="text-wrap">
-            <span class="v-card-subtitle ma-0 pa-0">Описание:</span
-            >{{ props.machine.description }}
-          </v-card-text>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
