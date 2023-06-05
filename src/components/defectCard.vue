@@ -17,6 +17,12 @@
         </v-expansion-panel-title>
         <v-expansion-panel-text class="pa-1">
           <v-card-title class="text-wrap">
+            Станок:
+            {{
+              `${props.defect?.machine.name} (${props.defect.machine.number})`
+            }}
+          </v-card-title>
+          <v-card-title class="text-wrap">
             Тип неисправности: {{ props.defect?.type.name }}
           </v-card-title>
           <v-card-title class="text-wrap"> Ответственные:</v-card-title>
@@ -41,10 +47,12 @@
               >{{ consumable.name }}
             </v-list-item-title>
           </v-list>
-          <v-card-title class="text-wrap"> Подробнее:</v-card-title>
-          <v-card-text v-if="props.defect?.description">
-            {{ props.defect?.description }}
-          </v-card-text>
+          <template v-if="props.defect?.description">
+            <v-card-title class="text-wrap"> Подробнее:</v-card-title>
+            <v-card-text>
+              {{ props.defect?.description }}
+            </v-card-text>
+          </template>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>

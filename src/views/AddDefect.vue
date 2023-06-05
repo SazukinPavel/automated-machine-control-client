@@ -26,8 +26,10 @@
         item-title="name"
         item-value="id"
         label="Тип"
+        clearable
       />
       <v-autocomplete
+        :filter="filterResponsible"
         ref="responsibleAutoComplete"
         v-model="addDefectDto.responsible"
         :items="filtredUsers"
@@ -153,16 +155,32 @@ const machines = computed<Machine[]>(() =>
   }))
 );
 const users = computed<User[]>(() => store.getters["users/users"]);
-const filtredUsers = computed<User[]>(() => {
-  return users.value.filter(
-    (u) =>
+const filtredUsers = computed<User & { isHide?: boolean }[]>(() => {
+  return users.value.map((u) => {
+    if (
       !addDefectDto.value.type ||
       !u.specialization ||
       u.specialization?.types
         ?.map((t) => t.id)
         .includes(addDefectDto.value?.type || "")
-  );
+    ) {
+      return { ...u, isHide: false };
+    }
+    return { ...u, isHide: true };
+  });
 });
+const filterResponsible = (
+  item: User & { isHide?: boolean },
+  queryText: string
+) => {
+  return (
+    (item.login.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) >
+      -1 ||
+      item.login.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) >
+        -1) &&
+    !item.isHide
+  );
+};
 const consumables = computed<Consumable[]>(() =>
   store.getters["consumables/consumables"]
     .filter((d: Consumable) => d.isAvailable)

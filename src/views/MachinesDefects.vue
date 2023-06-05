@@ -9,7 +9,7 @@
     </div>
     <v-row justify="end" class="mx-3">
       <v-btn class="mr-3 mt-3" @click="goBack">Назад</v-btn>
-      <doc-button @download="downloadXlsx" />
+      <doc-button class="mr-3 mt-3" @download="downloadXlsx" />
       <add-btn
         class="mr-3 mt-3"
         :to="{ name: 'AddDefect', query: { machine: machineId } }"

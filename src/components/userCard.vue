@@ -41,10 +41,10 @@
   </v-card>
   <v-dialog persistent v-model="isGeneratePassDialog">
     <v-card>
-      <v-card-title
-        >Новый пароль пользователя {{ props.user.login }}</v-card-title
+      <v-card-title class="text-wrap"
+        >Новый пароль пользователя {{ props.user.login }}:
+        {{ newPassword }}</v-card-title
       >
-      <v-card-title>{{ newPassword }}</v-card-title>
       <div class="d-flex justify-end my-4">
         <v-btn class="mx-3" @click="closePassDialog">Закрыть</v-btn>
         <v-btn class="mx-3" @click="copyPass"
