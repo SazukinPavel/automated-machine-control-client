@@ -78,7 +78,7 @@ export default class XlsxService {
       item.machine?.number,
       item.machine?.departament?.name,
       item.responsible?.map((r) => r.login).join(", "),
-      item.consumables?.map((r) => r.name).join(", "),
+      item.consumables?.map((r) => r.type.name + " " + r.name).join(", "),
       item.consumables?.map((r) => r.number).join(", "),
       item.isResolved ? "Да" : "Нет",
       (item.isResolved && formatToXlsxDate(item?.updateAt)) || "",
