@@ -4,10 +4,10 @@
     <div class="mx-3">
       <search v-model="searchValue" />
     </div>
-    <defect-card
-      v-for="defect in filtredDefects"
-      :key="defect.id"
-      :defect="defect"
+    <machine-card
+      v-for="machine in filtredMachines"
+      :key="machine.id"
+      :machine="machine"
     />
   </div>
   <loading v-else />
@@ -19,10 +19,11 @@ import { useStore } from "vuex";
 import Defect from "@/types/busnes/Defect";
 import deepObjectSearch from "@/utils/deepObjectSearch";
 import useDateFormater from "@/hooks/useDateFormater";
-import DefectCard from "@/components/defectCard.vue";
 import Search from "@/components/search.vue";
 import Loading from "@/components/loading.vue";
 import PageTitle from "@/components/ui/pageTitle.vue";
+import Machine from "@/types/busnes/Machine";
+import MachineCard from "@/components/machineCard.vue";
 
 const store = useStore();
 const { formatDateTime } = useDateFormater();
@@ -30,17 +31,20 @@ const { formatDateTime } = useDateFormater();
 const searchValue = ref("");
 const isFetchLoading = ref(false);
 
-const defects = computed<Defect[]>(() =>
-  store.getters["defects/defects"]?.map((d: Defect) => ({
-    ...d,
-    decisionDate: formatDateTime(d.decisionDate),
-  }))
+const machines = computed<Machine[]>(() =>
+  store.getters["defects/defects"]
+    ?.map((d: Defect) => ({
+      ...d,
+      decisionDate: formatDateTime(d.decisionDate),
+    }))
+    .map((d: Defect) => ({ ...d.machine, defects: [d], isActive: false }))
 );
-const filtredDefects = computed<Defect[]>(() => {
+const filtredMachines = computed<Machine[]>(() => {
+  console.log(machines.value);
   if (!searchValue.value) {
-    return defects.value;
+    return machines.value;
   }
-  return deepObjectSearch(defects.value, searchValue.value);
+  return deepObjectSearch(machines.value, searchValue.value);
 });
 
 onMounted(async () => {
