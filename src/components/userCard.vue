@@ -1,8 +1,8 @@
 <template>
   <v-card color="primary" variant="outlined" class="ma-5 pa-1">
     <v-card-title class="text-wrap">{{ props.user?.login }}</v-card-title>
-    <v-card-title v-if="props.user?.specialization" class="text-wrap text-end"
-      >Специальность:{{ props.user?.specialization.name }}</v-card-title
+    <v-card-title v-if="props.user?.specialization" class="text-wrap"
+      >Специальность: {{ props.user?.specialization.name }}</v-card-title
     >
     <v-row justify="end" class="pa-3">
       <v-btn
