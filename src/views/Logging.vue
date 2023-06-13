@@ -9,7 +9,7 @@
         <v-expansion-panel-text class="text-wrap pa-4">
           <v-card variant="text">
             <v-card-title class="text-subtitle-1 text-wrap"
-              >Колличество записей на странице</v-card-title
+              >Количество записей на странице</v-card-title
             >
             <v-text-field
               type="number"
